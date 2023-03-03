@@ -6,6 +6,7 @@ This is the readme
 
 - [@J4Ninja](https://www.github.com/J4Ninja)
 - [@JHMejia](https://github.com/jhmejia)
+- [@joeyaflores](https://github.com/joeyaflores)
 
 
 ## Documentation
@@ -22,7 +23,8 @@ To be made...
 
 ## Quick Start
 
-[Link to quick start ](https://superfrog.jhmejia.com)
+[Link to quick start ](https://superfrog.jhmejia.com/quick-start)
+
 
 
     
