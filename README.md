@@ -12,6 +12,8 @@ This is the readme
 
 [Documentation can be found here.](https://superfrog.jhmejia.com)
 
+### [How Can I Contribute to the documentation?] (https://superfrog.jhmejia.com/how-to-contribute)
+
 
 ## Demo
 
