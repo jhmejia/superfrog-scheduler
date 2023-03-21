@@ -17,20 +17,23 @@ externalDocs:
 servers:
   - url: Who knows
 tags:
-  - name: spiritdirector
-    description: What you can do as a spirit director
+  - name: superfrog-student-management
+    description: What you can do as a spirit director relating to super frog student management
+  
+  - name: requests-management
+    description: Approve, update, cancel superfrog appearance requests. Assign frog to request. 
     
   - name: superfrog-student
-    description: Operations about super frog student 
+    description: Operations about super frog student. View all appearances. 
     
   - name: user
     description: Operations about user
 paths:
-  /spiritdirector:
+  /superfrog:
     put:
       tags:
-        - spiritdirector
-      summary: Update an existing pet
+        - superfrog-student-management
+      summary: Update an existing superfrog student (activate/deactivate)
       description: Update an existing pet by Id
       operationId: updatePet
       requestBody:
@@ -68,8 +71,8 @@ paths:
             - read:pets
     post:
       tags:
-        - pet
-      summary: Add a new pet to the store
+        - superfrog-student-management
+      summary: Add a new superfrog student 
       description: Add a new pet to the store
       operationId: addPet
       requestBody:
@@ -178,15 +181,15 @@ paths:
         - petstore_auth:
             - write:pets
             - read:pets
-  /pet/{petId}:
+  /superfrog/{studentId}:
     get:
       tags:
-        - pet
-      summary: Find pet by ID
+        - superfrog-student-management
+      summary: Find super frog student by ID
       description: Returns a single pet
-      operationId: getPetById
+      operationId: getSuperById
       parameters:
-        - name: petId
+        - name: studentId
           in: path
           description: ID of pet to return
           required: true
@@ -219,7 +222,7 @@ paths:
       description: ''
       operationId: updatePetWithForm
       parameters:
-        - name: petId
+        - name: studentId
           in: path
           description: ID of pet that needs to be updated
           required: true
@@ -256,7 +259,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: petId
+        - name: studentId
           in: path
           description: Pet id to delete
           required: true
@@ -402,12 +405,12 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Order not found
-  /user:
+  /request:
     post:
       tags:
         - user
-      summary: Create user
-      description: This can only be done by the logged in user.
+      summary: Create superfrog request
+      description: This can  be made by any user regardless of if they are logged in 
       operationId: createUser
       requestBody:
         description: Created user object
@@ -421,6 +424,23 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags:
+        - user
+      summary: Delete superfrog request
+      description: This can  be made by any user regardless of if they are logged in 
+      operationId: deleteRequest
+    
       responses:
         default:
           description: successful operation
@@ -719,7 +739,7 @@ components:
           example: 10
         name:
           type: string
-          example: doggie
+          example: SuperFrogStudent1
         category:
           $ref: '#/components/schemas/Category'
         photoUrls:
