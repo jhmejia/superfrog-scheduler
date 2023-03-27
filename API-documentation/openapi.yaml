@@ -304,7 +304,7 @@ paths:
         - requests
       summary: Get all requests for a superfrog student
       description: Get all requests for a superfrog student
-      operationId: getRequestsBysuperfrogID
+      operationId: getRequestsBySuperfrogID
       parameters:
         - name: superfrogID
           in: path
@@ -332,7 +332,7 @@ paths:
         - requests
       summary: Get all requests for a superfrog student with a specific status
       description: Get all requests for a superfrog student with a specific status
-      operationId: getRequestsBsuperfrogIDAndStatus
+      operationId: getRequestsBySuperfrogIDAndStatus
       parameters:
         - name: superfrogID
           in: path
@@ -440,7 +440,6 @@ paths:
       responses:
         default:
           description: successful operation
-
 components:
   schemas:
     SuperFrog:
@@ -518,6 +517,4 @@ components:
       type: apiKey
       name: api_key
       in: query
-
-    
       

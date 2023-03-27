@@ -7,6 +7,7 @@ This is the readme
 - [@J4Ninja](https://www.github.com/J4Ninja)
 - [@JHMejia](https://github.com/jhmejia)
 - [@joeyaflores](https://github.com/joeyaflores)
+- [@cuirassier659](https://github.com/cuirassier659)
 
 
 ## Documentation
