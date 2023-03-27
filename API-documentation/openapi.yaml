@@ -360,69 +360,6 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Request not found
-  /requests/{superfrogID}/status/{status}/assign/{superfrogId}:
-    put:
-      tags:
-        - requests
-      summary: Assign a superfrog to a request
-      description: Assign a superfrog to a request
-      operationId: assignSuperfrog
-      parameters:
-        - name: superfrogID
-          in: path
-          description: ID of frog to return
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: status
-          in: path
-          description: Status of request to return
-          required: true
-          schema:
-            type: string
-        - name: superfrogId
-          in: path
-          description: ID of superfrog to return
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Request not found
-        '405':
-          description: Validation exception
-  /requests/{superfrogID}/status/{status}/unassign:
-    put:
-      tags:
-        - requests
-      summary: Unassign a superfrog from a request
-      description: Unassign a superfrog from a request
-      operationId: unassignSuperfrog
-      parameters:
-        - name: superfrogID
-          in: path
-          description: ID of frog to return
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: status
-          in: path
-          description: Status of request to return
-          required: true
-          schema:
-            type: string
-      responses:
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Request not found
-        '405':
-          description: Validation exception
   /user/create:
     post:
       tags:
