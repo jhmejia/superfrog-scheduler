@@ -2,19 +2,13 @@ openapi: 3.0.0
 info:
   title: SuperFrog API
   description: |-
-    Super Frog API for the WebTech super frog scheduler project
-  termsOfService: http://swagger.io/terms/
+    Super Frog API for the WebTech SuperFrog Scheduler project
   contact:
-    name: SuperFrog
+    name: SuperFrog Team
     url: https://github.com/jhmejia/superfrog-webtech
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.11
-externalDocs:
-  description: documentation for API 
-  url: http://superfrog.jhmejia.com
+  version: 1.1.12
 servers:
+  # Update when it is deployed to Production
   - url: localhost:8080
 tags:
   - name: superfrogs
