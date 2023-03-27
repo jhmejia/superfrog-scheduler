@@ -9,10 +9,11 @@ info:
   version: 1.1.12
 servers:
   # Update when it is deployed to Production
-  - url: localhost:8080
+  - url: localhost:8080/api
+    description: Development server
 tags:
   - name: superfrogs
-    description: What you can do as a spirit director relating to super frog student management
+    description: What you can do as a spirit director relating to SuperFrogs management. 
   
   - name: requests
     description: Approve, update, cancel superfrog appearance requests. Assign frog to request. 
