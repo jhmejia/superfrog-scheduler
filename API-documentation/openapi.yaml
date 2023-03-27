@@ -298,15 +298,15 @@ paths:
           description: Request not found
         '405':
           description: Validation exception
-  /requests/{frogID}:
+  /requests/{superfrogID}:
     get:
       tags:
         - requests
       summary: Get all requests for a superfrog student
       description: Get all requests for a superfrog student
-      operationId: getRequestsByFrogID
+      operationId: getRequestsBySuperfrogID
       parameters:
-        - name: frogID
+        - name: superfrogID
           in: path
           description: ID of frog to return
           required: true
@@ -326,15 +326,15 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Request not found
-  /requests/{frogID}/status/{status}:
+  /requests/{superfrogID}/status/{status}:
     get:
       tags:
         - requests
       summary: Get all requests for a superfrog student with a specific status
       description: Get all requests for a superfrog student with a specific status
-      operationId: getRequestsByFrogIDAndStatus
+      operationId: getRequestsBySuperfrogIDAndStatus
       parameters:
-        - name: frogID
+        - name: superfrogID
           in: path
           description: ID of frog to return
           required: true
@@ -360,7 +360,7 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Request not found
-  /requests/{frogID}/status/{status}/assign/{superfrogId}:
+  /requests/{superfrogID}/status/{status}/assign/{superfrogId}:
     put:
       tags:
         - requests
@@ -368,7 +368,7 @@ paths:
       description: Assign a superfrog to a request
       operationId: assignSuperfrog
       parameters:
-        - name: frogID
+        - name: superfrogID
           in: path
           description: ID of frog to return
           required: true
@@ -395,7 +395,7 @@ paths:
           description: Request not found
         '405':
           description: Validation exception
-  /requests/{frogID}/status/{status}/unassign:
+  /requests/{superfrogID}/status/{status}/unassign:
     put:
       tags:
         - requests
@@ -403,7 +403,7 @@ paths:
       description: Unassign a superfrog from a request
       operationId: unassignSuperfrog
       parameters:
-        - name: frogID
+        - name: superfrogID
           in: path
           description: ID of frog to return
           required: true
@@ -440,5 +440,81 @@ paths:
       responses:
         default:
           description: successful operation
+components:
+  schemas:
+    SuperFrog:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          format: password
+        userStatus:
+          type: integer
+          format: int32
+          description: User Status
+        active:
+          type: boolean
 
+    Request:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        superfrogID:
+          type: integer
+          format: int64
+        status:
+          type: string
+        description:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          format: password
+        phone:
+          type: string
+        userStatus:
+          type: integer
+          format: int32
+          description: User Status
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+    api_key_query:
+      type: apiKey
+      name: api_key
+      in: query
       
