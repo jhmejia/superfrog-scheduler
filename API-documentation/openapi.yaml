@@ -1,0 +1,523 @@
+openapi: 3.0.0
+info:
+  title: SuperFrog API
+  description: |-
+    Super Frog API for the WebTech super frog scheduler project
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: SuperFrog
+    url: https://github.com/jhmejia/superfrog-webtech
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: documentation for API 
+  url: http://superfrog.jhmejia.com
+servers:
+  - url: localhost:8080
+tags:
+  - name: superfrogs
+    description: What you can do as a spirit director relating to super frog student management
+  
+  - name: requests
+    description: Approve, update, cancel superfrog appearance requests. Assign frog to request. 
+    
+  - name: student
+    description: Operations about super frog student. View all appearances. 
+    
+  - name: user
+    description: Operations about user
+paths:
+  /superfrogs:
+    get:
+      tags:
+        - superfrogs
+      summary: Get all superfrogs
+      description: Get all superfrogs
+      operationId: getSuperfrogs
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SuperFrog'
+        '400':
+          description: Invalid status value
+        '404':
+          description: SuperFrogs not found
+    post:
+      tags:
+        - superfrogs
+      summary: Add a new superfrog
+      description: Add a new superfrog
+      operationId: addSuperfrog
+      requestBody:
+        description: SuperFrog object that needs to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuperFrog'
+      responses:
+        '405':
+          description: Invalid input
+  /superfrogs/{superfrogId}:
+    get:
+      tags:
+        - superfrogs
+      summary: Find superfrog by ID
+      description: Returns a single superfrog
+      operationId: getSuperfrogById
+      parameters:
+        - name: superfrogId
+          in: path
+          description: ID of superfrog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperFrog'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: SuperFrog not found
+    put:
+      tags:
+        - superfrogs
+      summary: Update an existing superfrog
+      description: Update an existing superfrog
+      operationId: updateSuperfrog
+      parameters:
+        - name: superfrogId
+          in: path
+          description: ID of superfrog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: SuperFrog object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuperFrog'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: SuperFrog not found
+        '405':
+          description: Validation exception
+    delete:
+      tags:
+        - superfrogs
+      summary: Deletes a superfrog
+      description: Deletes a superfrog
+      operationId: deleteSuperfrog
+      parameters:
+        - name: superfrogId
+          in: path
+          description: SuperFrog id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: SuperFrog not found
+  /requests:
+    get:
+      tags:
+        - requests
+      summary: Get all requests, as a spirit director. 
+      description: Get all requests
+      operationId: getRequests
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request'
+        '400':
+          description: Invalid status value
+        '404':
+          description: Requests not found
+    post:
+      tags:
+        - requests
+      summary: Add a new request
+      description: Add a new request
+      operationId: addRequest
+      requestBody:
+        description: Request object that needs to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '405':
+          description: Invalid input
+  /requests/{requestId}:
+    get:
+      tags:
+        - requests
+      summary: Find request by ID
+      description: Returns a single request
+      operationId: getRequestById
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of request to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+    put:
+      tags:
+        - requests
+      summary: Update an existing request
+      description: Update an existing request
+      operationId: updateRequest
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of request to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Request object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+        '405':
+          description: Validation exception
+    delete:
+      tags:
+        - requests
+      summary: Deletes a request
+      description: Deletes a request
+      operationId: deleteRequest
+      parameters:
+        - name: requestId
+          in: path
+          description: Request id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+  /requests/{requestId}/assign/{superfrogId}:
+    put:
+      tags:
+        - requests
+      summary: Assign a superfrog to a request
+      description: Assign a superfrog to a request
+      operationId: assignSuperfrog
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of request to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: superfrogId
+          in: path
+          description: ID of superfrog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+        '405':
+          description: Validation exception
+  /requests/{requestId}/unassign:
+    put:
+      tags:
+        - requests
+      summary: Unassign a superfrog from a request
+      description: Unassign a superfrog from a request
+      operationId: unassignSuperfrog
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of request to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+        '405':
+          description: Validation exception
+  /requests/{superfrogID}:
+    get:
+      tags:
+        - requests
+      summary: Get all requests for a superfrog student
+      description: Get all requests for a superfrog student
+      operationId: getRequestsBysuperfrogID
+      parameters:
+        - name: superfrogID
+          in: path
+          description: ID of frog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+  /requests/{superfrogID}/status/{status}:
+    get:
+      tags:
+        - requests
+      summary: Get all requests for a superfrog student with a specific status
+      description: Get all requests for a superfrog student with a specific status
+      operationId: getRequestsBsuperfrogIDAndStatus
+      parameters:
+        - name: superfrogID
+          in: path
+          description: ID of frog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: status
+          in: path
+          description: Status of request to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+  /requests/{superfrogID}/status/{status}/assign/{superfrogId}:
+    put:
+      tags:
+        - requests
+      summary: Assign a superfrog to a request
+      description: Assign a superfrog to a request
+      operationId: assignSuperfrog
+      parameters:
+        - name: superfrogID
+          in: path
+          description: ID of frog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: status
+          in: path
+          description: Status of request to return
+          required: true
+          schema:
+            type: string
+        - name: superfrogId
+          in: path
+          description: ID of superfrog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+        '405':
+          description: Validation exception
+  /requests/{superfrogID}/status/{status}/unassign:
+    put:
+      tags:
+        - requests
+      summary: Unassign a superfrog from a request
+      description: Unassign a superfrog from a request
+      operationId: unassignSuperfrog
+      parameters:
+        - name: superfrogID
+          in: path
+          description: ID of frog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: status
+          in: path
+          description: Status of request to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Request not found
+        '405':
+          description: Validation exception
+  /user/create:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+
+components:
+  schemas:
+    SuperFrog:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          format: password
+        userStatus:
+          type: integer
+          format: int32
+          description: User Status
+        active:
+          type: boolean
+
+    Request:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        superfrogID:
+          type: integer
+          format: int64
+        status:
+          type: string
+        description:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          format: password
+        phone:
+          type: string
+        userStatus:
+          type: integer
+          format: int32
+          description: User Status
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+    api_key_query:
+      type: apiKey
+      name: api_key
+      in: query
+
+    
+      
