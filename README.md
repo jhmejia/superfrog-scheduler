@@ -12,9 +12,7 @@ This is the readme
 
 ## Documentation
 
-[Documentation can be found here.](https://superfrog.jhmejia.com)
-
-### [How Can I Contribute to the documentation?](https://web-tech-project.gitbook.io/internal-docs/how-to-contribute)
+### [API Documentation can be found here.](https://jhmejia.com/superdocs)
 
 
 ## Demo
@@ -22,9 +20,6 @@ This is the readme
 To be made...
 
 
-## Quick Start
-
-[Link to quick start ](https://superfrog.jhmejia.com/quick-start)
 
 
 
