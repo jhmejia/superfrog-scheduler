@@ -5,7 +5,7 @@ info:
     Super Frog API for the WebTech SuperFrog Scheduler project
   contact:
     name: SuperFrog Team
-    url: https://github.com/jhmejia/superfrog-webtech
+    url: https://github.com/jhmejia/webtech-superfrog
   version: 1.1.12
 servers:
   # Update when it is deployed to Production
