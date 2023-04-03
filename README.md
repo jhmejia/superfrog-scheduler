@@ -14,7 +14,9 @@ This is the readme
 
 ## Documentation
 
-### [API Documentation can be found here.](https://jhmejia.com/superdocs)
+### [API Documentation](https://jhmejia.com/superdocs)
+
+### [Google Drive](https://drive.google.com/drive/folders/1CFxMNblwOV-mthVcRRb2gTsFxNRO7nlz?usp=sharing)
 
 
 ## Demo
