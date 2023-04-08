@@ -1,7 +1,6 @@
 package edu.tcu.cs.superfrogscheduler.superfrog;
 
-import edu.tcu.cs.superfrogscheduler.system.ObjectNotFoundException;
-import net.bytebuddy.implementation.bind.annotation.Super;
+import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -43,27 +41,27 @@ class SuperfrogServiceTest {
     void testFindByIdSuccess() {
         // Given. Arrange inputs and targets. Define the behavior of Mock object superfrogRepository
         /*
-          "id": 0,
-          "username": "",
-          "firstName": "string",
-          "lastName": "string",
-          "email": "string",
-          "password": "string",
-          "active": true
+            "id": 1,
+            "username": "superfrog1",
+            "firstName": "John",
+            "lastName": "Mejyen",
+            "email": "example@gmail.com",
+            "password": "password",
+            "active": true
          */
         Superfrog s = new Superfrog();
-        s.setId(0);
-        s.setUsername("johnnguyen");
+        s.setId(1);
+        s.setUsername("superfrog1");
         s.setFirstName("John");
-        s.setLastName("Nguyen");
-        s.setEmail("john.nguyen@tcu.edu");
-        s.setPassword("1234567890");
+        s.setLastName("Mejyen");
+        s.setEmail("example@gmail.com");
+        s.setPassword("password");
         s.setActive(true);
 
-        given(superfrogRepository.findById(0)).willReturn(Optional.of(s)); // Defines the behavior of mock object
+        given(superfrogRepository.findById(1)).willReturn(Optional.of(s)); // Defines the behavior of mock object
 
         // When. Act on the target behavior. When steps should cover the method to be tested.
-        Superfrog returnedSuperfrog = superfrogService.findById(0);
+        Superfrog returnedSuperfrog = superfrogService.findById(1);
 
         // Then. Assert expected outcomes.
         assertThat(returnedSuperfrog.getId()).isEqualTo(s.getId());
@@ -73,7 +71,7 @@ class SuperfrogServiceTest {
         assertThat(returnedSuperfrog.getEmail()).isEqualTo(s.getEmail());
         assertThat(returnedSuperfrog.getPassword()).isEqualTo(s.getPassword());
         assertThat(returnedSuperfrog.isActive()).isEqualTo(s.isActive());
-        verify(superfrogRepository, times(1)).findById(0);
+        verify(superfrogRepository, times(1)).findById(1);
     }
 
     @Test
@@ -83,14 +81,14 @@ class SuperfrogServiceTest {
 
         // When
         Throwable thrown = catchThrowable(()-> {
-            Superfrog returnedSuperfrog = superfrogService.findById(0);
+            Superfrog returnedSuperfrog = superfrogService.findById(1);
         });
 
         // Then
         assertThat(thrown)
                 .isInstanceOf(ObjectNotFoundException.class)
-                .hasMessage("Could not find superfrog with Id 0 :(");
-        verify(superfrogRepository, times(1)).findById(0);
+                .hasMessage("Could not find superfrog with Id 1 :(");
+        verify(superfrogRepository, times(1)).findById(1);
 
     }
 }

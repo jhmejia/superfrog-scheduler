@@ -1,4 +1,4 @@
-package edu.tcu.cs.superfrogscheduler.system;
+package edu.tcu.cs.superfrogscheduler.system.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
     public ObjectNotFoundException(String objectName, Integer id) {
