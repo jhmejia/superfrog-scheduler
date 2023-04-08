@@ -1,4 +1,4 @@
-package edu.tcu.cs.superfrogscheduler.system.exception;
+package edu.tcu.cs.superfrogscheduler.system;
 
 import edu.tcu.cs.superfrogscheduler.superfrog.Superfrog;
 import edu.tcu.cs.superfrogscheduler.superfrog.SuperfrogRepository;
