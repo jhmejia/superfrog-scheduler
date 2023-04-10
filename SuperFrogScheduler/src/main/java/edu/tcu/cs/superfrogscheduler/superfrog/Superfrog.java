@@ -1,9 +1,12 @@
 package edu.tcu.cs.superfrogscheduler.superfrog;
 
+import edu.tcu.cs.superfrogscheduler.request.Request;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Superfrog implements Serializable {
@@ -16,6 +19,7 @@ public class Superfrog implements Serializable {
     private String email;
     private String password;
     private boolean active;
+
 
     public Superfrog() {
     }
@@ -75,6 +79,7 @@ public class Superfrog implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+
 
 
 }

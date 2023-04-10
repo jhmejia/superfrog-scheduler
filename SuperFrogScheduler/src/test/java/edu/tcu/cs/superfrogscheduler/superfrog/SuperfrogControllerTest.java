@@ -2,6 +2,7 @@ package edu.tcu.cs.superfrogscheduler.superfrog;
 
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import edu.tcu.cs.superfrogscheduler.system.StatusCode;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,7 @@ class SuperfrogControllerTest {
         s3.setEmail("jo@gmail.com");
         s3.setPassword("password3");
         s3.setActive(false);
-        this.superfrogs.add(s2);
+        this.superfrogs.add(s3);
     }
 
     @AfterEach
@@ -98,6 +99,23 @@ class SuperfrogControllerTest {
                 .andExpect(jsonPath("$.code").value(StatusCode.NOT_FOUND))
                 .andExpect(jsonPath("$.message").value("Could not find superfrog with Id 1 :("))
                 .andExpect(jsonPath("$.data").isEmpty());
+
+    }
+
+    @Test
+    void testFindAllSuperfrogsSuccess() throws Exception {
+        // Given
+        given(this.superfrogService.findAll()).willReturn(this.superfrogs);
+
+        // When and then
+        this.mockMvc.perform(get("/api/superfrogs").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Find All Success"))
+                .andExpect(jsonPath("$.data", Matchers.hasSize(this.superfrogs.size())))
+                .andExpect(jsonPath("$.data[0].id").value(1))
+                .andExpect(jsonPath("$.data[1].id").value(2));
+
 
 
     }
