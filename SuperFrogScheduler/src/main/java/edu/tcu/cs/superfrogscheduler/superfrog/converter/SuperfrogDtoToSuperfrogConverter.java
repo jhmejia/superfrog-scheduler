@@ -1,21 +1,20 @@
 package edu.tcu.cs.superfrogscheduler.superfrog.converter;
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
-import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperfrogDto;
+import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
 import org.springframework.core.convert.converter.Converter;
 
-public class SuperfrogDtoToSuperfrogConverter implements Converter<SuperfrogDto, SuperFrogStudent>{
+public class SuperfrogDtoToSuperfrogConverter implements Converter<SuperFrogStudentDto, SuperFrogStudent>{
     @Override
-    public SuperFrogStudent convert(SuperfrogDto source) {
-//        Superfrog superfrog = new Superfrog();
-//        superfrog.setId(source.id());
+    public SuperFrogStudent convert(SuperFrogStudentDto source) {
+        SuperFrogStudent superFrogStudent = new SuperFrogStudent();
+        superFrogStudent.setId(source.id());
+        superFrogStudent.setFirstName(source.firstName());
+        superFrogStudent.setLastName(source.lastName());
 //        superfrog.setUsername(source.username());
-//        superfrog.setFirstName(source.firstName());
-//        superfrog.setLastName(source.lastName());
 //        superfrog.setEmail(source.email());
 //        superfrog.setPassword(source.password());
 //        superfrog.setActive(source.active());
-//        return superfrog;
-        return null;
+        return superFrogStudent;
     }
     
 }

@@ -1,4 +1,4 @@
-package edu.tcu.cs.superfrogscheduler.controller;
+package edu.tcu.cs.superfrogscheduler.system;
 
 public class HttpStatusCode {
 
