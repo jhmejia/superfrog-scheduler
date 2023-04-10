@@ -32,4 +32,14 @@ public class SuperFrogStudentController {
         return new Result(true, HttpStatusCode.SUCCESS, "Find One Success", superfrogDto);
     }
 
+    @GetMapping("/api/superfrogstudents")
+    public Result findAllSuperFrogStudents() {
+        List<SuperFrogStudent> foundSuperFrogStudents = this.superFrogStudentService.findAll();
+        // Convert foundSuperFrogStudents to a list of SuperFrogStudentDtos
+        List<SuperFrogStudentDto> superFrogStudentDtos = foundSuperFrogStudents.stream().map(this.superfrogToSuperfrogDtoConverter::convert)
+                .collect(Collectors.toList());
+
+        return new Result(true, HttpStatusCode.SUCCESS, "Find All Success", superFrogStudentDtos);
+    }
+
 }

@@ -64,7 +64,7 @@ class SuperfrogControllerTest {
     }
 
     @Test
-    void testFindSuperfrogByIdSuccess() throws Exception {
+    void testFindSuperFrogStudentByIdSuccess() throws Exception {
         // Given
         given(this.superFrogStudentService.findById(1001)).willReturn(this.superFrogStudents.get(0));
 
@@ -79,7 +79,7 @@ class SuperfrogControllerTest {
     }
 
     @Test
-    void testFindSuperfrogByIdNotFound() throws Exception {
+    void testFindSuperFrogStudentByIdNotFound() throws Exception {
         // Given
         given(this.superFrogStudentService.findById(1001)).willThrow(new ObjectNotFoundException("superfrog student", 1001));
 
@@ -90,6 +90,25 @@ class SuperfrogControllerTest {
                 .andExpect(jsonPath("$.message").value("Could not find superfrog student with Id 1001 :("))
                 .andExpect(jsonPath("$.data").isEmpty());
 
+    }
+
+    @Test
+    void testFindAllSuperFrogStudents() throws Exception {
+        // Given
+        given(this.superFrogStudentService.findAll()).willReturn(this.superFrogStudents);
+
+        // When and Then
+        this.mockMvc.perform(get("/api/superfrogstudents").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(HttpStatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Find All Success"))
+                .andExpect(jsonPath("$.data", Matchers.hasSize(this.superFrogStudents.size())))
+                .andExpect(jsonPath("$.data[0].id").value(1001))
+                .andExpect(jsonPath("$.data[0].firstName").value("Jane"))
+                .andExpect(jsonPath("$.data[1].id").value(1004))
+                .andExpect(jsonPath("$.data[1].firstName").value("John"))
+                .andExpect(jsonPath("$.data[2].id").value(1012))
+                .andExpect(jsonPath("$.data[2].firstName").value("Tim"));
     }
 
 

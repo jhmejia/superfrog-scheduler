@@ -101,5 +101,20 @@ class SuperfrogServiceTest {
 
     }
 
+    @Test
+    void testFindAllSuccess() {
+        // Given
+        given(superFrogStudentRepository.findAll()).willReturn(this.superFrogStudents);
+
+        // When
+        List<SuperFrogStudent> actualSuperFrogStudents = superFrogStudentService.findAll();
+
+        // Then
+        assertThat(actualSuperFrogStudents.size()).isEqualTo(this.superFrogStudents.size());
+        verify(superFrogStudentRepository, times(1)).findAll();
+
+    }
+
+
 
 }

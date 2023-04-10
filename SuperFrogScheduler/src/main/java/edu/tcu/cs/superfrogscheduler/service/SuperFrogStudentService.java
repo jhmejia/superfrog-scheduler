@@ -23,4 +23,8 @@ public class SuperFrogStudentService {
                 .orElseThrow(()-> new ObjectNotFoundException("superfrog", superfrogId));
     }
 
+    public List<SuperFrogStudent> findAll() {
+        return this.superFrogStudentRepository.findAll();
+    }
+
 }
