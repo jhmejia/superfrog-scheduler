@@ -61,7 +61,6 @@ paths:
               allOf:
                 - $ref: '#/components/schemas/SuperFrog'
               example:
-                username: "SuperFrog1"
                 firstName: "SuperFrog"
                 lastName: "example"
                 email: "aej@gmail.com"
@@ -459,9 +458,6 @@ components:
           type: integer
           format: int64
           example: 1
-        username:
-          type: string
-          example: "superfrog1"
         firstName:
           type: string
           example: "John"
@@ -479,8 +475,7 @@ components:
         active:
           type: boolean
           example: true
-      required:
-        - username
+      required: 
         - firstName
         - lastName
         - email
@@ -561,7 +556,6 @@ components:
           format: int32
           description: User Status
       required:
-        - username
         - firstName
         - lastName
         - email
@@ -574,21 +568,18 @@ components:
         $ref: '#/components/schemas/SuperFrog'
       example:
         - id: 1
-          username: "superfrog1"
           firstName: "John"
           lastName: "Mejyen"
           email: "example@gmail.com"
           password: "password"
           active: true
         - id: 2
-          username: "superfrog2"
           firstName: "Joey"
           lastName: "Quinn"
           email: "iamacat@gmail.com"
           password: "password2"
           active: true
         - id: 3
-          username: "superfrog3"
           firstName: "Ethan"
           lastName: "Edinboro"
           email: "jo@gmail.com"
@@ -683,7 +674,6 @@ components:
             - $ref: '#/components/schemas/SuperFrog'
           example:
             id: 1
-            username: "superfrog1"
             firstName: "John"
             lastName: "Mejyen"
             email: "misty@gmail.com"
@@ -719,11 +709,6 @@ components:
       description: Messages describing a bad request error
       type: object
       properties:
-        username:
-          title: Username
-          description: Username error message
-          type: string
-          example: Username must be between 3 and 20 characters long
         firstName:
           title: First name
           description: First name error message
