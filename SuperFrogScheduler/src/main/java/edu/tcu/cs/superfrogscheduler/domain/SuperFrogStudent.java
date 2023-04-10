@@ -76,4 +76,15 @@ public class SuperFrogStudent {
         return id;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

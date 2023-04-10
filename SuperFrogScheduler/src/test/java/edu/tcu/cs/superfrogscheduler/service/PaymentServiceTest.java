@@ -1,8 +1,8 @@
 package edu.tcu.cs.superfrogscheduler.service;
 
-import edu.tcu.cs.superfrogschedulertdd.domain.*;
-import edu.tcu.cs.superfrogschedulertdd.repository.PaymentFormRepository;
-import edu.tcu.cs.superfrogschedulertdd.repository.SuperFrogAppearanceRequestRepository;
+import edu.tcu.cs.superfrogscheduler.domain.*;
+import edu.tcu.cs.superfrogscheduler.repository.PaymentFormRepository;
+import edu.tcu.cs.superfrogscheduler.repository.SuperFrogAppearanceRequestRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

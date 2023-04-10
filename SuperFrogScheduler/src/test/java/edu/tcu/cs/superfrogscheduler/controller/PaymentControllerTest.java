@@ -1,8 +1,8 @@
 package edu.tcu.cs.superfrogscheduler.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.tcu.cs.superfrogschedulertdd.controller.dto.RequestIds;
-import edu.tcu.cs.superfrogschedulertdd.domain.Period;
+import edu.tcu.cs.superfrogscheduler.controller.dto.RequestIds;
+import edu.tcu.cs.superfrogscheduler.domain.Period;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
