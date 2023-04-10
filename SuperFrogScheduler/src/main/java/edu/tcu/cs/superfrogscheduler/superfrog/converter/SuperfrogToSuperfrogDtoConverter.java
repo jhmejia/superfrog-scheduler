@@ -16,4 +16,3 @@ public class SuperfrogToSuperfrogDtoConverter  implements Converter<Superfrog, S
     }
 }
     
-
