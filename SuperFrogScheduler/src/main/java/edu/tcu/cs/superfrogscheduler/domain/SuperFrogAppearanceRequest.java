@@ -61,6 +61,22 @@ public class SuperFrogAppearanceRequest {
         return this.mileage.compareTo(freeMileage) <= 0 ? 0.0 : this.mileage - freeMileage;
     }
 
+    public Integer getRequestId() {
+        return requestId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
     public EventType getEventType() {
         return eventType;
     }
@@ -81,4 +97,39 @@ public class SuperFrogAppearanceRequest {
         return student;
     }
 
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
+    }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setMileage(Double mileage) {
+        this.mileage = mileage;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
+    }
+
+    public void setStudent(SuperFrogStudent student) {
+        this.student = student;
+    }
 }
