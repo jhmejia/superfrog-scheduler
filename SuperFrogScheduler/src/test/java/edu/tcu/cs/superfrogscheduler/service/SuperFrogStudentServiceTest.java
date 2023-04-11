@@ -3,6 +3,7 @@ package edu.tcu.cs.superfrogscheduler.service;
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.repository.SuperFrogStudentRepository;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
+import edu.tcu.cs.superfrogscheduler.utils.IdWorker;
 import net.bytebuddy.implementation.bind.annotation.Super;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +29,9 @@ class SuperfrogServiceTest {
 
     @Mock
     SuperFrogStudentRepository superFrogStudentRepository;
+
+    @Mock
+    IdWorker idWorker;
 
     @InjectMocks
     SuperFrogStudentService superFrogStudentService;
@@ -116,5 +120,25 @@ class SuperfrogServiceTest {
     }
 
 
+    @Test
+    void testSaveSuccess() {
+        // Given
+        SuperFrogStudent newSuperFrogStudent = new SuperFrogStudent();
+        newSuperFrogStudent.setFirstName("New SuperFrog First");
+        newSuperFrogStudent.setLastName("New SuperFrog Last");
+
+        given(idWorker.nextId()).willReturn(1016L);
+        given(superFrogStudentRepository.save(newSuperFrogStudent)).willReturn(newSuperFrogStudent);
+
+        // When
+        SuperFrogStudent savedSuperFrogStudent = superFrogStudentService.save(newSuperFrogStudent);
+
+        // Then
+        assertThat(savedSuperFrogStudent.getId()).isEqualTo(1016);
+        assertThat(savedSuperFrogStudent.getFirstName()).isEqualTo(newSuperFrogStudent.getFirstName());
+        assertThat(savedSuperFrogStudent.getLastName()).isEqualTo(newSuperFrogStudent.getLastName());
+        verify(superFrogStudentRepository, times(1)).save(newSuperFrogStudent);
+
+    }
 
 }

@@ -1,13 +1,17 @@
 package edu.tcu.cs.superfrogscheduler.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.service.SuperFrogStudentService;
+import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -31,6 +36,9 @@ class SuperfrogControllerTest {
 
     @MockBean
     SuperFrogStudentService superFrogStudentService;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     List<SuperFrogStudent> superFrogStudents;
 
@@ -109,6 +117,34 @@ class SuperfrogControllerTest {
                 .andExpect(jsonPath("$.data[1].firstName").value("John"))
                 .andExpect(jsonPath("$.data[2].id").value(1012))
                 .andExpect(jsonPath("$.data[2].firstName").value("Tim"));
+    }
+
+    @Test
+    void testAddSuperFrogStudentSuccess() throws Exception {
+        // Given
+        SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
+                null,
+                "NewFirstName",
+                "NewLastName");
+
+        String json = this.objectMapper.writeValueAsString(superFrogStudentDto);
+
+        SuperFrogStudent savedSuperFrogStudent = new SuperFrogStudent();
+        savedSuperFrogStudent.setId(1016);
+        savedSuperFrogStudent.setFirstName("NewFirstName");
+        savedSuperFrogStudent.setLastName("NewLastName");
+
+        given(this.superFrogStudentService.save(Mockito.any(SuperFrogStudent.class))).willReturn(savedSuperFrogStudent);
+
+        // When and Then
+        this.mockMvc.perform(post("/api/superfrogstudents").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(HttpStatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Add Success"))
+                .andExpect(jsonPath("$.data.id").isNotEmpty())
+                .andExpect(jsonPath("$.data.firstName").value(savedSuperFrogStudent.getFirstName()))
+                .andExpect(jsonPath("$.data.lastName").value(savedSuperFrogStudent.getLastName()));
+
     }
 
 

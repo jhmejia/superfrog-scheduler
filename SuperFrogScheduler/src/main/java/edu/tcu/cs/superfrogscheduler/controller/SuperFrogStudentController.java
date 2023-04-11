@@ -2,13 +2,13 @@ package edu.tcu.cs.superfrogscheduler.controller;
 
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.service.SuperFrogStudentService;
+import edu.tcu.cs.superfrogscheduler.superfrog.converter.SuperfrogDtoToSuperfrogConverter;
 import edu.tcu.cs.superfrogscheduler.superfrog.converter.SuperfrogToSuperfrogDtoConverter;
 import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
 import edu.tcu.cs.superfrogscheduler.system.Result;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,9 +20,12 @@ public class SuperFrogStudentController {
 
     private final SuperfrogToSuperfrogDtoConverter superfrogToSuperfrogDtoConverter;
 
-    public SuperFrogStudentController(SuperFrogStudentService superFrogStudentService, SuperfrogToSuperfrogDtoConverter superfrogToSuperfrogDtoConverter) {
+    private final SuperfrogDtoToSuperfrogConverter superfrogDtoToSuperfrogConverter;
+
+    public SuperFrogStudentController(SuperFrogStudentService superFrogStudentService, SuperfrogToSuperfrogDtoConverter superfrogToSuperfrogDtoConverter, SuperfrogDtoToSuperfrogConverter superfrogDtoToSuperfrogConverter) {
         this.superFrogStudentService = superFrogStudentService;
         this.superfrogToSuperfrogDtoConverter = superfrogToSuperfrogDtoConverter;
+        this.superfrogDtoToSuperfrogConverter = superfrogDtoToSuperfrogConverter;
     }
 
     @GetMapping("/api/superfrogstudents/{superfrogId}")
@@ -40,6 +43,15 @@ public class SuperFrogStudentController {
                 .collect(Collectors.toList());
 
         return new Result(true, HttpStatusCode.SUCCESS, "Find All Success", superFrogStudentDtos);
+    }
+
+    @PostMapping("/api/superfrogstudents")
+    public Result addSuperFrogStudent(@Valid @RequestBody SuperFrogStudentDto superFrogStudentDto)
+    {
+        SuperFrogStudent newSuperFrogStudent = this.superfrogDtoToSuperfrogConverter.convert(superFrogStudentDto);
+        SuperFrogStudent savedSuperFrogStudent = this.superFrogStudentService.save(newSuperFrogStudent);
+        SuperFrogStudentDto savedSuperFrogStudentDto = this.superfrogToSuperfrogDtoConverter.convert(savedSuperFrogStudent);
+        return new Result(true, HttpStatusCode.SUCCESS, "Add Success", savedSuperFrogStudentDto);
     }
 
 }
