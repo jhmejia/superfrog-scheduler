@@ -54,4 +54,8 @@ public class SuperFrogStudentController {
         return new Result(true, HttpStatusCode.SUCCESS, "Add Success", savedSuperFrogStudentDto);
     }
 
+    @PutMapping("/api/superfrogstudents/{superfrogId}")
+    public Result updateSuperFrogStudent(@PathVariable int superfrogId,@Valid @RequestBody SuperFrogStudentDto superFrogStudentDto){
+        return null;
+    }
 }

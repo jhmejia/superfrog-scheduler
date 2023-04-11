@@ -36,4 +36,9 @@ public class SuperFrogStudentService {
         return this.superFrogStudentRepository.save(newSuperFrogStudent);
     }
 
+    public SuperFrogStudent update(int superfrodId, SuperFrogStudent updatedFrog){
+    return null;
+    }
+
+
 }
