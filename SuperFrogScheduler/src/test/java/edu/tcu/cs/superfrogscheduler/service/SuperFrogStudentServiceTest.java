@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -138,6 +139,49 @@ class SuperfrogServiceTest {
         assertThat(savedSuperFrogStudent.getFirstName()).isEqualTo(newSuperFrogStudent.getFirstName());
         assertThat(savedSuperFrogStudent.getLastName()).isEqualTo(newSuperFrogStudent.getLastName());
         verify(superFrogStudentRepository, times(1)).save(newSuperFrogStudent);
+
+    }
+
+    @Test
+    void testUpdateSuccess(){
+        //Given
+        SuperFrogStudent oldFrog= new SuperFrogStudent();
+        oldFrog.setId(1001);
+        oldFrog.setFirstName("Jane");
+        oldFrog.setLastName("Smith");
+
+        SuperFrogStudent updatedFrog= new SuperFrogStudent();
+        //updatedFrog.setId(1001);
+        updatedFrog.setFirstName("Jane");
+        updatedFrog.setLastName("Blacksmith");
+
+        given(this.superFrogStudentRepository.findById(1001)).willReturn(Optional.of(oldFrog));
+        given(this.superFrogStudentRepository.save(oldFrog)).willReturn(oldFrog);
+        //When
+        SuperFrogStudent updateFrog = this.superFrogStudentService.update(1001, updatedFrog);
+        //Then
+        assertThat(updateFrog.getId()).isEqualTo(1001);
+        assertThat(updateFrog.getLastName()).isEqualTo(updatedFrog.getLastName());
+        verify(this.superFrogStudentRepository, times(1)).findById(1001);
+        verify(this.superFrogStudentRepository, times(1)).save(oldFrog);
+    }
+
+    @Test
+    void testUpdateNotFound(){
+        //Given
+        SuperFrogStudent updatedFrog = new SuperFrogStudent();
+        updatedFrog.setFirstName("Jane");
+        updatedFrog.setLastName("Blacksmith");
+
+        given(this.superFrogStudentRepository.findById(1)).willReturn(Optional.empty());
+
+        //When
+        assertThrows(ObjectNotFoundException.class, () -> {
+            this.superFrogStudentService.update(1, updatedFrog);
+        });
+
+        // Then
+        verify(this.superFrogStudentRepository, times(1)).findById(1);
 
     }
 
