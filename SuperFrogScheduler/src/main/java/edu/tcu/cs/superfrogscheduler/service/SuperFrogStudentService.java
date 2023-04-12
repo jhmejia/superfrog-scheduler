@@ -36,14 +36,13 @@ public class SuperFrogStudentService {
         return this.superFrogStudentRepository.save(newSuperFrogStudent);
     }
 
-    public SuperFrogStudent update(int superfrogId, SuperFrogStudent updatedFrog){
-       return this.superFrogStudentRepository.findById(superfrogId)
-               .map(
-                       oldFrog.setFirstName(updatedFrog.getFirstName);
-                       oldFrog.setLastName(updatedFrog.getLastName);
-                       oldFrog.setId(updatedFrog.getId);
-                       return this.superFrogStudentRepository.save(oldFrog);
-               ).orElseThrow(() -> new ObjectNotFoundException(superFrogId));
+    public SuperFrogStudent update(int superFrogId, SuperFrogStudent updatedFrog){
+       return this.superFrogStudentRepository.findById(superFrogId)
+               .map(oldFrog -> {
+                   oldFrog.setFirstName(updatedFrog.getFirstName());
+                   oldFrog.setLastName(updatedFrog.getLastName());
+                   return this.superFrogStudentRepository.save(oldFrog);
+               }).orElseThrow(() -> new ObjectNotFoundException("superfrog", superFrogId ));
 
 
     }

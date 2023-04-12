@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -149,38 +150,38 @@ class SuperfrogServiceTest {
         oldFrog.setFirstName("Jane");
         oldFrog.setLastName("Smith");
 
-        SuperFrogStudend updatedFrog= new SuperFrogStudent();
-        updatedFrog.setId(1001);
+        SuperFrogStudent updatedFrog= new SuperFrogStudent();
+        //updatedFrog.setId(1001);
         updatedFrog.setFirstName("Jane");
         updatedFrog.setLastName("Blacksmith");
 
-        given(SuperFrogStudentRepository.findById("1001")).willReturn(Optional.of(oldFrog));
-        given(SuperFrogStudentRepository.save(oldFrog)).willReturn(oldFrog);
+        given(this.superFrogStudentRepository.findById(1001)).willReturn(Optional.of(oldFrog));
+        given(this.superFrogStudentRepository.save(oldFrog)).willReturn(oldFrog);
         //When
-        SuperFrogStudent updateFrog = SuperFrogStudentService.update(superFrogId=1001, updatedFrog);
+        SuperFrogStudent updateFrog = this.superFrogStudentService.update(1001, updatedFrog);
         //Then
         assertThat(updateFrog.getId()).isEqualTo(updatedFrog.getId());
         assertThat(updateFrog.getLastName()).isEqualTo(updatedFrog.getLastName());
-        verify(superFrogStudentRepository, times(1)).findById(1001);
-        verify(superFrogStudentRepository, times(1)).save(oldFrog);
+        verify(this.superFrogStudentRepository, times(1)).findById(1001);
+        verify(this.superFrogStudentRepository, times(1)).save(oldFrog);
     }
 
     @Test
     void testUpdateNotFound(){
         //Given
-        SuperFrogStudend updatedFrog= new SuperFrogStudent();
-        updatedFrog.setId(1001);
+        SuperFrogStudent updatedFrog = new SuperFrogStudent();
         updatedFrog.setFirstName("Jane");
         updatedFrog.setLastName("Blacksmith");
 
-        given(superFrogStudentRepository.findById(1001)).(Optional.empty());
+        given(this.superFrogStudentRepository.findById(1)).willReturn(Optional.empty());
 
         //When
-        assertThrows(ObjectNotFoundException.class, =>{
-            SuperFrogStudentService.update(1001, updatedFrog)
+        assertThrows(ObjectNotFoundException.class, () -> {
+            this.superFrogStudentService.update(1, updatedFrog);
         });
-        //Then
-        verify(superFrogStudentRepository, times(1)).findById(1001);
+
+        // Then
+        verify(this.superFrogStudentRepository, times(1)).findById(1);
 
     }
 

@@ -56,9 +56,9 @@ public class SuperFrogStudentController {
 
     @PutMapping("/api/superfrogstudents/{superfrogId}")
     public Result updateSuperFrogStudent(@PathVariable int superfrogId,@Valid @RequestBody SuperFrogStudentDto superFrogStudentDto){
-        SuperFrogStudent update = this.SuperfrogDtoToSuperfrogConverter.convert(superFrogStudentDto);
-        SuperFrogStudent updatedStudent = this.SuperFrogStudentService.update(superfrogId, update);
-        SuperfrogToSuperfrogDtoConverter updatedStudentDto = this.SuperfrogToSuperfrogDtoConverter.convert(updatedStudent);
-        return new Result(true, HttpStatusCode.SUCCESS, "Update Success", 1016, updatedStudentDto);
+        SuperFrogStudent update = this.superfrogDtoToSuperfrogConverter.convert(superFrogStudentDto);
+        SuperFrogStudent updatedStudent = this.superFrogStudentService.update(superfrogId, update);
+        SuperFrogStudentDto updatedStudentDto = this.superfrogToSuperfrogDtoConverter.convert(updatedStudent);
+        return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedStudentDto);
     }
 }
