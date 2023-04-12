@@ -22,10 +22,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -148,7 +148,7 @@ class SuperfrogControllerTest {
     }
 
     @Test
-    void testUpdateFrogSuccess(){
+    void testUpdateFrogSuccess() throws Exception {
         // Given
         SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
                 1016,
@@ -175,7 +175,7 @@ class SuperfrogControllerTest {
     }
 
     @Test
-    void testUpdateSuperFrogErrorWithNonExistentId(){
+    void testUpdateSuperFrogErrorWithNonExistentId() throws Exception {
 
         // Given
         SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
@@ -185,13 +185,13 @@ class SuperfrogControllerTest {
 
         String json = this.objectMapper.writeValueAsString(superFrogStudentDto);
 
-        given(this.superFrogStudentService.update(eq(1016), Mockito.any(SuperFrogStudent.class))).willThrow(new ObjectNotFoundException(1016, ));
+        given(this.superFrogStudentService.update(eq(1016), Mockito.any(SuperFrogStudent.class))).willThrow(new ObjectNotFoundException("superfrogstudent",1016));
 
         // When and Then
         this.mockMvc.perform(put("/api/superfrogstudents/1016").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.flag").value(false))
                 .andExpect(jsonPath("$.code").value(HttpStatusCode.NOT_FOUND))
-                .andExpect(jsonPath("$.message").value("Could not find associated id 1016 :("))
+                .andExpect(jsonPath("$.message").value("Could not find superfrogstudent with Id 1016 :("))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
 

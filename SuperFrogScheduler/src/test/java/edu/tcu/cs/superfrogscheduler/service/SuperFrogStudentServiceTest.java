@@ -160,7 +160,7 @@ class SuperfrogServiceTest {
         //When
         SuperFrogStudent updateFrog = this.superFrogStudentService.update(1001, updatedFrog);
         //Then
-        assertThat(updateFrog.getId()).isEqualTo(updatedFrog.getId());
+        assertThat(updateFrog.getId()).isEqualTo(1001);
         assertThat(updateFrog.getLastName()).isEqualTo(updatedFrog.getLastName());
         verify(this.superFrogStudentRepository, times(1)).findById(1001);
         verify(this.superFrogStudentRepository, times(1)).save(oldFrog);
