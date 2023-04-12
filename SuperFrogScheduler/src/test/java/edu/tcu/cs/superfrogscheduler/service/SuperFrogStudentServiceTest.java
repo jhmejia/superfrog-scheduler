@@ -141,4 +141,28 @@ class SuperfrogServiceTest {
 
     }
 
+    @Test
+    void testUpdateSuccess(){
+        //Given
+        SuperFrogStudent oldFrog= new SuperFrogStudent();
+        oldFrog.setId(1001);
+        oldFrog.setFirstName("Jane");
+        oldFrog.setLastName("Smith");
+
+        SuperFrogStudend updatedFrog= new SuperFrogStudent();
+        updatedFrog.setId(1001);
+        updatedFrog.setFirstName("Jane");
+        updatedFrog.setLastName("Blacksmith");
+
+        given(SuperFrogStudentRepository.findById("1001")).willReturn(Optional.of(oldFrog));
+        given(SuperFrogStudentRepository.save(oldFrog)).willReturn(oldFrog);
+        //When
+        SuperFrogStudent updateFrog = SuperFrogStudentService.update(superFrogId=1001, updatedFrog);
+        //Then
+        assertThat(updateFrog.getId()).isEqualTo(updatedFrog.getId());
+        assertThat(updateFrog.getLastName()).isEqualTo(updatedFrog.getLastName());
+        verify(superFrogStudentRepository, times(1)).findById(1001);
+        verify(superFrogStudentRepository, times(1)).save(oldFrog);
+    }
+
 }

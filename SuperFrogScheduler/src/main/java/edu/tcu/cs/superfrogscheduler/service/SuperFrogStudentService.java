@@ -36,8 +36,13 @@ public class SuperFrogStudentService {
         return this.superFrogStudentRepository.save(newSuperFrogStudent);
     }
 
-    public SuperFrogStudent update(int superfrodId, SuperFrogStudent updatedFrog){
-    return null;
+    public SuperFrogStudent update(int superfrogId, SuperFrogStudent updatedFrog){
+       SuperFrogStudent oldFrog= this.superFrogStudentRepository.findById(superfrogId).get();
+       oldFrog.setFirstName(updatedFrog.getFirstName);
+       oldFrog.setLastName(updatedFrog.getLastName);
+       oldFrog.setId(updatedFrog.getId);
+       SuperFrogStudent updateFrog = this.superFrogStudentRepository.save(oldFrog);
+       return updateFrog;
     }
 
 
