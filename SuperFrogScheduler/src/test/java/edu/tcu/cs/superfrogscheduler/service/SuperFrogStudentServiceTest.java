@@ -165,4 +165,14 @@ class SuperfrogServiceTest {
         verify(superFrogStudentRepository, times(1)).save(oldFrog);
     }
 
+    @Test
+    void testUpdateNotFound(){
+        SuperFrogStudend updatedFrog= new SuperFrogStudent();
+        updatedFrog.setId(1001);
+        updatedFrog.setFirstName("Jane");
+        updatedFrog.setLastName("Blacksmith");
+
+        given(superFrogStudentRepository.findById(1001)).(Optional.empty());
+    }
+
 }
