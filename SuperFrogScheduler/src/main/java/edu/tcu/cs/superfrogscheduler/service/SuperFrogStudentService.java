@@ -37,12 +37,15 @@ public class SuperFrogStudentService {
     }
 
     public SuperFrogStudent update(int superfrogId, SuperFrogStudent updatedFrog){
-       SuperFrogStudent oldFrog= this.superFrogStudentRepository.findById(superfrogId).get();
-       oldFrog.setFirstName(updatedFrog.getFirstName);
-       oldFrog.setLastName(updatedFrog.getLastName);
-       oldFrog.setId(updatedFrog.getId);
-       SuperFrogStudent updateFrog = this.superFrogStudentRepository.save(oldFrog);
-       return updateFrog;
+       return this.superFrogStudentRepository.findById(superfrogId)
+               .map(
+                       oldFrog.setFirstName(updatedFrog.getFirstName);
+                       oldFrog.setLastName(updatedFrog.getLastName);
+                       oldFrog.setId(updatedFrog.getId);
+                       return this.superFrogStudentRepository.save(oldFrog);
+               ).orElseThrow(() -> new ObjectNotFoundException(superFrogId));
+
+
     }
 
 

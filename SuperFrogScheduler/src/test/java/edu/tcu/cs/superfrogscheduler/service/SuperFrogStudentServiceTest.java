@@ -167,12 +167,21 @@ class SuperfrogServiceTest {
 
     @Test
     void testUpdateNotFound(){
+        //Given
         SuperFrogStudend updatedFrog= new SuperFrogStudent();
         updatedFrog.setId(1001);
         updatedFrog.setFirstName("Jane");
         updatedFrog.setLastName("Blacksmith");
 
         given(superFrogStudentRepository.findById(1001)).(Optional.empty());
+
+        //When
+        assertThrows(ObjectNotFoundException.class, =>{
+            SuperFrogStudentService.update(1001, updatedFrog)
+        });
+        //Then
+        verify(superFrogStudentRepository, times(1)).findById(1001);
+
     }
 
 }

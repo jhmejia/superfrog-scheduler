@@ -147,5 +147,53 @@ class SuperfrogControllerTest {
 
     }
 
+    @Test
+    void testUpdateFrogSuccess(){
+        // Given
+        SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
+                1016,
+                "Jane",
+                "Blacksmith");
+
+        String json = this.objectMapper.writeValueAsString(superFrogStudentDto);
+
+        SuperFrogStudent updatedFrog = new SuperFrogStudent();
+        updatedFrog.setId(1016);
+        updatedFrog.setFirstName("Jane");
+        updatedFrog.setLastName("Blacksmith");
+
+        given(this.superFrogStudentService.update(eq(1016), Mockito.any(SuperFrogStudent.class))).willReturn(updatedFrog);
+
+        // When and Then
+        this.mockMvc.perform(put("/api/superfrogstudents/1016").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(HttpStatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Update Success"))
+                .andExpect(jsonPath("$.data.id").value(1016))
+                .andExpect(jsonPath("$.data.firstName").value(updatedFrog.getFirstName()))
+                .andExpect(jsonPath("$.data.lastName").value(updatedFrog.getLastName()));
+    }
+
+    @Test
+    void testUpdateSuperFrogErrorWithNonExistentId(){
+
+        // Given
+        SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
+                1016,
+                "Jane",
+                "Blacksmith");
+
+        String json = this.objectMapper.writeValueAsString(superFrogStudentDto);
+
+        given(this.superFrogStudentService.update(eq(1016), Mockito.any(SuperFrogStudent.class))).willThrow(new ObjectNotFoundException(1016, ));
+
+        // When and Then
+        this.mockMvc.perform(put("/api/superfrogstudents/1016").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(false))
+                .andExpect(jsonPath("$.code").value(HttpStatusCode.NOT_FOUND))
+                .andExpect(jsonPath("$.message").value("Could not find associated id 1016 :("))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
 
 }
