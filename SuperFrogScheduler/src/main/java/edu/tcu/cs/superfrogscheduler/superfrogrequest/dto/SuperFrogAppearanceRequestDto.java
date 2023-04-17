@@ -12,16 +12,16 @@ import java.time.LocalTime;
 public record SuperFrogAppearanceRequestDto(
         Integer requestId,
 
-        @NotEmpty(message = "Event Type is required") EventType eventType,
-        @NotEmpty(message = "Address is required") String address,
+        EventType eventType,
+        String address,
 
-        @NotEmpty(message = "Mileage is required") Double mileage,
+        Double mileage,
 
-        @NotEmpty(message = "Event Date is required") LocalDate eventDate,
+        LocalDate eventDate,
 
-        @NotEmpty(message = "Start Time is required") LocalTime startTime,
+        LocalTime startTime,
 
-        @NotEmpty(message = "End Time is required") LocalTime endTime,
+        LocalTime endTime,
         RequestStatus status,
         SuperFrogStudent student) {
 }
