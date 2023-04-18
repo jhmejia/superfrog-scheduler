@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    
+
+    <style>
+        .landing-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #800080;
+            color: white;
+            cursor: pointer;
+        }
+
+        .profile-image {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            background-image: url('/Users/mannpatel/Desktop/WT/PROJECT/superfrog.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="landing-page">
+            <div class="profile-image"></div>
+            <h1>Test</h1>
+            <p>LOLs</p>
+            <div class="button-container">
+                <button class="button" @click="goToPricing"><i class="fas fa-dollar-sign"></i> Pricing</button>
+                <button class="button" @click="goToRange">Range</button>
+                <button class="button" @click="goToRequest">Request</button>
+                <button class="button" @click="goToModifyRequest">Modify a request</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@latest"></script>
+
+    <script>
+        const app = Vue.createApp({
+            methods: {
+                goToPricing() {
+                    // navigate to Pricing page
+                },
+                goToRange() {
+                    // navigate to Range page
+                },
+                goToRequest() {
+                    // navigate to Request page
+                },
+                goToModifyRequest() {
+                    // navigate to Modify Request page
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>
