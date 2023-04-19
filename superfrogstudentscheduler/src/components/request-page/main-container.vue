@@ -6,6 +6,8 @@
     <button @click="goForward" :disabled="currentComponentIndex === components.length - 1">Forward</button>
     
   </div>
+
+  <h1> Request Page </h1>
 </template>
 
       

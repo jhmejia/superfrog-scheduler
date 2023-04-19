@@ -9,6 +9,7 @@
   
     <router-view v-if="$route.path !='/'"></router-view>
 
+    
 </template>
 
 
