@@ -1,15 +1,22 @@
-
 <template>
   <div class="request-page">
-    <component  @update="saveData" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
-    <button @click="goBack" :disabled="currentComponentIndex === 0">Back</button>
-    <button @click="goForward" :disabled="currentComponentIndex === components.length - 1">Forward</button>
+    
+      <step-progress :steps="steps" :current-step="currentStep" icon-class="fa fa-check" active-color="#32CD32
+
+" passive-color="white"></step-progress>
+
+    <component  :eventInfo="eventInfo" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
+    <button @click="goBack" :disabled="selectedComponentIndex === 0">Back</button>
+    <button v-if="selectedComponentIndex != components.length - 2" @click="goForward">Forward</button>
+    <button v-if="selectedComponentIndex === components.length - 2" @click="submit">Submit</button>
     
   </div>
 </template>
 
       
 <script>
+   import StepProgress from 'vue-step-progress';
+   import 'vue-step-progress/dist/main.css';
    import DateTimePage from './date-time-page.vue'
    import DetailFormPage from './detail-form-page.vue'
    import PolicyPage from './policy-page.vue'
@@ -23,7 +30,8 @@
       DetailFormPage,
       PolicyPage,
       ReviewSubPage,
-      ReceiptPage
+      ReceiptPage,
+      'StepProgress': StepProgress
         },
         data() {
           return {
@@ -35,19 +43,37 @@
               { name: 'Receipt', component: ReceiptPage}
             ],
             selectedComponentIndex: 0,
+            currentStep: 0,
             currentComponent: '',
             defaultComponent: DateTimePage,
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            address: "",
-            nameOfOrg: "",
-            eventTitle: "",
-            eventDescription: "",
-            specialInstructions: "",
-            outSideOrgs:"",
-            expensesBenefits: "",
+            eventInfo : {
+              contactFirstName: "",
+              contactLastName: "",
+              email: "",
+              phoneNumber: "",
+              addressOfAppearance: "",
+              nameOfOrganization: "",
+              eventTitle: "",
+              eventDescription: "",
+              specialInstructions: "",
+              outsideOrganizations:"",
+              expensesBenefits: "",
+              scheduleDate: "",
+              startTime: "",
+              endTime: "",
+              eventType: "",
+              totalCost: 0.00,
+            },
+            steps: [
+              'Select Date and Time',
+              'Complete Form',
+              'Policy Agreement',
+              'Review Submission',
+            ],
+            
+
+
+           
             
           }
         },
@@ -60,61 +86,54 @@
                 }
               },
         },
+        
         methods: {
           selectComponent(index) {
               this.selectedComponentIndex = index;
+              
           },
           goForward() {
             if (this.selectedComponentIndex < this.components.length - 1) {
               this.selectedComponentIndex++;
+              this.currentStep++;
               this.currentComponent = this.components[this.selectedComponentIndex].component;
+              
             }
           },
           goBack() {
           if (this.selectedComponentIndex > 0) {
             this.selectedComponentIndex--;
+            this.currentStep--;
             this.currentComponent = this.components[this.selectedComponentIndex].component;
+            
             }
           },
+          sendData(data) {
+            this.eventInfo = data;
           
-          saveData(data) {
-            this.firstName = data.firstName;
-            this.lastName = data.lastName;
-            this.email = data.email;
-            this.phone = data.phone;
-            this.address = data.address;
-            this.nameOfOrg = data.nameOfOrg;
-            this.eventTitle = data.eventTitle;
-            this.eventDescription = data.eventDescription;
-            this.specialInstructions = data.specialInstructions;
-            this.outSideOrgs = data.outSideOrgs;
-            this.expensesBenefits = data.expensesBenefits;
-          }
-          ,
-          watch: {
-              DetailFormPage: function(newVal, oldVal) {
-                this.firstName = newVal.firstName
-                this.lastName = newVal.lastName
-                this.email = newVal.email
-                this.phone = newVal.phone
-                this.address = newVal.address
-                this.nameOfOrg = newVal.nameOfOrg
-                this.eventTitle = newVal.eventTitle
-                this.eventDescription = newVal.eventDescription
-                this.specialInstructions = newVal.specialInstructions
-                this.outSideOrgs = newVal.outSideOrgs
-                this.expensesBenefits = newVal.expensesBenefits
+          },
+          submit() {
+            if (this.selectedComponentIndex < this.components.length - 1) {
+              this.selectedComponentIndex++;
+              this.currentStep++;
+              this.currentComponent = this.components[this.selectedComponentIndex].component;
               
-              }
+            }
+            //Send data to backend/generate id and recipt
           }
+        },
+        
 
-        }
-}
+ }
+  
+
 </script>
 
 <style scoped>
 .request-page {
   background-color: purple;
   color: white;
+  width: 100vw;
+  height: 100vh;
 }
 </style>
