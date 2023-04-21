@@ -4,8 +4,24 @@
     <component  @update="saveData" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
     <button @click="goBack" :disabled="currentComponentIndex === 0">Back</button>
     <button @click="goForward" :disabled="currentComponentIndex === components.length - 1">Forward</button>
+
+    <div class="tabs">
+      <ul>
+        <li v-for="(component, index) in components" :key="index" :class="{ 'is-active': selectedComponentIndex === index }">
+          <a @click="selectComponent(index)">{{ component.name }}</a>
+        </li>
+      </ul>
+    </div>
+
+      <!-- Go back to home page-->
+
+      <router-link to="/">
+        <button class="button is-primary">Home</button>
+      </router-link>
     
   </div>
+
+  
 </template>
 
       
