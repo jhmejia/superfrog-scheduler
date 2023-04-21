@@ -7,7 +7,7 @@
     
   </div>
 
-  <h1> Request Page </h1>
+  
 </template>
 
       
