@@ -10,6 +10,9 @@
     <button v-if="selectedComponentIndex != components.length - 2" @click="goForward">Forward</button>
     <button v-if="selectedComponentIndex === components.length - 2" @click="submit">Submit</button>
     
+    <router-link to="/">
+        <button class="button is-primary home-button">Home</button>
+      </router-link>
   </div>
 </template>
 
@@ -135,5 +138,12 @@
   color: white;
   width: 100vw;
   height: 100vh;
+}
+.home-button {
+  font-size: 20px;
+  padding: 10px 0px;
+}
+button.button.is-primary {
+  width: 100px; /* adjust this value to your desired width */
 }
 </style>
