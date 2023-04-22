@@ -134,7 +134,7 @@
 
 <style scoped>
 .request-page {
-  background-color: purple;
+  background-color: #4d2279;
   color: white;
   width: 100vw;
   height: 100vh;
