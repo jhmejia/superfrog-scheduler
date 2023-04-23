@@ -3,6 +3,8 @@ package edu.tcu.cs.superfrogscheduler.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,7 +13,7 @@ import java.time.LocalTime;
  * A SuperFrogAppearanceRequest includes event-related information.
  */
 @Entity
-public class SuperFrogAppearanceRequest {
+public class SuperFrogAppearanceRequest implements Serializable {
 
     @Id
     private Integer requestId;
@@ -81,4 +83,39 @@ public class SuperFrogAppearanceRequest {
         return student;
     }
 
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setMileage(Double mileage) {
+        this.mileage = mileage;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
+    }
+
+    public void setStudent(SuperFrogStudent student) {
+        this.student = student;
+    }
+
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
+    }
 }

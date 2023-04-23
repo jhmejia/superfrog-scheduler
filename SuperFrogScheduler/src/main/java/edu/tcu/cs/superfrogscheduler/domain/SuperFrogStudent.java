@@ -1,7 +1,11 @@
 package edu.tcu.cs.superfrogscheduler.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -13,7 +17,7 @@ import java.util.stream.Collectors;
  * She gets paid for each appearance in an event.
  */
 @Entity
-public class SuperFrogStudent {
+public class SuperFrogStudent implements Serializable {
 
     private String firstName;
 
@@ -22,6 +26,17 @@ public class SuperFrogStudent {
     @Id
     private Integer id;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "student")
+    private List<SuperFrogAppearanceRequest> requests;
+
+
+    public List<SuperFrogAppearanceRequest> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<SuperFrogAppearanceRequest> requests) {
+        this.requests = requests;
+    }
 
     public SuperFrogStudent() {
     }
