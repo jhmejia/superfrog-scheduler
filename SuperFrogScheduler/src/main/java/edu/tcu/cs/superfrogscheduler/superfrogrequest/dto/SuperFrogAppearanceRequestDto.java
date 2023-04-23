@@ -4,6 +4,7 @@ import edu.tcu.cs.superfrogscheduler.domain.EventType;
 import edu.tcu.cs.superfrogscheduler.domain.RequestStatus;
 
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
+import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
@@ -23,5 +24,5 @@ public record SuperFrogAppearanceRequestDto(
 
         LocalTime endTime,
         RequestStatus status,
-        SuperFrogStudent student) {
+        SuperFrogStudentDto student) {
 }

@@ -53,4 +53,8 @@ public class SuperFrogAppearanceController {
         SuperFrogAppearanceRequestDto savedAppearanceDto = this.superFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter.convert(savedAppearance);
         return new Result(true, HttpStatusCode.SUCCESS, "Add Success", savedAppearanceDto);
     }
+
+
+
+
 }

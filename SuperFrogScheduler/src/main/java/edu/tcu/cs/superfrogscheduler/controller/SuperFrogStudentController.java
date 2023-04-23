@@ -1,5 +1,6 @@
 package edu.tcu.cs.superfrogscheduler.controller;
 
+import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.service.SuperFrogStudentService;
 import edu.tcu.cs.superfrogscheduler.superfrog.converter.SuperfrogDtoToSuperfrogConverter;
@@ -52,6 +53,20 @@ public class SuperFrogStudentController {
         SuperFrogStudent savedSuperFrogStudent = this.superFrogStudentService.save(newSuperFrogStudent);
         SuperFrogStudentDto savedSuperFrogStudentDto = this.superfrogToSuperfrogDtoConverter.convert(savedSuperFrogStudent);
         return new Result(true, HttpStatusCode.SUCCESS, "Add Success", savedSuperFrogStudentDto);
+    }
+
+    @PutMapping("/api/superfrogstudents/{superfrogId}")
+    public Result updateSuperFrogStudent(@PathVariable int superfrogId,@Valid @RequestBody SuperFrogStudentDto superFrogStudentDto){
+        SuperFrogStudent update = this.superfrogDtoToSuperfrogConverter.convert(superFrogStudentDto);
+        SuperFrogStudent updatedStudent = this.superFrogStudentService.update(superfrogId, update);
+        SuperFrogStudentDto updatedStudentDto = this.superfrogToSuperfrogDtoConverter.convert(updatedStudent);
+        return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedStudentDto);
+    }
+
+    @PutMapping("api/superfrogstudents/{superfrogId}/superfrogappearancerequests/{requestId}")
+    public Result assignAppearanceRequest(@PathVariable Integer requestId, @PathVariable Integer superfrogId) {
+        this.superFrogStudentService.assignAppearanceRequest(requestId, superfrogId);
+        return new Result(true, HttpStatusCode.SUCCESS, "Appearance Request Assignment Success");
     }
 
 }

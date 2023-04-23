@@ -22,10 +22,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -145,6 +145,54 @@ class SuperfrogControllerTest {
                 .andExpect(jsonPath("$.data.firstName").value(savedSuperFrogStudent.getFirstName()))
                 .andExpect(jsonPath("$.data.lastName").value(savedSuperFrogStudent.getLastName()));
 
+    }
+
+    @Test
+    void testUpdateFrogSuccess() throws Exception {
+        // Given
+        SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
+                1016,
+                "Jane",
+                "Blacksmith");
+
+        String json = this.objectMapper.writeValueAsString(superFrogStudentDto);
+
+        SuperFrogStudent updatedFrog = new SuperFrogStudent();
+        updatedFrog.setId(1016);
+        updatedFrog.setFirstName("Jane");
+        updatedFrog.setLastName("Blacksmith");
+
+        given(this.superFrogStudentService.update(eq(1016), Mockito.any(SuperFrogStudent.class))).willReturn(updatedFrog);
+
+        // When and Then
+        this.mockMvc.perform(put("/api/superfrogstudents/1016").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(HttpStatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Update Success"))
+                .andExpect(jsonPath("$.data.id").value(1016))
+                .andExpect(jsonPath("$.data.firstName").value(updatedFrog.getFirstName()))
+                .andExpect(jsonPath("$.data.lastName").value(updatedFrog.getLastName()));
+    }
+
+    @Test
+    void testUpdateSuperFrogErrorWithNonExistentId() throws Exception {
+
+        // Given
+        SuperFrogStudentDto superFrogStudentDto = new SuperFrogStudentDto(
+                1016,
+                "Jane",
+                "Blacksmith");
+
+        String json = this.objectMapper.writeValueAsString(superFrogStudentDto);
+
+        given(this.superFrogStudentService.update(eq(1016), Mockito.any(SuperFrogStudent.class))).willThrow(new ObjectNotFoundException("superfrogstudent",1016));
+
+        // When and Then
+        this.mockMvc.perform(put("/api/superfrogstudents/1016").contentType(MediaType.APPLICATION_JSON).content(json).accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(false))
+                .andExpect(jsonPath("$.code").value(HttpStatusCode.NOT_FOUND))
+                .andExpect(jsonPath("$.message").value("Could not find superfrogstudent with Id 1016 :("))
+                .andExpect(jsonPath("$.data").isEmpty());
     }
 
 

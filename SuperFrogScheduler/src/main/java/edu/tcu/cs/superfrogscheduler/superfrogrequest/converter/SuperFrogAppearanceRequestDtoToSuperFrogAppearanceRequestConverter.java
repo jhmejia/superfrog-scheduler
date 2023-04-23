@@ -19,7 +19,6 @@ public class SuperFrogAppearanceRequestDtoToSuperFrogAppearanceRequestConverter 
         superFrogAppearanceRequest.setStartTime(source.startTime());
         superFrogAppearanceRequest.setEndTime(source.endTime());
         superFrogAppearanceRequest.setStatus(source.status());
-        superFrogAppearanceRequest.setStudent(source.student());
         return superFrogAppearanceRequest;
     }
 }

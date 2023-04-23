@@ -1,9 +1,14 @@
 package edu.tcu.cs.superfrogscheduler.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,7 +18,7 @@ import java.util.stream.Collectors;
  * She gets paid for each appearance in an event.
  */
 @Entity
-public class SuperFrogStudent {
+public class SuperFrogStudent implements Serializable {
 
     private String firstName;
 
@@ -21,6 +26,10 @@ public class SuperFrogStudent {
 
     @Id
     private Integer id;
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "student")
+    private List<SuperFrogAppearanceRequest> requests = new ArrayList<>();
+
 
 
     public SuperFrogStudent() {
@@ -86,5 +95,30 @@ public class SuperFrogStudent {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<SuperFrogAppearanceRequest> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<SuperFrogAppearanceRequest> requests) {
+        this.requests = requests;
+    }
+
+
+
+    public void addAppearanceRequest(SuperFrogAppearanceRequest appearanceRequest) {
+        appearanceRequest.setStudent(this);
+        this.requests.add(appearanceRequest);
+    }
+
+    public void removeAllAppearanceRequests() {
+        this.requests.stream().forEach(request -> request.setStudent(null));
+        this.requests = null;
+    }
+
+    public void removeAppearanceRequest(SuperFrogAppearanceRequest requestToBeAssigned) {
+        requestToBeAssigned.setStudent(null);
+        this.requests.remove(requestToBeAssigned);
     }
 }
