@@ -1,18 +1,39 @@
-<template>
+<!-- <template>
+  <div>
+    <step-progress :steps="steps" :current-step="currentStep" icon-class="fa fa-check" active-color="#32CD32" passive-color="white"></step-progress>
+  </div>
   <div class="request-page">
     
-      <step-progress :steps="steps" :current-step="currentStep" icon-class="fa fa-check" active-color="#32CD32
-
-" passive-color="white"></step-progress>
-
+      
     <component  :eventInfo="eventInfo" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
-    <button @click="goBack" :disabled="selectedComponentIndex === 0">Back</button>
-    <button v-if="selectedComponentIndex != components.length - 2" @click="goForward">Forward</button>
+    <button class="button is-primary back-button" @click="goBack" :disabled="selectedComponentIndex === 0">Back</button>
+    <button class="button is-primary forward-button" v-if="selectedComponentIndex != components.length - 2" @click="goForward">Forward</button>
     <button v-if="selectedComponentIndex === components.length - 2" @click="submit">Submit</button>
     
     <router-link to="/">
         <button class="button is-primary home-button">Home</button>
       </router-link>
+  </div>
+</template> -->
+
+<template>
+  <div>
+    <step-progress :steps="steps" :current-step="currentStep" icon-class="fa fa-check" active-color="#32CD32" passive-color="white"></step-progress>
+  </div>
+  <div class="request-page">
+    <div class="content-container">
+      <!-- <h3>Select Date and Time:</h3> -->
+      <component :eventInfo="eventInfo" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
+      <div class="button-container">
+        <button class="button is-primary back-button" @click="goBack" :disabled="selectedComponentIndex === 0">Back</button>
+        <button class="button is-primary forward-button" v-if="selectedComponentIndex != components.length - 2" @click="goForward">Forward</button>
+        <button class="button is-primary submit-button" v-if="selectedComponentIndex === components.length - 2" @click="submit">Submit</button>
+      </div>
+      <router-link to="/">
+        <button class="button is-primary home-button">Home</button>
+      </router-link>
+      
+    </div>
   </div>
 </template>
 
@@ -138,12 +159,44 @@
   color: white;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .home-button {
   font-size: 20px;
   padding: 10px 0px;
 }
+
 button.button.is-primary {
-  width: 100px; /* adjust this value to your desired width */
+  width: 120px;
+}
+
+.back-button {
+  font-size: 20px;
+  padding: 10px 0px;
+}
+
+.forward-button {
+  font-size: 20px;
+  padding: 10px 0px;
+}
+.submit-button {
+  font-size: 20px;
+  padding: 10px 0px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
 }
 </style>
