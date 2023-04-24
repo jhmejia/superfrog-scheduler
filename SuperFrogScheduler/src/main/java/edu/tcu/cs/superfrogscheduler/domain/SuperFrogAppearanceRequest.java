@@ -1,8 +1,6 @@
 package edu.tcu.cs.superfrogscheduler.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,6 +14,7 @@ import java.time.LocalTime;
 public class SuperFrogAppearanceRequest implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer requestId;
 
     private EventType eventType;

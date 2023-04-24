@@ -14,11 +14,8 @@ import java.util.List;
 public class SuperFrogAppearanceRequestService {
     private final SuperFrogAppearanceRequestRepository superFrogAppearanceRequestRepository;
 
-    private final IdWorker idWorker;
-
-    public SuperFrogAppearanceRequestService(SuperFrogAppearanceRequestRepository superFrogAppearanceRequestRepository, IdWorker idWorker) {
+    public SuperFrogAppearanceRequestService(SuperFrogAppearanceRequestRepository superFrogAppearanceRequestRepository) {
         this.superFrogAppearanceRequestRepository = superFrogAppearanceRequestRepository;
-        this.idWorker = idWorker;
     }
 
     public SuperFrogAppearanceRequest findById(Integer requestId) {
@@ -32,7 +29,27 @@ public class SuperFrogAppearanceRequestService {
     }
 
     public SuperFrogAppearanceRequest save(SuperFrogAppearanceRequest newSuperFrogAppearanceRequest) {
-        newSuperFrogAppearanceRequest.setRequestId((int) idWorker.nextId());
         return this.superFrogAppearanceRequestRepository.save(newSuperFrogAppearanceRequest);
+    }
+
+    public SuperFrogAppearanceRequest update(Integer requestId, SuperFrogAppearanceRequest update) {
+        return this.superFrogAppearanceRequestRepository.findById(requestId)
+                .map(oldRequest -> {
+                    oldRequest.setEventType(update.getEventType());
+                    oldRequest.setAddress(update.getAddress());
+                    oldRequest.setMileage(update.getMileage());
+                    oldRequest.setEventDate(update.getEventDate());
+                    oldRequest.setStartTime(update.getStartTime());
+                    oldRequest.setEndTime(update.getEndTime());
+                    oldRequest.setStatus(update.getStatus());
+                    return this.superFrogAppearanceRequestRepository.save(oldRequest);
+                })
+                .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
+    }
+
+    public void delete(Integer requestId) {
+        this.superFrogAppearanceRequestRepository.findById(requestId)
+                .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
+        this.superFrogAppearanceRequestRepository.deleteById(requestId);
     }
 }

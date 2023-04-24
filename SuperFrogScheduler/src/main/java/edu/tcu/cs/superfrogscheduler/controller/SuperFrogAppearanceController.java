@@ -55,6 +55,19 @@ public class SuperFrogAppearanceController {
     }
 
 
+    @PutMapping("/api/superfrogappearancerequests/{requestId}")
+    public Result updateSuperFrogAppearanceRequest(@PathVariable Integer requestId, @Valid @RequestBody SuperFrogAppearanceRequestDto superFrogAppearanceRequestDto) {
+        SuperFrogAppearanceRequest update = this.superFrogAppearanceRequestDtoToSuperFrogAppearanceRequestConverter.convert(superFrogAppearanceRequestDto);
+        SuperFrogAppearanceRequest updatedRequest = this.superFrogAppearanceRequestService.update(requestId, update);
+        SuperFrogAppearanceRequestDto updatedRequestDto = this.superFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter.convert(updatedRequest);
+        return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedRequestDto);
+    }
+
+    @DeleteMapping("/api/superfrogappearancerequests/{requestId}")
+    public Result deleteSuperFrogAppearanceRequest(@PathVariable Integer requestId){
+        this.superFrogAppearanceRequestService.delete(requestId);
+        return new Result(true, HttpStatusCode.SUCCESS, "Delete Success");
+    }
 
 
 }
