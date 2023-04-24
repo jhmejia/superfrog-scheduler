@@ -19,6 +19,9 @@ This is the readme
 ### [Google Drive](https://drive.google.com/drive/folders/1CFxMNblwOV-mthVcRRb2gTsFxNRO7nlz?usp=sharing)
 
 
+## Installation
+npm install @fortawesome/fontawesome-free
+
 ## Demo
 
 To be made...
