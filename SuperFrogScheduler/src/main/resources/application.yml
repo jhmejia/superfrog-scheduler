@@ -8,4 +8,4 @@ spring:
     show-sql: true
 api:
   endpoint:
-    base-url: /api/
+    base-url: /api
