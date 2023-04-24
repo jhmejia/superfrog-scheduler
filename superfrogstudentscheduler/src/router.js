@@ -1,6 +1,7 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
 // import PricingPage from '@/components/pricing-page/main-container.vue'
+import AdminPage from '@/components/admin-page/main-parent.vue'
 import RequestPage from '@/components/request-page/main-container.vue'
 import PricingPage from '@/components/pricing-page/main-container.vue'
 import App from '@/App.vue'
@@ -9,6 +10,7 @@ const routes = [
     { path: '/', component: App },
 
     { path: '/pricing', component: PricingPage },
+    { path: '/admin', component: AdminPage},
 
     { path: '/range', component: RequestPage },
     { path: '/request', component: RequestPage },
