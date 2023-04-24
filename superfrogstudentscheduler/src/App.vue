@@ -55,6 +55,9 @@ export default {
         },
         goToModifyRequest() {
             this.$router.push('/modify-request')
+        },
+        goToLogin() {
+            this.$router.push('/login')
         }
     }
 }
