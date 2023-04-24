@@ -6,6 +6,8 @@ import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequestRepository;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudentRepository;
+import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUser;
+import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +21,13 @@ public class DBDataInitializer implements CommandLineRunner {
 
     private SuperFrogStudentRepository studentRepository;
 
+    private final SuperFrogUserService superFrogUserService;
 
-    public DBDataInitializer(SuperFrogAppearanceRequestRepository requestRepository, SuperFrogStudentRepository studentRepository) {
+
+    public DBDataInitializer(SuperFrogAppearanceRequestRepository requestRepository, SuperFrogStudentRepository studentRepository, SuperFrogUserService superFrogUserService) {
         this.requestRepository = requestRepository;
         this.studentRepository = studentRepository;
+        this.superFrogUserService = superFrogUserService;
     }
 
     @Override
@@ -113,6 +118,26 @@ public class DBDataInitializer implements CommandLineRunner {
         this.requestRepository.save(request5);
         this.requestRepository.save(request6);
         this.requestRepository.save(request7);
+
+        SuperFrogUser u1 = new SuperFrogUser();
+        u1.setId(1);
+        u1.setUsername("john");
+        u1.setEmail("john.nguyen@tcu.edu");
+        u1.setPassword("12345");
+        u1.setActive(true);
+        u1.setRoles("spiritdirector superfrogstudent");
+
+        SuperFrogUser u2 = new SuperFrogUser();
+        u2.setId(2);
+        u2.setEmail("nhan.nguyen@tcu.edu");
+        u2.setUsername("nhan");
+        u2.setPassword("12345");
+        u2.setActive(true);
+        u2.setRoles("superfrogstudent");
+
+        this.superFrogUserService.save(u1);
+        this.superFrogUserService.save(u2);
+
     }
 
 }
