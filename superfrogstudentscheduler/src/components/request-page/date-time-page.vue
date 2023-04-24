@@ -1,8 +1,13 @@
 <template class="main">
   <Datepicker
     
-    v-model="selectedDate"
+    v-model="eventInfo.scheduleDate"
     lang="en"
+    @input="updateParent"
+    date-format="{
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric' }"
   />
   
 </template>
@@ -16,7 +21,7 @@
     name: 'DateTimePage',
     data() {
       return {
-        selectedDate: [
+        scheduleDate: [
         new Date()
           ],
         startTime: '',
@@ -34,9 +39,7 @@
     methods: {
       updateParent() {
       this.$emit('update', {
-        date: this.date,
-        timeStart: this.timeStart,
-        timeEnd: this.timeEnd,
+        eventInfo: this.eventInfo,
         })},
         
         

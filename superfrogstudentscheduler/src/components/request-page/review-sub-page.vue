@@ -5,7 +5,7 @@
         <table>
           <tr>
             <td>Date</td>
-            <td>{{eventInfo.scheduleDate}}</td>
+            <td>{{formattedDate}}</td>
             
           </tr>
           <tr>
@@ -83,6 +83,8 @@
   </template>
   
   <script>
+import { computed } from '@vue/reactivity';
+
   export default {
     name: 'ReviewSubPage',
     props: {
@@ -110,6 +112,14 @@
           totalCost: this.eventInfo.totalCost,
           
     }
+
+    },
+    computed: {
+      formattedDate() {
+        if(!this.scheduleDate) return '';
+        const string = this.scheduleDate.toLocaleDateString('en-US')
+        return string;
+      },
       
     }
   

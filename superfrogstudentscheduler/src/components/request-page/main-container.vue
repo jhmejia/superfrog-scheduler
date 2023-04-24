@@ -157,8 +157,6 @@
 .request-page {
   background-color: #4d2279;
   color: white;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
