@@ -1,12 +1,13 @@
 <template>
     <div class="top-bar">
-        <div class="profile-image-container">
+        
+        <!-- <div class="profile-image-container">
             <img
                 class="profile-image"
                 src="https://ia903204.us.archive.org/4/items/discordprofilepictures/discordblue.png"
                 alt="Profile Image"
             />
-        </div>
+        </div> -->
 
         <p>{{ username }}</p>
     </div>
