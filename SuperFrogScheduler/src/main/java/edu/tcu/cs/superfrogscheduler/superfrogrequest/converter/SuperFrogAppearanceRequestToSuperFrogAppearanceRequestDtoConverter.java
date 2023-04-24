@@ -26,6 +26,16 @@ public class SuperFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter 
                 source.getStartTime(),
                 source.getEndTime(),
                 source.getStatus(),
+                source.getContactFirstName(),
+                source.getContactLastName(),
+                source.getPhoneNumber(),
+                source.getEmail(),
+                source.getTitle(),
+                source.getNameOfOrg(),
+                source.getDescription(),
+                source.getSpecialInstructions(),
+                source.getOutsideOrgs(),
+                source.getExpenses(),
                 source.getStudent() != null ? this.superfrogToSuperfrogDtoConverter.convert(source.getStudent()) : null);
     }
 }

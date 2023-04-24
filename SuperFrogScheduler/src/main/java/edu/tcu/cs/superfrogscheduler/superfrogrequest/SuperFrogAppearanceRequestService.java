@@ -41,6 +41,16 @@ public class SuperFrogAppearanceRequestService {
                     oldRequest.setStartTime(update.getStartTime());
                     oldRequest.setEndTime(update.getEndTime());
                     oldRequest.setStatus(update.getStatus());
+                    oldRequest.setContactFirstName(update.getContactFirstName());
+                    oldRequest.setContactLastName(update.getContactLastName());
+                    oldRequest.setPhoneNumber(update.getPhoneNumber());
+                    oldRequest.setEmail(update.getEmail());
+                    oldRequest.setTitle(update.getTitle());
+                    oldRequest.setNameOfOrg(update.getNameOfOrg());
+                    oldRequest.setDescription(update.getDescription());
+                    oldRequest.setSpecialInstructions(update.getSpecialInstructions());
+                    oldRequest.setOutsideOrgs(update.getOutsideOrgs());
+                    oldRequest.setExpenses(update.getExpenses());
                     return this.superFrogAppearanceRequestRepository.save(oldRequest);
                 })
                 .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));

@@ -22,5 +22,25 @@ public record SuperFrogAppearanceRequestDto(
 
         LocalTime endTime,
         RequestStatus status,
+
+        String contactFirstName,
+
+        String contactLastName,
+
+        String phoneNumber,
+
+        String email,
+
+        String title,
+
+        String nameOfOrg,
+
+        String description,
+
+        String specialInstructions,
+
+        String outsideOrgs,
+
+        String expenses,
         SuperFrogStudentDto student) {
 }

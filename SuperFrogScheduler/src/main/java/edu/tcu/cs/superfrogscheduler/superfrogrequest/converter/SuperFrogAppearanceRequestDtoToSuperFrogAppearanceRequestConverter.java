@@ -19,6 +19,15 @@ public class SuperFrogAppearanceRequestDtoToSuperFrogAppearanceRequestConverter 
         superFrogAppearanceRequest.setStartTime(source.startTime());
         superFrogAppearanceRequest.setEndTime(source.endTime());
         superFrogAppearanceRequest.setStatus(source.status());
+        superFrogAppearanceRequest.setContactFirstName(source.contactFirstName());
+        superFrogAppearanceRequest.setContactLastName(source.contactLastName());
+        superFrogAppearanceRequest.setPhoneNumber(source.phoneNumber());
+        superFrogAppearanceRequest.setEmail(source.email());
+        superFrogAppearanceRequest.setTitle(source.title());
+        superFrogAppearanceRequest.setNameOfOrg(source.nameOfOrg());
+        superFrogAppearanceRequest.setDescription(source.description());
+        superFrogAppearanceRequest.setOutsideOrgs(source.outsideOrgs());
+        superFrogAppearanceRequest.setExpenses(source.expenses());
         return superFrogAppearanceRequest;
     }
 }
