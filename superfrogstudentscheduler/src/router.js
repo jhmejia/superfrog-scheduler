@@ -1,6 +1,6 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
-import PricingPage from '@/components/pricing-page/main-container.vue'
+// import PricingPage from '@/components/pricing-page/main-container.vue'
 import RequestPage from '@/components/request-page/main-container.vue'
 import PricingPage from '@/components/pricing-page/main-container.vue'
 import App from '@/App.vue'
