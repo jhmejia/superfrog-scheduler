@@ -60,10 +60,15 @@ public class SuperFrogStudentController {
         return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedStudentDto);
     }
 
-    @PutMapping("api/superfrogstudents/{superfrogId}/superfrogappearancerequests/{requestId}")
+    @PutMapping("api/superfrogstudents/{superfrogId}/assign/superfrogappearancerequests/{requestId}")
     public Result assignAppearanceRequest(@PathVariable Integer requestId, @PathVariable Integer superfrogId) {
         this.superFrogStudentService.assignAppearanceRequest(requestId, superfrogId);
         return new Result(true, HttpStatusCode.SUCCESS, "Appearance Request Assignment Success");
     }
 
+    @PutMapping("api/superfrogstudents/{superfrogId}/unassign/superfrogappearancerequests/{requestId}")
+    public Result unAssignAppearanceRequest(@PathVariable Integer requestId, @PathVariable Integer superfrogId) {
+        this.superFrogStudentService.unAssignAppearanceRequest(requestId, superfrogId);
+        return new Result(true, HttpStatusCode.SUCCESS, "Appearance Request Unassignment Success");
+    }
 }

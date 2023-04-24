@@ -67,4 +67,19 @@ public class SuperFrogStudentService {
         superFrogStudent.addAppearanceRequest(requestToBeAssigned);
     }
 
+    public void unAssignAppearanceRequest(Integer requestId, Integer superfrogId){
+        // Find this artifact by Id from DB.
+        SuperFrogAppearanceRequest requestToBeRemoved = this.superFrogAppearanceRequestRepository.findById(requestId)
+                .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
+
+        // Find this wizard by Id fromm DB.
+        SuperFrogStudent superFrogStudent = this.superFrogStudentRepository.findById(superfrogId)
+                .orElseThrow(() -> new ObjectNotFoundException("superfrog", superfrogId));
+
+        // Request Removal
+        if (requestToBeRemoved.getStudent() != null) {
+            requestToBeRemoved.getStudent().removeAppearanceRequest(requestToBeRemoved);
+        }
+    }
+
 }
