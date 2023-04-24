@@ -5,7 +5,6 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-
         <version>3.0.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
@@ -16,18 +15,6 @@
     <description>superfrog-scheduler</description>
     <properties>
         <java.version>19</java.version>
-
-        <version>3.0.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>edu.tcu.cs</groupId>
-    <artifactId>SuperFrogScheduler</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>SuperFrogScheduler</name>
-    <description>SuperFrogScheduler</description>
-    <properties>
-        <java.version>17</java.version>
-
     </properties>
     <dependencies>
         <dependency>
@@ -56,14 +43,12 @@
             <scope>test</scope>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>3.0.4</version>
         </dependency>
-
 
     </dependencies>
 
