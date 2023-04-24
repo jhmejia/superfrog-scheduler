@@ -12,10 +12,9 @@ public class SuperfrogDtoToSuperfrogConverter implements Converter<SuperFrogStud
         superFrogStudent.setId(source.id());
         superFrogStudent.setFirstName(source.firstName());
         superFrogStudent.setLastName(source.lastName());
-//        superfrog.setUsername(source.username());
-//        superfrog.setEmail(source.email());
-//        superfrog.setPassword(source.password());
-//        superfrog.setActive(source.active());
+        superFrogStudent.setEmail(source.email());
+        superFrogStudent.setAddress(source.address());
+        superFrogStudent.setActive(source.active());
         return superFrogStudent;
     }
     

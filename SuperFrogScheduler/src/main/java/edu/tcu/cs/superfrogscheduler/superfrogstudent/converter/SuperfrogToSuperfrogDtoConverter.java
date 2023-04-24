@@ -16,11 +16,11 @@ public class SuperfrogToSuperfrogDtoConverter  implements Converter<SuperFrogStu
        return new SuperFrogStudentDto(
                source.getId(),
                source.getFirstName(),
-               source.getLastName());
-//               source.getUsername(),
-//               source.getEmail(),
-//               source.getPassword(),
-//               source.isActive());
+               source.getLastName(),
+               source.getEmail(),
+               source.getPhoneNumber(),
+               source.getAddress(),
+               source.isActive());
     }
 }
     

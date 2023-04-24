@@ -32,9 +32,9 @@ public class DBDataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        SuperFrogStudent student1 = new SuperFrogStudent("Jane", "Smith", 1001);
-        SuperFrogStudent student2 = new SuperFrogStudent("John", "Doe", 1004);
-        SuperFrogStudent student3 = new SuperFrogStudent("Tim", "Johnson", 1012);
+        SuperFrogStudent student1 = new SuperFrogStudent("Jane", "Smith", 1001, "jane.smith@tcu.edu", "1234567890", "address1", true);
+        SuperFrogStudent student2 = new SuperFrogStudent("John", "Doe", 1004, "john.doe@tcu.edu", "1234567890", "address2", true);
+        SuperFrogStudent student3 = new SuperFrogStudent("Tim", "Johnson", 1012, "tim@tcu.edu", "1234567890", "address3", true);
 
         this.studentRepository.save(student1);
         this.studentRepository.save(student2);

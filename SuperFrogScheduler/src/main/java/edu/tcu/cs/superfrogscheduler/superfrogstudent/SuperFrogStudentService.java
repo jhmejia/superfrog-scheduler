@@ -44,6 +44,9 @@ public class SuperFrogStudentService {
                .map(oldFrog -> {
                    oldFrog.setFirstName(updatedFrog.getFirstName());
                    oldFrog.setLastName(updatedFrog.getLastName());
+                   oldFrog.setPhoneNumber(updatedFrog.getPhoneNumber());
+                   oldFrog.setAddress(updatedFrog.getAddress());
+                   oldFrog.setActive(updatedFrog.isActive());
                    return this.superFrogStudentRepository.save(oldFrog);
                }).orElseThrow(() -> new ObjectNotFoundException("superfrog", superFrogId ));
 

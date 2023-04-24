@@ -30,6 +30,14 @@ public class SuperFrogStudent implements Serializable {
     @Id
     private Integer id;
 
+    private String email;
+
+    private String phoneNumber;
+
+    private String address;
+
+    private boolean active;
+
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "student")
     private List<SuperFrogAppearanceRequest> requests = new ArrayList<>();
 
@@ -38,10 +46,14 @@ public class SuperFrogStudent implements Serializable {
     public SuperFrogStudent() {
     }
 
-    public SuperFrogStudent(String firstName, String lastName, Integer id) {
+    public SuperFrogStudent(String firstName, String lastName, Integer id, String email, String phoneNumber, String address, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.active = active;
     }
 
     public PaymentForm generatePaymentForm(List<SuperFrogAppearanceRequest> requests, Period paymentPeriod) {
@@ -98,6 +110,38 @@ public class SuperFrogStudent implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public List<SuperFrogAppearanceRequest> getRequests() {
