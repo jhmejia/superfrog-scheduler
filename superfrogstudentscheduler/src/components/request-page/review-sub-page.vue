@@ -19,7 +19,7 @@
         </table>
       </span>
       <hr>
-      <span class="contact-info">
+      <span class="contact-info-1">
         <table>
           <tr>
             <td>Name</td>
@@ -37,7 +37,7 @@
         </table>
         <hr>
       </span>
-      <span class="event-info">
+      <span class="event-info-1">
         <table>
           <tr>
             <td>Address of Appearance</td>
@@ -68,7 +68,7 @@
         </table>
         <hr>
       </span>
-      <span class="cost">
+      <span class="cost-1">
         <table>
           <tr>
             <td>Superfrog cost x hours</td>
