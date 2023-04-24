@@ -1,7 +1,13 @@
 <template>
   <div class="sidebar">
     <div class="section">
+
+        <img src="https://content.sportslogos.net/logos/34/868/full/tcu_horned_frogs_logo_secondary_19976347.png" alt="SuperFrog" width="100" >
+
+
       <div class="section-header" @click="toggleSection('students')">
+        <i class="icon fa fa-address-book"></i>
+        SuperFrog Students 
         <i
           class="icon"
           :class="[
@@ -10,7 +16,6 @@
               : 'fa fa-chevron-right',
           ]"
         ></i>
-        SuperFrog Students
       </div>
       <div class="section-content" v-show="isExpanded('students')">
         <div class="sub-section" @click="selectSection('add-student')">
@@ -22,6 +27,8 @@
       </div>
 
       <div class="section-header" @click="toggleSection('requests')">
+        <i class="icon fa fa-bars-progress"></i>
+        Requests
         <i
           class="icon"
           :class="[
@@ -30,7 +37,6 @@
               : 'fa fa-chevron-right',
           ]"
         ></i>
-        Requests
       </div>
       <div class="section-content" v-show="isExpanded('requests')">
         <div class="sub-section" @click="selectSection('add-request')">
@@ -91,19 +97,22 @@ export default {
 
 <style scoped>
 .sidebar {
-  width: 200px;
-  background-color: #f5f5f5;
+  width: 240px;
+  background-color: #8e00e0;
   padding: 20px;
 }
 
 .section {
   margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .section-header {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+  text-align: left;
+  color: #ffffff;
 }
 
 .icon {
