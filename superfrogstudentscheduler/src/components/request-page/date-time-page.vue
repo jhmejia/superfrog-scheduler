@@ -1,9 +1,10 @@
-<template>
+<template class="main">
   <Datepicker
     
     v-model="selectedDate"
     lang="en"
   />
+  
 </template>
   
   <script>
