@@ -1,7 +1,9 @@
 <template>
   <div class="pricing">
     <header>
-      <div class="logo">SuperFrog</div>
+
+      <div class="logo">SuperFrog Scheduler</div>
+
       <nav>
         <ul>
           <li><button v-on:click="goToHome">Home</button></li>
@@ -12,43 +14,56 @@
       </nav>
     </header>
     <main>
-      <h1>Pricing</h1>
-      <p>Our mascot service offers the following pricing options:</p>
-      <ul>
-        <li>
-          <h2>Bronze</h2>
-          <p class="price">$50/hour</p>
-          <ul>
-            <li>1 mascot performer</li>
-            <li>Up to 2 hours of service</li>
-            <li>Basic costume options</li>
-          </ul>
-        </li>
-        <li>
-          <h2>Silver</h2>
-          <p class="price">$75/hour</p>
-          <ul>
-            <li>1 mascot performer</li>
-            <li>Up to 3 hours of service</li>
-            <li>Advanced costume options</li>
-            <li>Photo opportunities with guests</li>
-          </ul>
-        </li>
-        <li>
-          <h2>Gold</h2>
-          <p class="price">$100/hour</p>
-          <ul>
-            <li>2 mascot performers</li>
-            <li>Up to 4 hours of service</li>
-            <li>Premium costume options</li>
-            <li>Photo opportunities with guests</li>
-            <li>Mascot performance and entertainment</li>
-          </ul>
-        </li>
-      </ul>
+
+      <h1>Spirit Appearance Fees</h1>
+      <p>GENERAL APPEARANCES – Rates Per Appearance (All events outside of a TCU Athletic match are paid appearances.
+        Mascot times will be determined by type of event, please contact office for more details.)</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Price</th>
+            <th>Performer(s)</th>
+            <th>Hours of Service</th>
+            <th>Costume Options</th>
+            <th>Photo Opportunities</th>
+            <th>Performance & Entertainment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:center;">Bronze</td>
+            <td style="text-align:center;">$50/hour</td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">Up to 2 hours</td>
+            <td style="text-align:center;">Basic</td>
+            <td style="text-align:center;">No</td>
+            <td style="text-align:center;">No</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;">Silver</td>
+            <td style="text-align:center;">$75/hour</td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">Up to 3 hours</td>
+            <td style="text-align:center;">Advanced</td>
+            <td style="text-align:center;">Yes</td>
+            <td style="text-align:center;">No</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;">Gold</td>
+            <td style="text-align:center;">$100/hour</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">Up to 4 hours</td>
+            <td style="text-align:center;">Premium</td>
+            <td style="text-align:center;">Yes</td>
+            <td style="text-align:center;">Yes</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
     <footer>
-      <p>
+      <p style="text-align:center;">
+
         Contact us at
         <a href="mailto:info@superfrog.com">info@superfrog.com</a> or call
         555-1234 for more information.
@@ -57,96 +72,106 @@
   </div>
 </template>
 
-
+  
+  
 <script>
 
-    export default {
-      name: 'PricingPage',
-      components: {
-      },
-      data() {
-        return {
-        }
-      },
-      methods: {
-        goToHome() {
-              this.$router.push('/')
-          },
-          goToRange() {
-              this.$router.push('/range')
-          },
-          goToRequest() {
-              this.$router.push('/request')
-          },
-          goToModifyRequest() {
-              this.$router.push('/modify-request')
-          }
-      }
+export default {
+  name: 'PricingPage',
+  components: {
+  },
+  data() {
+    return {
     }
+  },
+  methods: {
+    goToHome() {
+      this.$router.push('/')
+    },
+    goToRange() {
+      this.$router.push('/range')
+    },
+    goToRequest() {
+      this.$router.push('/request')
+    },
+    goToModifyRequest() {
+      this.$router.push('/modify-request')
+    }
+  }
+}
 
 </script>
-
-
-<style> 
-
-
+  
+  
+<style scoped> 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  /*background-color: #fff;*/
+   font-family: Arial, sans-serif;
+   margin: 0;
+   /*background-color: #fff;*/
+ }
+
+ .pricing {
+   background-color: #fff;
+   /* text color black*/
+   color: #000;
+ }
+
+ header {
+   background-color: #060808;
+   color: #fff;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 20px;
+ }
+
+ .logo {
+   font-size: 1.5rem;
+   font-weight: bold;
+ }
+
+ nav ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   display: flex;
+ }
+
+ nav li {
+   margin-left: 20px;
+ }
+
+ nav a {
+   color: #fff;
+   text-decoration: none;
+ }
+
+ main {
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 20px;
+ }
+
+ h1 {
+   margin-top: 0;
+ }
+
+ ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+ }
+ table {
+  border-collapse: collapse;
 }
 
-.pricing {
-  background-color: #fff;
-}
-
-header {
-  background-color: #060808;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-nav li {
-  margin-left: 20px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-}
-
-main {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-h1 {
-  margin-top: 0;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+table th, table td {
+  border: 1px solid black;
+  padding: 8px;
 }
 
 </style>
+

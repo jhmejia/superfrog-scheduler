@@ -1,57 +1,61 @@
 <template>
 
-    <router-view v-if="$route.path !='/'"></router-view>
 
-  <div v-if="$route.path == '/'" id="app">
-    <title>Landing Page</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
-        rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <router-view v-if="$route.path !='/'"></router-view>
 
-      <div class="landing-page">
-          <div class="profile-image"></div>
-          <h1 class="heading">SuperFrog Scheduler</h1>
+<div v-if="$route.path == '/'" id="app">
+  <title>Landing Page</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+      rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
-          <p class="description">
-              Add TCU Spirit to your event <br>
-              Request SuperFrog, TCU Cheerleader, & Showgirls to your <br>
-              wedding, grad party and more!
-          </p>
-          <div class="button-container">
-              
-              <button class="button" v-on:click="goToPricing"><i class="fas fa-money-bill"></i><br> Pricing</button>
-              <button class="button" v-on:click="goToRange"><i class="fas fa-map-marker-alt"></i><br> Range</button>
-              <button class="button" v-on:click="goToRequest"><i class="fas fa-calendar-alt"></i><br> Request</button>
-              <button class="button" v-on:click="goToModifyRequest"><i class="fas fa-pencil-alt"></i><br> Modify a
-                  request</button>
-          </div>
+    <div class="landing-page">
+        <div class="profile-image"></div>
+        <h1 class="heading">SuperFrog Scheduler</h1>
 
-      </div>
+        <p class="description">
+            Add TCU Spirit to your event <br>
+            Request SuperFrog, TCU Cheerleader, & Showgirls to your <br>
+            wedding, grad party and more!
+        </p>
+        <div class="button-container">
+            <!-- <RouterLink v-if="$route.path != '/'" to="/">Home</RouterLink> -->
+            <button class="button" v-on:click="goToPricing"><i class="fas fa-money-bill"></i><br> Pricing</button>
+            <button class="button" v-on:click="goToRange"><i class="fas fa-map-marker-alt"></i><br> Range</button>
+            <button class="button" v-on:click="goToRequest"><i class="fas fa-calendar-alt"></i><br> Request</button>
+            <button class="button" v-on:click="goToModifyRequest"><i class="fas fa-pencil-alt"></i><br> Modify a
+                request</button>
+        </div>
 
-  </div>
+    </div>
+
+</div>
+
 
 
 </template>
 
 <script>
 
-  export default {
-      name: 'App',
-      methods: {
-          goToPricing() {
-              this.$router.push('/pricing')
-          },
-          goToRange() {
-              this.$router.push('/range')
-          },
-          goToRequest() {
-              this.$router.push('/request')
-          },
-          goToModifyRequest() {
-              this.$router.push('/modify-request')
-          }
-      }
-  }
+
+export default {
+    name: 'App',
+    methods: {
+        goToPricing() {
+            this.$router.push('/pricing')
+        },
+        goToRange() {
+            this.$router.push('/range')
+        },
+        goToRequest() {
+            this.$router.push('/request')
+        },
+        goToModifyRequest() {
+            this.$router.push('/modify-request')
+        }
+    }
+}
+
 </script>
 
 <style>
@@ -61,6 +65,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100vh;
+
 }
 
 body {
@@ -90,6 +95,7 @@ cursor: pointer;
 width: 25%;
 border-radius: 40px;
 }
+
 
 .button i {
 font-size: 50px;
@@ -129,3 +135,7 @@ font-size: 24px;
 line-height: 1.2;
 }
 </style>
+
+  
+    <!-- <RouterLink v-if="$route.path != '/'" to="/">Home</RouterLink> -->
+    
