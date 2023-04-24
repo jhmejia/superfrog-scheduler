@@ -1,5 +1,6 @@
 package edu.tcu.cs.superfrogscheduler.controller;
 
+import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
 import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.service.SuperFrogStudentService;
 import edu.tcu.cs.superfrogscheduler.superfrog.converter.SuperfrogDtoToSuperfrogConverter;
@@ -61,4 +62,11 @@ public class SuperFrogStudentController {
         SuperFrogStudentDto updatedStudentDto = this.superfrogToSuperfrogDtoConverter.convert(updatedStudent);
         return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedStudentDto);
     }
+
+    @PutMapping("api/superfrogstudents/{superfrogId}/superfrogappearancerequests/{requestId}")
+    public Result assignAppearanceRequest(@PathVariable Integer requestId, @PathVariable Integer superfrogId) {
+        this.superFrogStudentService.assignAppearanceRequest(requestId, superfrogId);
+        return new Result(true, HttpStatusCode.SUCCESS, "Appearance Request Assignment Success");
+    }
+
 }

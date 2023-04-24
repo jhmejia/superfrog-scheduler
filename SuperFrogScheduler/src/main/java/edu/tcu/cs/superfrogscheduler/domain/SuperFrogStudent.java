@@ -8,6 +8,7 @@ import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,16 +28,9 @@ public class SuperFrogStudent implements Serializable {
     private Integer id;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "student")
-    private List<SuperFrogAppearanceRequest> requests;
+    private List<SuperFrogAppearanceRequest> requests = new ArrayList<>();
 
 
-    public List<SuperFrogAppearanceRequest> getRequests() {
-        return requests;
-    }
-
-    public void setRequests(List<SuperFrogAppearanceRequest> requests) {
-        this.requests = requests;
-    }
 
     public SuperFrogStudent() {
     }
@@ -101,5 +95,30 @@ public class SuperFrogStudent implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<SuperFrogAppearanceRequest> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<SuperFrogAppearanceRequest> requests) {
+        this.requests = requests;
+    }
+
+
+
+    public void addAppearanceRequest(SuperFrogAppearanceRequest appearanceRequest) {
+        appearanceRequest.setStudent(this);
+        this.requests.add(appearanceRequest);
+    }
+
+    public void removeAllAppearanceRequests() {
+        this.requests.stream().forEach(request -> request.setStudent(null));
+        this.requests = null;
+    }
+
+    public void removeAppearanceRequest(SuperFrogAppearanceRequest requestToBeAssigned) {
+        requestToBeAssigned.setStudent(null);
+        this.requests.remove(requestToBeAssigned);
     }
 }
