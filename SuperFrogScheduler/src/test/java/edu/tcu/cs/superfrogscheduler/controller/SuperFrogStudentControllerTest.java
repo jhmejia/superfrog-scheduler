@@ -1,10 +1,9 @@
 package edu.tcu.cs.superfrogscheduler.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
-import edu.tcu.cs.superfrogscheduler.service.SuperFrogStudentService;
-import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudentService;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.dto.SuperFrogStudentDto;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import org.hamcrest.Matchers;

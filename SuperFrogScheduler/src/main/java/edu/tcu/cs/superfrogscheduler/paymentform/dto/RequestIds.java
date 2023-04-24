@@ -1,4 +1,4 @@
-package edu.tcu.cs.superfrogscheduler.controller.dto;
+package edu.tcu.cs.superfrogscheduler.paymentform.dto;
 
 import edu.tcu.cs.superfrogscheduler.domain.Period;
 

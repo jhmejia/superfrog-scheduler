@@ -1,10 +1,8 @@
-package edu.tcu.cs.superfrogscheduler.controller;
+package edu.tcu.cs.superfrogscheduler.paymentform;
 
-import edu.tcu.cs.superfrogscheduler.controller.dto.RequestIds;
-import edu.tcu.cs.superfrogscheduler.domain.PaymentForm;
+import edu.tcu.cs.superfrogscheduler.paymentform.dto.RequestIds;
 import edu.tcu.cs.superfrogscheduler.domain.Period;
-import edu.tcu.cs.superfrogscheduler.domain.Result;
-import edu.tcu.cs.superfrogscheduler.service.PaymentService;
+import edu.tcu.cs.superfrogscheduler.system.Result;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

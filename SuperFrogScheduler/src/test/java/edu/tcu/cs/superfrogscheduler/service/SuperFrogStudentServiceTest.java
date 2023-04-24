@@ -1,10 +1,10 @@
 package edu.tcu.cs.superfrogscheduler.service;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
-import edu.tcu.cs.superfrogscheduler.repository.SuperFrogStudentRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudentRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudentService;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import edu.tcu.cs.superfrogscheduler.utils.IdWorker;
-import net.bytebuddy.implementation.bind.annotation.Super;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

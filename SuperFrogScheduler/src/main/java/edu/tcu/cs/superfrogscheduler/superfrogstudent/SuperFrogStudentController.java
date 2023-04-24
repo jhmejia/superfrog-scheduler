@@ -1,11 +1,8 @@
-package edu.tcu.cs.superfrogscheduler.controller;
+package edu.tcu.cs.superfrogscheduler.superfrogstudent;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
-import edu.tcu.cs.superfrogscheduler.service.SuperFrogStudentService;
-import edu.tcu.cs.superfrogscheduler.superfrog.converter.SuperfrogDtoToSuperfrogConverter;
-import edu.tcu.cs.superfrogscheduler.superfrog.converter.SuperfrogToSuperfrogDtoConverter;
-import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.converter.SuperfrogDtoToSuperfrogConverter;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.converter.SuperfrogToSuperfrogDtoConverter;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.dto.SuperFrogStudentDto;
 import edu.tcu.cs.superfrogscheduler.system.Result;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import jakarta.validation.Valid;

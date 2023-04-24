@@ -1,4 +1,4 @@
-package edu.tcu.cs.superfrogscheduler.domain;
+package edu.tcu.cs.superfrogscheduler.superfrogrequest;
 
 /**
  * A SuperFrogAppearanceRequest can be in various status.

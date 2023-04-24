@@ -1,6 +1,6 @@
-package edu.tcu.cs.superfrogscheduler.repository;
+package edu.tcu.cs.superfrogscheduler.superfrogrequest;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

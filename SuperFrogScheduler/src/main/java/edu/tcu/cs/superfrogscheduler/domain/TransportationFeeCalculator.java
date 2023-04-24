@@ -1,5 +1,7 @@
 package edu.tcu.cs.superfrogscheduler.domain;
 
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
+
 import java.math.BigDecimal;
 import java.util.List;
 

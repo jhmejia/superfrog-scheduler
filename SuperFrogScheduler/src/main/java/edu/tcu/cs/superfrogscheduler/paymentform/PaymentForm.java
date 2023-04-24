@@ -1,5 +1,6 @@
-package edu.tcu.cs.superfrogscheduler.domain;
+package edu.tcu.cs.superfrogscheduler.paymentform;
 
+import edu.tcu.cs.superfrogscheduler.domain.Period;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 

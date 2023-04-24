@@ -1,11 +1,12 @@
 package edu.tcu.cs.superfrogscheduler.service;
 
 import edu.tcu.cs.superfrogscheduler.domain.EventType;
-import edu.tcu.cs.superfrogscheduler.domain.RequestStatus;
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
-import edu.tcu.cs.superfrogscheduler.repository.SuperFrogAppearanceRequestRepository;
-import edu.tcu.cs.superfrogscheduler.repository.SuperFrogStudentRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.RequestStatus;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequestService;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequestRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudentRepository;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

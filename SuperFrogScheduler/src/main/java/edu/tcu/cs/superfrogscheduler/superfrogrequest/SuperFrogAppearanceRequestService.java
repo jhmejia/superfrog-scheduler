@@ -1,9 +1,8 @@
-package edu.tcu.cs.superfrogscheduler.service;
+package edu.tcu.cs.superfrogscheduler.superfrogrequest;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
-import edu.tcu.cs.superfrogscheduler.repository.SuperFrogAppearanceRequestRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequestRepository;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
-import edu.tcu.cs.superfrogscheduler.utils.IdWorker;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

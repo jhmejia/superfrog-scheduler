@@ -1,5 +1,9 @@
 package edu.tcu.cs.superfrogscheduler.domain;
 
+import edu.tcu.cs.superfrogscheduler.paymentform.PaymentForm;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.RequestStatus;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

@@ -1,8 +1,11 @@
-package edu.tcu.cs.superfrogscheduler.service;
+package edu.tcu.cs.superfrogscheduler.paymentform;
 
 import edu.tcu.cs.superfrogscheduler.domain.*;
-import edu.tcu.cs.superfrogscheduler.repository.PaymentFormRepository;
-import edu.tcu.cs.superfrogscheduler.repository.SuperFrogAppearanceRequestRepository;
+import edu.tcu.cs.superfrogscheduler.paymentform.PaymentForm;
+import edu.tcu.cs.superfrogscheduler.paymentform.PaymentFormRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequestRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,5 @@
-package edu.tcu.cs.superfrogscheduler.controller;
+package edu.tcu.cs.superfrogscheduler.superfrogrequest;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
-import edu.tcu.cs.superfrogscheduler.service.SuperFrogAppearanceRequestService;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.converter.SuperFrogAppearanceRequestDtoToSuperFrogAppearanceRequestConverter;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.converter.SuperFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.dto.SuperFrogAppearanceRequestDto;
@@ -10,7 +8,6 @@ import edu.tcu.cs.superfrogscheduler.system.Result;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.HTML;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,5 +1,7 @@
-package edu.tcu.cs.superfrogscheduler.domain;
+package edu.tcu.cs.superfrogscheduler.superfrogrequest;
 
+import edu.tcu.cs.superfrogscheduler.domain.EventType;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

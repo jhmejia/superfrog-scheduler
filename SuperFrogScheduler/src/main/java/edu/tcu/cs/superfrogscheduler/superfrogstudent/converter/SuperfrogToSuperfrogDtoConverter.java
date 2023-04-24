@@ -1,7 +1,7 @@
-package edu.tcu.cs.superfrogscheduler.superfrog.converter;
+package edu.tcu.cs.superfrogscheduler.superfrogstudent.converter;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogStudent;
-import edu.tcu.cs.superfrogscheduler.superfrog.dto.SuperFrogStudentDto;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.dto.SuperFrogStudentDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

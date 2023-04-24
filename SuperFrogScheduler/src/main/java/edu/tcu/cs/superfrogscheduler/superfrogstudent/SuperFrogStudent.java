@@ -1,5 +1,8 @@
-package edu.tcu.cs.superfrogscheduler.domain;
+package edu.tcu.cs.superfrogscheduler.superfrogstudent;
 
+import edu.tcu.cs.superfrogscheduler.domain.*;
+import edu.tcu.cs.superfrogscheduler.paymentform.PaymentForm;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

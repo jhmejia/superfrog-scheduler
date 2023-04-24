@@ -1,7 +1,7 @@
 package edu.tcu.cs.superfrogscheduler.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.tcu.cs.superfrogscheduler.controller.dto.RequestIds;
+import edu.tcu.cs.superfrogscheduler.paymentform.dto.RequestIds;
 import edu.tcu.cs.superfrogscheduler.domain.Period;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import org.junit.jupiter.api.DisplayName;

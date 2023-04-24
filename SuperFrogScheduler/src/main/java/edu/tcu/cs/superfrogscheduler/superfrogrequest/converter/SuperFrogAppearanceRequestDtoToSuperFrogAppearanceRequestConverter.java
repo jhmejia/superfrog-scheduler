@@ -1,6 +1,6 @@
 package edu.tcu.cs.superfrogscheduler.superfrogrequest.converter;
 
-import edu.tcu.cs.superfrogscheduler.domain.SuperFrogAppearanceRequest;
+import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.dto.SuperFrogAppearanceRequestDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
