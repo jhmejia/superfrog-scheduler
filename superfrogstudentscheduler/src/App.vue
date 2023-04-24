@@ -10,6 +10,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <div class="landing-page">
+        
+        <button class="login-button" v-on:click="goToLogin">Log In</button>
+
         <div class="profile-image"></div>
         <h1 class="heading">SuperFrog Scheduler</h1>
 
@@ -68,6 +71,8 @@ height: 100vh;
 
 }
 
+
+
 body {
 background-color: #4d2279;
 }
@@ -96,6 +101,14 @@ width: 25%;
 border-radius: 40px;
 }
 
+
+.login-button {
+margin: 10px;
+padding: 10px 40px;
+top: 0;
+left: 0;
+position: absolute;
+}
 
 .button i {
 font-size: 50px;
