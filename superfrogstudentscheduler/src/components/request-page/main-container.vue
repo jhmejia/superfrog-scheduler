@@ -21,6 +21,7 @@
     <step-progress :steps="steps" :current-step="currentStep" icon-class="fa fa-check" active-color="#32CD32" passive-color="white"></step-progress>
   </div>
   <div class="request-page">
+
     <div class="content-container">
       <!-- <h3>Select Date and Time:</h3> -->
       <component :eventInfo="eventInfo" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
@@ -34,7 +35,10 @@
       </router-link>
       
     </div>
+
   </div>
+
+  
 </template>
 
       

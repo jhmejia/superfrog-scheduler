@@ -1,7 +1,9 @@
 <template>
   <div class="pricing">
     <header>
+
       <div class="logo">SuperFrog Scheduler</div>
+
       <nav>
         <ul>
           <li><button v-on:click="goToHome">Home</button></li>
@@ -12,6 +14,7 @@
       </nav>
     </header>
     <main>
+
       <h1>Spirit Appearance Fees</h1>
       <p>GENERAL APPEARANCES – Rates Per Appearance (All events outside of a TCU Athletic match are paid appearances.
         Mascot times will be determined by type of event, please contact office for more details.)</p>
@@ -60,6 +63,7 @@
     </main>
     <footer>
       <p style="text-align:center;">
+
         Contact us at
         <a href="mailto:info@superfrog.com">info@superfrog.com</a> or call
         555-1234 for more information.
@@ -67,6 +71,7 @@
     </footer>
   </div>
 </template>
+
   
   
 <script>
@@ -169,3 +174,4 @@ table th, table td {
 }
 
 </style>
+

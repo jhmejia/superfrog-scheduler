@@ -1,5 +1,6 @@
 <template>
 
+
   <router-view v-if="$route.path !='/'"></router-view>
 
 <div v-if="$route.path == '/'" id="app">
@@ -31,9 +32,11 @@
 </div>
 
 
+
 </template>
 
 <script>
+
 
 export default {
     name: 'App',
@@ -52,6 +55,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style>
@@ -61,6 +65,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100vh;
+
 }
 
 body {
@@ -90,6 +95,7 @@ cursor: pointer;
 width: 25%;
 border-radius: 40px;
 }
+
 
 .button i {
 font-size: 50px;
