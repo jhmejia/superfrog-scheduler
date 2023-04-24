@@ -10,6 +10,8 @@
         </div> -->
 
         <p>{{ username }}</p>
+
+        <button class="leave-button" v-on:click="goHome"> Log Out</button>
     </div>
 </template>
 
@@ -21,10 +23,17 @@ export default {
             required: true,
         },
     },
+    methods: {
+        goHome() {
+            this.$router.push("/");
+        },
+    },
 };
 </script>
 
 <style scoped>
+
+
 .top-bar {
     height: 50px;
     background-color: #f5f5f5;
@@ -53,5 +62,15 @@ profile-image-container {
     height: 50px;
     width: 50px;
     border-radius: 50%;
+}
+
+.leave-button {
+    background-color: #4d2279;
+    color: rgb(255, 0, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
 </style>
