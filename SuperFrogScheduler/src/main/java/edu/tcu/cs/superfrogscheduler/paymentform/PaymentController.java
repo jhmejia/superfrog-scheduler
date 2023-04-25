@@ -20,7 +20,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @PostMapping("/payment-forms")
+    @PostMapping("/api/paymentform")
     public Result generatePaymentForms(@RequestBody RequestIds requestIds) {
         List<Integer> selectedIds = requestIds.getRequestIds();
 
