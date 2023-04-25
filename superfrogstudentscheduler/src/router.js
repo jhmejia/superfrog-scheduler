@@ -7,6 +7,7 @@ import PricingPage from '@/components/pricing-page/main-container.vue'
 import LoginPage from '@/components/login-page/main-container.vue'
 import SuperfrogPage from '@/components/superfrog-page/main-parent.vue'
 import App from '@/App.vue'
+import RangePage from '@/components/range-page/main-container.vue'
 
 
 const routes = [
@@ -16,7 +17,7 @@ const routes = [
     { path: '/admin', component: AdminPage},
     { path: '/superfrog', component: SuperfrogPage},
 
-    { path: '/range', component: RequestPage },
+    { path: '/range', component: RangePage },
     { path: '/request', component: RequestPage },
     { path: '/modify-request', component: RequestPage },
     { path: '/login', component: LoginPage },
