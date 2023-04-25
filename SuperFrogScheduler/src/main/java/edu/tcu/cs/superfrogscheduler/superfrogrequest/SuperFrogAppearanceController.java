@@ -71,6 +71,13 @@ public class SuperFrogAppearanceController {
         return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedRequestDto);
     }
 
+    @PutMapping("/api/superfrogappearancerequests/{requestId}/status/{status}")
+    public Result updateSuperFrogAppearanceRequest(@PathVariable Integer requestId,@PathVariable RequestStatus status) {
+        SuperFrogAppearanceRequest updatedRequest = this.superFrogAppearanceRequestService.updateStatus(requestId, status);
+        SuperFrogAppearanceRequestDto updatedRequestDto = this.superFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter.convert(updatedRequest);
+        return new Result(true, HttpStatusCode.SUCCESS, "Update Status Success", updatedRequestDto);
+    }
+
     @DeleteMapping("/api/superfrogappearancerequests/{requestId}")
     public Result deleteSuperFrogAppearanceRequest(@PathVariable Integer requestId){
         this.superFrogAppearanceRequestService.delete(requestId);

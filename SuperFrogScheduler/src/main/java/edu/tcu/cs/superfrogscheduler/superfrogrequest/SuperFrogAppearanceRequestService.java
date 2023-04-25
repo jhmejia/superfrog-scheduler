@@ -65,4 +65,13 @@ public class SuperFrogAppearanceRequestService {
                 .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
         this.superFrogAppearanceRequestRepository.deleteById(requestId);
     }
+
+    public SuperFrogAppearanceRequest updateStatus(Integer requestId, RequestStatus status) {
+        return this.superFrogAppearanceRequestRepository.findById(requestId)
+                .map(oldRequest -> {
+                    oldRequest.setStatus(status);
+                    return this.superFrogAppearanceRequestRepository.save(oldRequest);
+                })
+                .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
+    }
 }
