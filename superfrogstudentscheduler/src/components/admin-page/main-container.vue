@@ -1,28 +1,28 @@
 <template>
     <div class="main-box">
         <h1>{{ section }}</h1>
-        <div v-if="section === 'add-student'">
+        <div class="text" v-if="section === 'add-student'">
             <!-- add student form here -->
             Add dat backend to add a student. Yo
         </div>
-        <div v-if="section === 'view-students'">
+        <div class="text" v-if="section === 'view-students'">
             <p id="all-student"> All Students </p>
         </div>
-        <div v-if="section === 'add-request'">
+        <div class="text" v-if="section === 'add-request'">
             <!-- Add request form here -->
             Add dat backend to add a request. Yo
         </div>
-        <div v-if="section === 'view-requests'">
+        <div class="text" v-if="section === 'view-requests'">
             <!-- Display all requests here -->
             Yo, I need to add the backend to view all requests, can't do it
             alone so I'm askin' for assistance.
         </div>
-        <div v-if="section === 'view-calendar'">
+        <div class="text" v-if="section === 'view-calendar'">
             <!-- Display calendar here -->
             Yo, I need to add the backend to view the calendar, can't do it
             alone so I'm askin' for assistance.
         </div>
-        <div v-if="section === 'view-reports'">
+        <div class="text" v-if="section === 'view-reports'">
             <!-- Display reports here -->
             Yo, I need to add the backend to view the reports, can't do it alone
             so I'm askin' for assistance.
@@ -68,3 +68,12 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.text {
+    color: black;
+}
+.h1 {
+    color: black;
+}
+</style>
