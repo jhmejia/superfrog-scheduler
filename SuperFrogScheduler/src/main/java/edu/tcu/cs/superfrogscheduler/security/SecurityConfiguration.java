@@ -70,6 +70,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, this.baseUrl + "/superfrogstudents/**").permitAll()
                         .requestMatchers(HttpMethod.POST, this.baseUrl + "/superfrogstudents").hasAuthority("ROLE_spiritdirector")
                         .requestMatchers(HttpMethod.PUT, this.baseUrl + "/superfrogstudents/**").hasAuthority("ROLE_superfrogstudent")
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/paymentform").permitAll()
                         .requestMatchers(HttpMethod.GET, this.baseUrl + "/users/**").hasAuthority("ROLE_spiritdirector") // Protect the endpoint.
                         .requestMatchers(HttpMethod.POST, this.baseUrl + "/users").hasAuthority("ROLE_spiritdirector") // Protect the endpoint.
                         .requestMatchers(HttpMethod.PUT, this.baseUrl + "/users/**").hasAuthority("ROLE_spiritdirector") // Protect the endpoint.

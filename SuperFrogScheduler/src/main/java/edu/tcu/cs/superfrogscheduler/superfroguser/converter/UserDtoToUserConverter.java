@@ -11,7 +11,6 @@ public class UserDtoToUserConverter implements Converter<UserDto, SuperFrogUser>
     public SuperFrogUser convert(UserDto source) {
         SuperFrogUser user = new SuperFrogUser();
         user.setUsername(source.username());
-        user.setEmail(source.email());
         user.setActive(source.active());
         user.setRoles(source.roles());
         return user;

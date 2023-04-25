@@ -14,6 +14,7 @@ public class SuperfrogDtoToSuperfrogConverter implements Converter<SuperFrogStud
         superFrogStudent.setLastName(source.lastName());
         superFrogStudent.setEmail(source.email());
         superFrogStudent.setAddress(source.address());
+        superFrogStudent.setPhoneNumber(source.phoneNumber());
         superFrogStudent.setActive(source.active());
         return superFrogStudent;
     }

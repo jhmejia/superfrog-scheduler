@@ -16,10 +16,8 @@ public class SuperFrogUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotEmpty(message = "email is required.")
-    private String email;
 
-    @NotEmpty(message = "username is required")
+    @NotEmpty(message = "username (email) is required")
     private String username;
 
 
@@ -50,13 +48,6 @@ public class SuperFrogUser implements Serializable {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;
