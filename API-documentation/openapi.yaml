@@ -12,27 +12,27 @@ servers:
   - url: localhost:8080/api
     description: Development server
 tags:
-  - name: superfrogs
-    description: What you can do as a spirit director relating to SuperFrogs management. 
+  - name: superfrogstudents
+    description: What you can do as a spirit director relating to superfrogstudents management. 
   
-  - name: requests-management
-    description: Requests management from the perspective of a spirit director.
+  - name: superfrogappearancerequests-management
+    description: superfrogappearancerequests management from the perspective of a spirit director.
 
-  - name: requests
-    description: What you can do as a superfrog relating to requests management.
+  - name: superfrogappearancerequests
+    description: What you can do as a superfrog relating to superfrogappearancerequests management.
     
   - name: user
     description: Operations about user
 paths:
 
 # SuperFrog CRUD
-  /superfrogs:
+  /superfrogstudents:
     get:
       tags:
-        - superfrogs
-      summary: Get all superfrogs
-      description: Get all superfrogs and return them in an array. 
-      operationId: getSuperfrogs
+        - superfrogstudents
+      summary: Get all superfrogstudents
+      description: Get all superfrogstudents and return them in an array. 
+      operationId: getsuperfrogstudents
       responses:
         '200':
           description: successful operation
@@ -41,15 +41,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ApiResponseFindAllSuperfrogs'
+                  $ref: '#/components/schemas/ApiResponseFindAllsuperfrogstudents'
         '400':
           description: Invalid status value
         '404':
-          description: SuperFrogs not found
+          description: superfrogstudents not found
     post:
       tags:
-        - superfrogs
-      summary: Add a new superfrog
+        - superfrogstudents
+      summary: Add a new superfrog, as a Spirit Director
       description: Add a new superfrog and return the new superfrog
       operationId: addSuperfrog
       requestBody:
@@ -81,13 +81,13 @@ paths:
                     $ref: '#/components/schemas/ApiResponseSuperfrogBadRequest'
 
           
-  /superfrogs/active:  
+  /superfrogstudents/active:  
     get:
       tags:
-        - superfrogs
+        - superfrogstudents
       summary: Get all actives
-      description: get all active superfrogs
-      operationId: getActiveSuperfrogs
+      description: get all active superfrogstudents
+      operationId: getActivesuperfrogstudents
       responses:
         '200':
           description: successful operation
@@ -100,12 +100,12 @@ paths:
         '400':
           description: Invalid status value
         '404':
-          description: SuperFrogs not found
+          description: superfrogstudents not found
           
-  /superfrogs/{superfrogId}:
+  /superfrogstudents/{superfrogId}:
     get:
       tags:
-        - superfrogs
+        - superfrogstudents
       summary: Find superfrog by ID
       description: Returns a single superfrog
       operationId: getSuperfrogById
@@ -132,8 +132,8 @@ paths:
           
     put:
       tags:
-        - superfrogs
-      summary: Update an existing superfrog
+        - superfrogstudents
+      summary: Update an existing superfrog, as a student or director
       description: Update an existing superfrog
       operationId: updateSuperfrog
       parameters:
@@ -158,9 +158,45 @@ paths:
           description: SuperFrog not found
         '405':
           description: Validation exception
+          
+  /superfrogstudents/{superfrogId}/superfrogappearancerequests/{requestId}:
+    put:
+      tags:
+        - superfrogstudents
+      summary: Assign a request to a superfrogstudent
+      description: Update an existing superfrog
+      operationId: assignRequest
+      parameters:
+        - name: superfrogId
+          in: path
+          description: ID of superfrog to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: SuperFrog object that needs to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuperFrog'
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: SuperFrog not found
+        '405':
+          description: Validation exception
     # delete:
     #   tags:
-    #     - superfrogs
+    #     - superfrogstudents
     #   summary: Deletes a superfrog
     #   description: Deletes a superfrog
     #   operationId: deleteSuperfrog
@@ -178,14 +214,14 @@ paths:
     #     '404':
     #       description: SuperFrog not found
           
-  # Requests CRUD
-  /requests:
+  # superfrogappearancerequests CRUD
+  /superfrogappearancerequests:
     get:
       tags:
-        - requests-management
-      summary: Get all requests, as a spirit director. 
-      description: Get all requests
-      operationId: getRequests
+        - superfrogappearancerequests-management
+      summary: Get all superfrogappearancerequests
+      description: Get all superfrogappearancerequests
+      operationId: getsuperfrogappearancerequests
       responses:
         '200':
           description: successful operation
@@ -198,10 +234,10 @@ paths:
         '400':
           description: Invalid status value
         '404':
-          description: Requests not found
+          description: superfrogappearancerequests not found
     post:
       tags:
-        - requests-management
+        - superfrogappearancerequests-management
       summary: Add a new request
       description: Add a new request
       operationId: addRequest
@@ -215,10 +251,10 @@ paths:
       responses:
         '405':
           description: Invalid input
-  /requests/{requestId}:
+  /superfrogappearancerequests/{requestId}:
     get:
       tags:
-        - requests-management
+        - superfrogappearancerequests-management
       summary: Find request by ID
       description: Returns a single request
       operationId: getRequestById
@@ -243,7 +279,7 @@ paths:
           description: Request not found
     put:
       tags:
-        - requests-management
+        - superfrogappearancerequests-management
       summary: Update an existing request
       description: Update an existing request
       operationId: updateRequest
@@ -271,7 +307,7 @@ paths:
           description: Validation exception
     delete:
       tags:
-        - requests
+        - superfrogappearancerequests
       summary: Deletes a request
       description: Deletes a request
       operationId: deleteRequest
@@ -288,39 +324,11 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Request not found
-  /requests/{requestId}/assign/{superfrogId}:
+
+  /superfrogappearancerequests/{requestId}/unassign:
     put:
       tags:
-        - requests-management
-      summary: Assign a superfrog to a request
-      description: Assign a superfrog to a request
-      operationId: assignSuperfrog
-      parameters:
-        - name: requestId
-          in: path
-          description: ID of request to return
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: superfrogId
-          in: path
-          description: ID of superfrog to return
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Request not found
-        '405':
-          description: Validation exception
-  /requests/{requestId}/unassign:
-    put:
-      tags:
-        - requests-management
+        - superfrogappearancerequests-management
       summary: Unassign a superfrog from a request
       description: Unassign a superfrog from a request
       operationId: unassignSuperfrog
@@ -339,13 +347,13 @@ paths:
           description: Request not found
         '405':
           description: Validation exception
-  /requests/{superfrogID}:
+  /superfrogappearancerequests/{superfrogID}:
     get:
       tags:
-        - requests
-      summary: Get all requests for a superfrog student
-      description: Get all requests for a superfrog student
-      operationId: getRequestsBySuperfrogID
+        - superfrogappearancerequests
+      summary: Get all superfrogappearancerequests for a superfrog student
+      description: Get all superfrogappearancerequests for a superfrog student
+      operationId: getsuperfrogappearancerequestsBySuperfrogID
       parameters:
         - name: superfrogID
           in: path
@@ -367,13 +375,13 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Request not found
-  /requests/{superfrogID}/status/{status}:
+  /superfrogappearancerequests/{superfrogID}/status/{status}:
     get:
       tags:
-        - requests
-      summary: Get all requests for a superfrog student with a specific status
-      description: Get all requests for a superfrog student with a specific status
-      operationId: getRequestsBySuperfrogIDAndStatus
+        - superfrogappearancerequests
+      summary: Get all superfrogappearancerequests for a superfrog student with a specific status
+      description: Get all superfrogappearancerequests for a superfrog student with a specific status
+      operationId: getsuperfrogappearancerequestsBySuperfrogIDAndStatus
       parameters:
         - name: superfrogID
           in: path
@@ -401,13 +409,13 @@ paths:
           description: Invalid ID supplied
         '404':
           description: Request not found
-  /requests/{requestId}/status/{status}:
+  /superfrogappearancerequests/{requestId}/status/{status}:
     put:
       tags:
-        - requests-management
+        - superfrogappearancerequests-management
       summary: Update the status of a request
       description: Update the status of a request. 
-      operationId: updateRequestStatus
+      operationId: updatesuperfrogappearancerequeststatus
       parameters:
         - name: requestId
           in: path
@@ -432,13 +440,13 @@ paths:
 
 
 # User CRUD
-  /user/create:
+  /user/login:
     post:
       tags:
         - user
-      summary: Create user
+      summary: Login as a user
       description: This can only be done by the logged in user.
-      operationId: createUser
+      operationId: loginUser
       requestBody:
         description: Created user object
         required: true
@@ -449,6 +457,66 @@ paths:
       responses:
         default:
           description: successful operation
+  /users:
+    get:
+      tags:
+        - user
+      summary: Login as a user
+      description: This can only be done by the logged in user.
+      operationId: getAllUser
+      responses:
+        default:
+          description: successful operation
+          
+  /users/{username}/disable:
+    put:
+      tags:
+        - user
+      summary: Disable a user by username (email)
+      description: This can only be done by the logged in user.
+      operationId: disableUser
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Created user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+  
+  /users/{username}/enable:
+    put:
+      tags:
+        - user
+      summary: Enable a user by username (email)
+      description: This can only be done by the spirit director
+      operationId: enableUser
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Created user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+  
+  
 components:
   schemas:
     SuperFrog:
@@ -585,8 +653,8 @@ components:
           email: "jo@gmail.com"
           password: "password3"
           active: false
-    ApiResponseFindAllSuperfrogs:
-      title: API response for findAllSuperfrogs
+    ApiResponseFindAllsuperfrogstudents:
+      title: API response for findAllsuperfrogstudents
       type: object
       properties:
         flag:
