@@ -2,7 +2,7 @@
     <div class="sidebar">
       <div class="section">
   
-          <img src="https://content.sportslogos.net/logos/34/868/full/tcu_horned_frogs_logo_secondary_19976347.png" alt="SuperFrog" width="100" >
+          <img class="superfrog-img" src="https://content.sportslogos.net/logos/34/868/full/tcu_horned_frogs_logo_secondary_19976347.png" alt="SuperFrog" >
   
   
         <div class="section-header" @click="toggleSection('students')">
@@ -27,7 +27,7 @@
         </div>
   
         <div class="section-header" @click="toggleSection('requests')">
-          <i class="icon fa fa-bars-progress"></i>
+          <i class="icon fa fa-list-alt"></i>
           Requests
           <i
             class="icon"
@@ -55,7 +55,8 @@
         </div>
         <div class="section">
           <div class="section-header" @click="selectSection('view-reports')">
-            <i class="icon fa fa-file-text"></i>
+            <i class="icon fa fa-file"></i>
+
             Reports
           </div>
         </div>
@@ -97,8 +98,8 @@
   
   <style scoped>
   .sidebar {
-    width: 240px;
-    background-color: #8e00e0;
+    width: 450px;
+    background-color: #4d2279;
     padding: 20px;
   }
   
@@ -108,7 +109,8 @@
   }
   
   .section-header {
-    font-size: 18px;
+    font-size: 32px;
+    margin-top: 50px;
     font-weight: bold;
     cursor: pointer;
     text-align: left;
@@ -122,5 +124,9 @@
   .sub-section {
     margin-left: 20px;
     cursor: pointer;
+  }
+  .superfrog-img{
+    width: 150px;
+    margin-left: 125px;
   }
   </style>

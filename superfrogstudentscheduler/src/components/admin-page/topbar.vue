@@ -36,14 +36,14 @@ export default {
 
 .top-bar {
     height: 50px;
-    background-color: #f5f5f5;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     font-size: 24px;
     font-weight: bold;
-    width: 100%;
-    padding-right: 10px; /* add some padding to the right */
+    padding-right: 10px;
+    border-bottom: grey 10px solid;
 }
 
 .top-bar p {

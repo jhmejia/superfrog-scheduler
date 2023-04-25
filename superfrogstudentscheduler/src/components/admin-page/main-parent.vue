@@ -41,7 +41,10 @@
     flex-direction: row;
     height: 100vh;
     width: 100vw;
+    background-color: white;
+    color: black;
   }
+
   
   .right {
     display: flex;
