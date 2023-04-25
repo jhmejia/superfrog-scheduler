@@ -6,6 +6,7 @@ import edu.tcu.cs.superfrogscheduler.superfrogrequest.dto.SuperFrogAppearanceReq
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import edu.tcu.cs.superfrogscheduler.system.Result;
 import jakarta.validation.Valid;
+import org.apache.coyote.Request;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,16 @@ public class SuperFrogAppearanceController {
                 .map(this.superFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter::convert)
                 .collect(Collectors.toList());
         return new Result(true, HttpStatusCode.SUCCESS, "Find All Success", appearanceRequestDtos);
+    }
+
+    @GetMapping("/api/superfrogappearancerequests/status/{status}")
+    public Result findSuperFrogAppearanceByStatus(@PathVariable RequestStatus status) {
+        List<SuperFrogAppearanceRequest> foundAppearance = this.superFrogAppearanceRequestService.findByStatus(status);
+
+        List<SuperFrogAppearanceRequestDto> appearanceRequestDtos = foundAppearance.stream()
+                .map(this.superFrogAppearanceRequestToSuperFrogAppearanceRequestDtoConverter::convert)
+                .collect(Collectors.toList());
+        return new Result(true, HttpStatusCode.SUCCESS, "Find By Status Success", appearanceRequestDtos);
     }
 
     @PostMapping("/api/superfrogappearancerequests")

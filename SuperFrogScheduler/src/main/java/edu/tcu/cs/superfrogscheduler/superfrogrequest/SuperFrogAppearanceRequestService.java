@@ -27,6 +27,10 @@ public class SuperFrogAppearanceRequestService {
         return this.superFrogAppearanceRequestRepository.findAll();
     }
 
+    public List<SuperFrogAppearanceRequest> findByStatus(RequestStatus status) {
+        return this.superFrogAppearanceRequestRepository.findByStatus(status);
+    }
+
     public SuperFrogAppearanceRequest save(SuperFrogAppearanceRequest newSuperFrogAppearanceRequest) {
         return this.superFrogAppearanceRequestRepository.save(newSuperFrogAppearanceRequest);
     }
