@@ -4,6 +4,10 @@
         <div class="text" v-if="section === 'add-student'">
             <!-- add student form here -->
             Add dat backend to add a student. Yo
+
+            <!-- Include vue container for form to add a student (add-student.vue)-->
+            <add-student></add-student>
+
         </div>
         <div class="text" v-if="section === 'view-students'">
             <p id="all-student"> All Students </p>
@@ -16,6 +20,9 @@
             <!-- Display all requests here -->
             Yo, I need to add the backend to view all requests, can't do it
             alone so I'm askin' for assistance.
+
+            <!-- Include vue container for viewing requests (view-requests.vue)-->
+            <view-requests></view-requests>
         </div>
         <div class="text" v-if="section === 'view-calendar'">
             <!-- Display calendar here -->
@@ -32,6 +39,8 @@
 
 <script>
 import axios from "axios";
+import AddStudent from "./add-student.vue";
+import ViewRequests from "./view-requests.vue";
 
 export default {
     props: {
@@ -39,6 +48,10 @@ export default {
             type: String,
             default: "students",
         },
+    },
+    components: {
+        AddStudent,
+        ViewRequests
     },
     data() {
         return {
