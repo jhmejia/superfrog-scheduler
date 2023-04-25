@@ -30,6 +30,10 @@ public class SuperFrogStudentService {
                 .orElseThrow(()-> new ObjectNotFoundException("superfrog", superfrogId));
     }
 
+    public List<SuperFrogStudent> findByActive() {
+        return this.superFrogStudentRepository.findSuperFrogStudentByActive(true);
+    }
+
     public List<SuperFrogStudent> findAll() {
         return this.superFrogStudentRepository.findAll();
     }
@@ -46,7 +50,7 @@ public class SuperFrogStudentService {
                    oldFrog.setLastName(updatedFrog.getLastName());
                    oldFrog.setPhoneNumber(updatedFrog.getPhoneNumber());
                    oldFrog.setAddress(updatedFrog.getAddress());
-                   oldFrog.setActive(updatedFrog.isActive());
+                   //oldFrog.setActive(updatedFrog.isActive()); // students should not be able to update their active status
                    return this.superFrogStudentRepository.save(oldFrog);
                }).orElseThrow(() -> new ObjectNotFoundException("superfrog", superFrogId ));
 

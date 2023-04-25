@@ -48,7 +48,7 @@ public class DBDataInitializer implements CommandLineRunner {
                 LocalDate.of(2023, 4, 6),
                 LocalTime.of(13, 0),
                 LocalTime.of(15, 30),
-                RequestStatus.COMPLETED,
+                RequestStatus.PENDING,
                 "FirstName",
                 "LastName",
                 "1234567890",
@@ -128,7 +128,7 @@ public class DBDataInitializer implements CommandLineRunner {
                 LocalDate.of(2023, 4, 19),
                 LocalTime.of(14, 30),
                 LocalTime.of(15, 30),
-                RequestStatus.COMPLETED,
+                RequestStatus.APPROVED,
                 "FirstName",
                 "LastName",
                 "1234567890",
@@ -191,16 +191,14 @@ public class DBDataInitializer implements CommandLineRunner {
 
         SuperFrogUser u1 = new SuperFrogUser();
         u1.setId(1);
-        u1.setUsername("john");
-        u1.setEmail("john.nguyen@tcu.edu");
+        u1.setUsername("john.nguyen@tcu.edu");
         u1.setPassword("12345");
         u1.setActive(true);
         u1.setRoles("spiritdirector superfrogstudent");
 
         SuperFrogUser u2 = new SuperFrogUser();
         u2.setId(2);
-        u2.setEmail("nhan.nguyen@tcu.edu");
-        u2.setUsername("nhan");
+        u2.setUsername("nhan.nguyen@tcu.edu");
         u2.setPassword("12345");
         u2.setActive(true);
         u2.setRoles("superfrogstudent");

@@ -46,6 +46,7 @@ public class SuperFrogUserController {
         return new Result(true, HttpStatusCode.SUCCESS, "Find One Success", userDto);
     }
 
+
     @PostMapping
     public Result addUser(@Valid @RequestBody SuperFrogUser newUser) {
         SuperFrogUser savedUser = this.superFrogUserService.save(newUser);
@@ -57,8 +58,8 @@ public class SuperFrogUserController {
     @PutMapping("/{userId}")
     public Result updateUser(@PathVariable Integer userId, @Valid @RequestBody UserDto userDto) {
         SuperFrogUser update = this.userDtoToUserConverter.convert(userDto);
-        SuperFrogUser updatedHogwartsUser = this.superFrogUserService.update(userId, update);
-        UserDto updatedUserDto = this.userToUserDtoConverter.convert(updatedHogwartsUser);
+        SuperFrogUser updatedUser = this.superFrogUserService.update(userId, update);
+        UserDto updatedUserDto = this.userToUserDtoConverter.convert(updatedUser);
         return new Result(true, HttpStatusCode.SUCCESS, "Update Success", updatedUserDto);
     }
 
@@ -67,4 +68,19 @@ public class SuperFrogUserController {
         this.superFrogUserService.delete(userId);
         return new Result(true, HttpStatusCode.SUCCESS, "Delete Success");
     }
+
+    @PutMapping("/{username}/disable")
+    public Result disableUser(@PathVariable String username) {
+        SuperFrogUser updatedUser = this.superFrogUserService.disableUser(username);
+        UserDto updatedUserDto = this.userToUserDtoConverter.convert(updatedUser);
+        return new Result(true, HttpStatusCode.SUCCESS, "Disable User Success", updatedUserDto);
+    }
+
+    @PutMapping("/{username}/enable")
+    public Result enableUser(@PathVariable String username) {
+        SuperFrogUser updatedUser = this.superFrogUserService.enableUser(username);
+        UserDto updatedUserDto = this.userToUserDtoConverter.convert(updatedUser);
+        return new Result(true, HttpStatusCode.SUCCESS, "Enable User Success", updatedUserDto);
+    }
+
 }

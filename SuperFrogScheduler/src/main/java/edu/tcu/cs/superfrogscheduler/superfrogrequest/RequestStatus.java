@@ -5,6 +5,8 @@ package edu.tcu.cs.superfrogscheduler.superfrogrequest;
  */
 public enum RequestStatus {
 
-    COMPLETED
+    COMPLETED,
+    PENDING,
+    APPROVED
 
 }
