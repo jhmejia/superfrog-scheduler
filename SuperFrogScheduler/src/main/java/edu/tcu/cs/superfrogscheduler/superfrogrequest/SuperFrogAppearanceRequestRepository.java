@@ -9,4 +9,6 @@ public interface SuperFrogAppearanceRequestRepository extends JpaRepository<Supe
 
     List<SuperFrogAppearanceRequest> findByRequestIdIn(List<Integer> appearanceRequestIdList);
 
+    List<SuperFrogAppearanceRequest> findByStatus(RequestStatus status);
+
 }

@@ -27,6 +27,10 @@ public class SuperFrogAppearanceRequestService {
         return this.superFrogAppearanceRequestRepository.findAll();
     }
 
+    public List<SuperFrogAppearanceRequest> findByStatus(RequestStatus status) {
+        return this.superFrogAppearanceRequestRepository.findByStatus(status);
+    }
+
     public SuperFrogAppearanceRequest save(SuperFrogAppearanceRequest newSuperFrogAppearanceRequest) {
         return this.superFrogAppearanceRequestRepository.save(newSuperFrogAppearanceRequest);
     }
@@ -60,5 +64,14 @@ public class SuperFrogAppearanceRequestService {
         this.superFrogAppearanceRequestRepository.findById(requestId)
                 .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
         this.superFrogAppearanceRequestRepository.deleteById(requestId);
+    }
+
+    public SuperFrogAppearanceRequest updateStatus(Integer requestId, RequestStatus status) {
+        return this.superFrogAppearanceRequestRepository.findById(requestId)
+                .map(oldRequest -> {
+                    oldRequest.setStatus(status);
+                    return this.superFrogAppearanceRequestRepository.save(oldRequest);
+                })
+                .orElseThrow(() -> new ObjectNotFoundException("superfrogappearancerequest", requestId));
     }
 }
