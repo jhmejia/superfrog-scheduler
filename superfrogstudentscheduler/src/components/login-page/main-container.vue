@@ -136,7 +136,7 @@ button {
 .login-buttons {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px; /* add margin to bottom to create space between the two button groups */
+  margin-bottom: 20px;
 }
 
 .home {
