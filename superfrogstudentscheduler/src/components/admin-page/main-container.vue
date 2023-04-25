@@ -11,6 +11,7 @@
         </div>
         <div class="text" v-if="section === 'view-students'">
             <p id="all-student"> All Students </p>
+            <view-students></view-students>
         </div>
         <div class="text" v-if="section === 'add-request'">
             <!-- Add request form here -->
@@ -41,6 +42,7 @@
 import axios from "axios";
 import AddStudent from "./add-student.vue";
 import ViewRequests from "./view-requests.vue";
+import ViewStudents from "./view-students.vue";
 
 export default {
     props: {
@@ -51,7 +53,8 @@ export default {
     },
     components: {
         AddStudent,
-        ViewRequests
+        ViewRequests,
+        ViewStudents
     },
     data() {
         return {
@@ -59,25 +62,11 @@ export default {
         };
     },
     mounted() {
-        if (this.section === "view-students") {
-            this.getStudents();
-        }
+        
         
     },
     methods: {
-        getStudents() {
-            const base_url = "http://localhost:5000/api/v1/students";
-            axios
-                .get(base_url)
-                .then((response) => {
-                    console.log(response.data);
-                    this.students = response.data;
-                })
-                .catch((error) => {
-                    console.error(error);
-                    this.students = "Can't find students";
-                });
-        },
+        
     },
 };
 </script>
