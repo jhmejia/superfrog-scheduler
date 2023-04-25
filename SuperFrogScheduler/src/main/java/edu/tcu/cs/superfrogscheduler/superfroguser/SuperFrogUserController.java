@@ -75,4 +75,12 @@ public class SuperFrogUserController {
         UserDto updatedUserDto = this.userToUserDtoConverter.convert(updatedUser);
         return new Result(true, HttpStatusCode.SUCCESS, "Disable User Success", updatedUserDto);
     }
+
+    @PutMapping("/{username}/enable")
+    public Result enableUser(@PathVariable String username) {
+        SuperFrogUser updatedUser = this.superFrogUserService.enableUser(username);
+        UserDto updatedUserDto = this.userToUserDtoConverter.convert(updatedUser);
+        return new Result(true, HttpStatusCode.SUCCESS, "Enable User Success", updatedUserDto);
+    }
+
 }

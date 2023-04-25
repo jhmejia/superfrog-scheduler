@@ -75,4 +75,14 @@ public class SuperFrogUserService implements UserDetailsService {
         this.superFrogStudentRepository.save(superFrogStudentToBeDisabled);
         return userToBeDisabled;
     }
+
+    public SuperFrogUser enableUser(String username) throws UsernameNotFoundException {
+        SuperFrogUser userToBeDisabled = this.superFrogUserRepository.findByUsername(username).orElseThrow();
+        userToBeDisabled.setActive(true);
+        this.superFrogUserRepository.save(userToBeDisabled);
+        SuperFrogStudent superFrogStudentToBeDisabled = this.superFrogStudentRepository.findSuperFrogStudentByEmail(username);
+        superFrogStudentToBeDisabled.setActive(true);
+        this.superFrogStudentRepository.save(superFrogStudentToBeDisabled);
+        return userToBeDisabled;
+    }
 }
