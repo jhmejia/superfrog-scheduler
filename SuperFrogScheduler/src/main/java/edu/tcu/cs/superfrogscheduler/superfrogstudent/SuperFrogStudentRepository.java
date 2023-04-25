@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface SuperFrogStudentRepository extends JpaRepository<SuperFrogStudent, Integer> {
 
     List<SuperFrogStudent> findSuperFrogStudentByActive(boolean active);
+
+    SuperFrogStudent findSuperFrogStudentByEmail(String email);
 }

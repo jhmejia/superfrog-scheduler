@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotEmpty;
 
 public record UserDto(Integer id,
 
-                      String email,
 
                       @NotEmpty(message = "username is required.")
                       String username,
