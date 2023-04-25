@@ -1,7 +1,8 @@
 <template>
     <div>
-      <span class="title">Review your order</span>
+     
       <span class="date">
+        <div class="title">Review Your Order</div>
         <table>
           <tr>
             <td>Date</td>
@@ -19,6 +20,7 @@
         </table>
       </span>
       <span class="contact-info-1">
+        <div class="title">Personal Information</div>
         <table>
           <tr>
             <td>Name</td>
@@ -36,6 +38,7 @@
         </table>
       </span>
       <span class="event-info-1">
+        <div class="title">Event Information</div>
         <table>
           <tr>
             <td>Address of Appearance</td>
@@ -66,9 +69,10 @@
         </table>
       </span>
       <span class="cost-1">
+        <div class="title">Total Cost</div>
         <table>
           <tr>
-            <td>Superfrog cost (175) x hours</td>
+            <td>Event type x hours</td>
           </tr>
           <tr>
            
@@ -147,12 +151,65 @@ import { computed } from '@vue/reactivity';
 
   <style scoped>
 .contact-info-1{
-  border: 1px solid black ;
-  border-radius: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+table{
+  margin-bottom: 1%;
 }
 
 td{
   border-color: lightgray;
-  background-color: lightgray; 
+  background-color: white;
+  color: grey;
+  font-size: 1rem;
+  text-align: center;
+  padding: 2.5px;
+}
+.title{
+  font-size: 2rem;
+  margin: 1%;
+  text-align: center;
+
+}
+.event-info-1 table> tr > td:nth-child(2){
+  width:20vw;
+}
+
+.contact-info-1 table> tr > td:nth-child(2){
+  width:15vw;
+}
+
+.date table> tr > td:nth-child(2){
+  width:15vw;
+}
+.event-info-1{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.date{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.cost-1 {
+  display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 1vw;
+}
+
+.cost-1 > table > tr > td{
+  width: 15vw;
+  height: 5vh;
+  text-align: center;
 }
 </style>

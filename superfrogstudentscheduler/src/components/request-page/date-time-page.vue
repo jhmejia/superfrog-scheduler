@@ -1,6 +1,6 @@
 <template class="main">
   <div class="date">
-    Pick Date:
+    Select date
   <VueDatePicker
     :enable-time-picker="false"
     v-model="scheduleDate"
@@ -9,8 +9,8 @@
     
   />
 </div>
-Pick Starting Time:
 <div class="time">
+  <span>Select starting time</span>
   <VueDatePicker
     v-model="startTime"
     time-picker
@@ -19,7 +19,7 @@ Pick Starting Time:
     :is-24="false"
     
     />
-Pick Ending Time:
+    <span>Select ending time</span>
     <VueDatePicker
     v-model="endTime"
     time-picker
@@ -95,3 +95,20 @@ import { format } from 'date-fns';
 
     
   </script>
+
+  <style scoped>
+  .date{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 10px;
+  }
+  .time{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+  }
+  </style>

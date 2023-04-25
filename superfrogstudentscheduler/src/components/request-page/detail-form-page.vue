@@ -15,7 +15,7 @@
             <td>{{ eventInfo.endTime }}</td>
           </tr>
         </table>
-        <div>
+        <div class="dropdown-box">
         <label for="dropdown">Event Type</label>
           <select id="dropdown" v-model="eventInfo.eventType" @change="updateParent">
             <option value="TCU">TCU</option>
@@ -24,11 +24,11 @@
           </select>
           </div>
         </div>
-          <div class="contact-info">
-            <div class="title-container">
+        <div class="title-container">
               <span class="title-1">Personal Contact</span>
-            </div>
-            <div class="input-container">
+          </div>
+          <div class="contact-info">
+            
               <div>
                 <span>Contact First Name</span>
                 <input type="text" class="normal-text" v-model="eventInfo.contactFirstName" @input="updateParent">
@@ -45,7 +45,7 @@
                 <span>Phone Number</span>
                 <input placeholder="(xxx)-xxx-xxxx" type="text" class="normal-text" v-model="eventInfo.phoneNumber" @input="updateParent">
               </div>
-            </div>
+            
           </div>
     <div class="title-container">
     <span class="title-1">Event Information</span>
@@ -149,15 +149,24 @@
   font-weight: bold;
   margin-bottom: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
-.date-1 > *{
-  flex-basis: 48%;
+.date-1 > div {
+  flex-basis: 40%;
+  position: relative;
+  align-self: center;
+  text-align: center;
+}
 
+.date-1 > table{
+  flex-basis: content;
 }
 .date-table{
   background-color: white;
-  color:lightslategray
+  color:lightslategray;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: 1px solid black;
 }
 
 .event-1 {
@@ -168,43 +177,66 @@
   flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
+  margin-bottom: 1vh;
+}
+
+.event-1 > div > span{
+  text-align: left;
+}
+.event-1 > div{
+
+  flex-basis: 50%;
+  display: grid;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: center;
+  margin-bottom: 2vh;
+  
+
+}
+.event-1 > div:nth-child(3)
+{
+  flex-basis: 100%;
+  justify-content: center;
 }
 
 
 .contact-info {
-  border: 1px solid #ccc;
-  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 2vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
 
 }
 
 .title-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 1vh;
 }
 
-.input-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-.input-container > div{
+
+.contact-info > div{
   flex-basis: 50%;
+  width: 22rem;
   display: flex;
-  flex-direction: column;  
   align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.input-container > div > span{
+.contact-info > div > span{
+  width: 22rem;
   position: relative;
-  align-self: flex-start;
 }
 
 
 .title-1 {
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
@@ -214,11 +246,11 @@
 
 
 .normal-text{
-  width: 250px;
+  width: 21rem;
+  height: 1rem;
   padding: 5px;
   border: 1px solid #ccc;
   position: relative;
-  align-self: flex-start;
   
 }
 
@@ -226,7 +258,8 @@ select{
   height: 20px;
 }
 .large-text{
-  height: 10vh;
+  height: 8rem;
+  width: 22rem;
 }
 
 .event-2{
@@ -242,33 +275,21 @@ select{
 .event-2 > div{
   
   flex-basis: 50%;
+  width: 22rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 2vh;
 }
 
 .event-2 > div > span{
+  width: 22rem;
   position: relative;
-  align-self: flex-start;
 }
 
-.event-1 > div > span{
-  position: relative;
-  align-self: flex-start;
-}
-.event-1 > div{
 
-  flex-basis: 50%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
 
-}
-.event-1 > div:nth-child(3)
-{
-  flex-basis: 100%;
-  justify-content: center;
-}
 
 
 </style>
