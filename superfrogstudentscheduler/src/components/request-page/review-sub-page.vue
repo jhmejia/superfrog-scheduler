@@ -5,7 +5,7 @@
         <table>
           <tr>
             <td>Date</td>
-            <td>{{formattedDate}}</td>
+            <td>{{eventInfo.scheduleDate}}</td>
             
           </tr>
           <tr>
@@ -18,7 +18,6 @@
           </tr>
         </table>
       </span>
-      <hr>
       <span class="contact-info-1">
         <table>
           <tr>
@@ -35,7 +34,6 @@
             <td>{{eventInfo.phoneNumber}}</td>
           </tr>
         </table>
-        <hr>
       </span>
       <span class="event-info-1">
         <table>
@@ -66,16 +64,15 @@
           
 
         </table>
-        <hr>
       </span>
       <span class="cost-1">
         <table>
           <tr>
-            <td>Superfrog cost x hours</td>
+            <td>Superfrog cost (175) x hours</td>
           </tr>
           <tr>
            
-            <td>Totalcost = {{eventInfo.expensesBenefits}}</td>
+            <td>Totalcost = {{getTotalPrice(eventInfo.startTime,eventInfo.endTime, eventInfo.eventType)}}</td>
           </tr>
         </table>
       </span>
@@ -114,15 +111,48 @@ import { computed } from '@vue/reactivity';
     }
 
     },
-    computed: {
-      formattedDate() {
-        if(!this.scheduleDate) return '';
-        const string = this.scheduleDate.toLocaleDateString('en-US')
-        return string;
-      },
-      
+   
+    methods: {
+      getTotalPrice(startTime, endTime,type) {
+
+          let typeCoef = 0
+
+          if(type == "TCU") typeCoef = 100
+          else if(type == "Public") typeCoef = 100
+          else if(type == "Private") typeCoef = 175
+          
+          const start = new Date(`2000-01-01T${startTime.replace(/(\d{1,2}):(\d{2}) ([AP]M)/, function(match, hour, minute, period) {
+            return `${hour % 12 + (period.toUpperCase() === 'PM' ? 12 : 0)}:${minute}:00`;
+          })}`);
+
+          const end = new Date(`2000-01-01T${endTime.replace(/(\d{1,2}):(\d{2}) ([AP]M)/, function(match, hour, minute, period) {
+            return `${hour % 12 + (period.toUpperCase() === 'PM' ? 12 : 0)}:${minute}:00`;
+          })}`);
+          let difference = end.getTime() - start.getTime();
+          console.log(difference)
+         
+          if (end.getTime() < start.getTime()) {
+            difference += 12 * 60 * 60 * 1000;
+          }
+          
+          const hours = difference / (60 * 60 * 1000);
+
+          return parseFloat(hours * typeCoef);
+}
     }
   
    
 }
   </script>
+
+  <style scoped>
+.contact-info-1{
+  border: 1px solid black ;
+  border-radius: 5px;
+}
+
+td{
+  border-color: lightgray;
+  background-color: lightgray; 
+}
+</style>

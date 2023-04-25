@@ -1,48 +1,97 @@
 <template class="main">
-  <Datepicker
+  <div class="date">
+    Pick Date:
+  <VueDatePicker
+    :enable-time-picker="false"
+    v-model="scheduleDate"
+    :format="formatDate"
+    @closed="updateDate"
     
-    v-model="eventInfo.scheduleDate"
-    lang="en"
-    @input="updateParent"
-    date-format="{
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric' }"
   />
-  
+</div>
+Pick Starting Time:
+<div class="time">
+  <VueDatePicker
+    v-model="startTime"
+    time-picker
+    :format="formatS"
+    @closed="updateStart"
+    :is-24="false"
+    
+    />
+Pick Ending Time:
+    <VueDatePicker
+    v-model="endTime"
+    time-picker
+    :format='formatE'
+    @closed="updateEnd"
+    :is-24="false"
+    />
+  </div>
 </template>
   
   <script>
 
-  import 'vue-datepicker-ui/lib/vuedatepickerui.css';
-  import VueDatepickerUi from 'vue-datepicker-ui';
+ 
+  import VueDatePicker from '@vuepic/vue-datepicker';
+  import '@vuepic/vue-datepicker/dist/main.css'
+import { format } from 'date-fns';
+  import { ref } from 'vue';
 
   export default {
     name: 'DateTimePage',
     data() {
       return {
-        scheduleDate: [
-        new Date()
-          ],
-        startTime: '',
-        endTime: '',
+        startTime: ref(new Date()),
+        endTime: ref(new Date()),
+        scheduleDate: ref(new Date()),
+        
       }
+    },
+    computed:{
+      
     },
     props: {
       eventInfo: {
         type: Object
       }
+      
     },
     components: {
-      Datepicker: VueDatepickerUi
+      VueDatePicker
+
     },
     methods: {
       updateParent() {
       this.$emit('update', {
         eventInfo: this.eventInfo,
         })},
-        
-        
-    }
+        updateStart(){
+          this.eventInfo.startTime = this.startTime;
+          this.updateParent();
+        },
+        updateEnd(){
+          this.eventInfo.endTime = this.endTime;
+          this.updateParent();
+        },
+        updateDate(){
+          this.eventInfo.scheduleDate = this.scheduleDate;
+          this.updateParent();
+        },
+        formatS(date) {
+          this.eventInfo.startTime = format(date, 'hh:mm a');
+          return format(date, 'hh:mm a');
+        },
+        formatE(date) {
+          this.eventInfo.endTime = format(date, 'hh:mm a');
+          return format(date, 'hh:mm a');
+          },
+        formatDate(date) {
+          this.eventInfo.scheduleDate = format(date, 'MM/dd/yyyy');
+          return format(date, 'MM/dd/yyyy');
+        },
+        }
   }
+
+    
   </script>

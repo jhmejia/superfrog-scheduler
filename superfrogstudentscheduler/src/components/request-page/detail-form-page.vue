@@ -4,7 +4,7 @@
         <table class="date-table">
           <tr>
             <td>Date</td>
-            <td>{{ formattedDate }}</td>
+            <td>{{ eventInfo.scheduleDate }}</td>
           </tr>
           <tr>
             <td>Start Time</td>
@@ -130,11 +130,7 @@
     }
   },
   computed: {
-      formattedDate() {
-        if(!this.scheduleDate) return '';
-        const string = this.scheduleDate.toLocaleDateString('en-US');
-        return string;
-      },
+      
     }
   }
   </script>
@@ -183,6 +179,7 @@
   align-items: center;
 
 }
+
 .title-container {
   display: flex;
   justify-content: center;
@@ -194,8 +191,17 @@
   flex-wrap: wrap;
 }
 .input-container > div{
-  flex-basis: 48%;
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
 }
+
+.input-container > div > span{
+  position: relative;
+  align-self: flex-start;
+}
+
 
 .title-1 {
   font-size: 1.2em;
@@ -205,16 +211,14 @@
   align-items: center;
 }
 
-div > span {
-  display: inline-block;
-  width: 200px;
-  font-weight: bold;
-}
+
 
 .normal-text{
-  width: 185px;
+  width: 250px;
   padding: 5px;
   border: 1px solid #ccc;
+  position: relative;
+  align-self: flex-start;
   
 }
 
@@ -236,13 +240,28 @@ select{
 }
 
 .event-2 > div{
-  flex-basis: 48%;
+  
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.event-2 > div > span{
+  position: relative;
+  align-self: flex-start;
+}
+
+.event-1 > div > span{
+  position: relative;
+  align-self: flex-start;
 }
 .event-1 > div{
-  flex-basis: 48%;
-  padding: 10px;
-  box-sizing: border-box;
-  display: inline;
+
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 
 }
 .event-1 > div:nth-child(3)
