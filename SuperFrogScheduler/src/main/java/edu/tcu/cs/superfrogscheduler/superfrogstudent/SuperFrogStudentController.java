@@ -3,6 +3,8 @@ package edu.tcu.cs.superfrogscheduler.superfrogstudent;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.converter.SuperfrogDtoToSuperfrogConverter;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.converter.SuperfrogToSuperfrogDtoConverter;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.dto.SuperFrogStudentDto;
+import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUser;
+import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUserService;
 import edu.tcu.cs.superfrogscheduler.system.Result;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import jakarta.validation.Valid;
@@ -20,10 +22,13 @@ public class SuperFrogStudentController {
 
     private final SuperfrogDtoToSuperfrogConverter superfrogDtoToSuperfrogConverter;
 
-    public SuperFrogStudentController(SuperFrogStudentService superFrogStudentService, SuperfrogToSuperfrogDtoConverter superfrogToSuperfrogDtoConverter, SuperfrogDtoToSuperfrogConverter superfrogDtoToSuperfrogConverter) {
+    private final SuperFrogUserService superFrogUserService;
+
+    public SuperFrogStudentController(SuperFrogStudentService superFrogStudentService, SuperfrogToSuperfrogDtoConverter superfrogToSuperfrogDtoConverter, SuperfrogDtoToSuperfrogConverter superfrogDtoToSuperfrogConverter, SuperFrogUserService superFrogUserService) {
         this.superFrogStudentService = superFrogStudentService;
         this.superfrogToSuperfrogDtoConverter = superfrogToSuperfrogDtoConverter;
         this.superfrogDtoToSuperfrogConverter = superfrogDtoToSuperfrogConverter;
+        this.superFrogUserService = superFrogUserService;
     }
 
     @GetMapping("/api/superfrogstudents/{superfrogId}")
@@ -59,6 +64,12 @@ public class SuperFrogStudentController {
     {
         SuperFrogStudent newSuperFrogStudent = this.superfrogDtoToSuperfrogConverter.convert(superFrogStudentDto);
         SuperFrogStudent savedSuperFrogStudent = this.superFrogStudentService.save(newSuperFrogStudent);
+        SuperFrogUser newStudentUser = new SuperFrogUser();
+        newStudentUser.setUsername(savedSuperFrogStudent.getEmail());
+        newStudentUser.setActive(true);
+        newStudentUser.setRoles("superfrogstudent");
+        newStudentUser.setPassword("superfrogstudent");
+        this.superFrogUserService.save(newStudentUser);
         SuperFrogStudentDto savedSuperFrogStudentDto = this.superfrogToSuperfrogDtoConverter.convert(savedSuperFrogStudent);
         return new Result(true, HttpStatusCode.SUCCESS, "Add Success", savedSuperFrogStudentDto);
     }

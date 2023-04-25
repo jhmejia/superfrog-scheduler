@@ -16,7 +16,6 @@ public class SuperFrogUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotEmpty(message = "email is required.")
     private String email;
 
     @NotEmpty(message = "username is required")
