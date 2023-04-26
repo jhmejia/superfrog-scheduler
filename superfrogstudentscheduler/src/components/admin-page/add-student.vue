@@ -1,5 +1,5 @@
 <template>
-    <form> <!-- First name last name, id-->
+  <form @submit.prevent="addStudent"> <!-- First name last name, id-->
         <label for="fname" >First name:</label><br>
         <input type="text" id="fname" name="fname" v-model="fname"><br>
         <label for="lname">Last name:</label><br>
@@ -10,7 +10,7 @@
         <input type="text" id="email" name="email" v-model="email"><br>
         <label for="address">Physical Address:</label><br>
         <input type="text" id="address" name="address" v-model="address"><br>
-        <input type="submit" value="Submit" @click="addStudent">
+        <input type="submit" value="Submit">
     </form>
 
 </template>
