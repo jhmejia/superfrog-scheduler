@@ -13,6 +13,7 @@
         <input type="submit" value="Submit">
     </form>
 
+    <p v-if="successMessage">{{ successMessage }}</p>
 </template>
 
 <script>
@@ -28,6 +29,7 @@ export default {
             phoneNumber: "",
             email: "",
             address: "",
+            successMessage: null,
         };
     },
     methods: {
@@ -45,7 +47,8 @@ export default {
                  address: this.address,
              }, {headers})
                 .then(response=>{
-                  console.log(response.data());
+                  console.log(response.data);
+                  this.successMessage = 'Student added successfully!';
                 }).catch(error=>{
                   console.log(error);
           })
