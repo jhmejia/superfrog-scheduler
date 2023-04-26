@@ -38,8 +38,8 @@ export default {
               'Content-Type': 'application/json'
            }
             axios.post("http://localhost:8080/api/superfrogstudents", {
-                 fname: this.fname,
-                 lname: this.lname,
+                 firstName: this.fname,
+                 lastName: this.lname,
                  phoneNumber: this.phoneNumber,
                  email: this.email,
                  address: this.address,
