@@ -40,6 +40,7 @@ public class SuperFrogStudentService {
 
     public SuperFrogStudent save(SuperFrogStudent newSuperFrogStudent) {
         newSuperFrogStudent.setId((int) idWorker.nextId());
+        newSuperFrogStudent.setActive(true);
         return this.superFrogStudentRepository.save(newSuperFrogStudent);
     }
 

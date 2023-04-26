@@ -1,17 +1,24 @@
 <template>
-    <form> <!-- First name last name, id-->
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
+  <form @submit.prevent="addStudent"> <!-- First name last name, id-->
+        <label for="fname" >First name:</label><br>
+        <input type="text" id="fname" name="fname" v-model="fname"><br>
         <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname"><br>
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id"><br>
+        <input type="text" id="lname" name="lname" v-model="lname"><br>
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input type="text" id="phoneNumber" name="phoneNumber" v-model="phoneNumber"><br>
+        <label for="email">email:</label><br>
+        <input type="text" id="email" name="email" v-model="email"><br>
+        <label for="address">Physical Address:</label><br>
+        <input type="text" id="address" name="address" v-model="address"><br>
         <input type="submit" value="Submit">
     </form>
 
+    <p v-if="successMessage">{{ successMessage }}</p>
 </template>
 
 <script>
+import axios from 'axios';
+
 
 export default {
     name: "AddStudent",
@@ -19,17 +26,33 @@ export default {
         return {
             fname: "",
             lname: "",
-            id: "",
+            phoneNumber: "",
+            email: "",
+            address: "",
+            successMessage: null,
         };
     },
     methods: {
         addStudent() {
-            axios.post("localhost:8080/api/superfrogstudents/1001", {
-                 fname: this.fname,
-                 lname: this.lname,
-                 id: this.id,
-             });
-            console.log("Student added");
+            const token=localStorage.getItem('token');
+            const headers = {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+           }
+            axios.post("http://localhost:8080/api/superfrogstudents", {
+                 firstName: this.fname,
+                 lastName: this.lname,
+                 phoneNumber: this.phoneNumber,
+                 email: this.email,
+                 address: this.address,
+             }, {headers})
+                .then(response=>{
+                  console.log(response.data);
+                  this.successMessage = 'Student added successfully!';
+                }).catch(error=>{
+                  console.log(error);
+          })
+
         },
     },
 }

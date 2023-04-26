@@ -3,11 +3,13 @@ package edu.tcu.cs.superfrogscheduler.superfrogstudent;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.converter.SuperfrogDtoToSuperfrogConverter;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.converter.SuperfrogToSuperfrogDtoConverter;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.dto.SuperFrogStudentDto;
+import edu.tcu.cs.superfrogscheduler.superfroguser.MyUserPrincipal;
 import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUser;
 import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUserService;
 import edu.tcu.cs.superfrogscheduler.system.Result;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import jakarta.validation.Valid;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,6 +71,7 @@ public class SuperFrogStudentController {
         newStudentUser.setActive(true);
         newStudentUser.setRoles("superfrogstudent");
         newStudentUser.setPassword("superfrogstudent");
+        UserDetails newStudentUserDetails = new MyUserPrincipal(newStudentUser);
         this.superFrogUserService.save(newStudentUser);
         SuperFrogStudentDto savedSuperFrogStudentDto = this.superfrogToSuperfrogDtoConverter.convert(savedSuperFrogStudent);
         return new Result(true, HttpStatusCode.SUCCESS, "Add Success", savedSuperFrogStudentDto);

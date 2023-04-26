@@ -2,8 +2,6 @@
     <div class="main-box">
         <h1>{{ section }}</h1>
         <div class="text" v-if="section === 'add-student'">
-            <!-- add student form here -->
-            Add dat backend to add a student. Yo
 
             <!-- Include vue container for form to add a student (add-student.vue)-->
             <add-student></add-student>
