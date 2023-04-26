@@ -70,6 +70,7 @@ public class SuperFrogUserService implements UserDetailsService {
         SuperFrogUser userToBeDisabled = this.superFrogUserRepository.findByUsername(username).orElseThrow();
         userToBeDisabled.setActive(false);
         this.superFrogUserRepository.save(userToBeDisabled);
+        UserDetails userToBeDisabledDetails = new MyUserPrincipal(userToBeDisabled);
         SuperFrogStudent superFrogStudentToBeDisabled = this.superFrogStudentRepository.findSuperFrogStudentByEmail(username);
         superFrogStudentToBeDisabled.setActive(false);
         this.superFrogStudentRepository.save(superFrogStudentToBeDisabled);
@@ -77,12 +78,13 @@ public class SuperFrogUserService implements UserDetailsService {
     }
 
     public SuperFrogUser enableUser(String username) throws UsernameNotFoundException {
-        SuperFrogUser userToBeDisabled = this.superFrogUserRepository.findByUsername(username).orElseThrow();
-        userToBeDisabled.setActive(true);
-        this.superFrogUserRepository.save(userToBeDisabled);
-        SuperFrogStudent superFrogStudentToBeDisabled = this.superFrogStudentRepository.findSuperFrogStudentByEmail(username);
-        superFrogStudentToBeDisabled.setActive(true);
-        this.superFrogStudentRepository.save(superFrogStudentToBeDisabled);
-        return userToBeDisabled;
+        SuperFrogUser userToBeEnabled = this.superFrogUserRepository.findByUsername(username).orElseThrow();
+        userToBeEnabled.setActive(true);
+        UserDetails userToBeEnabledDetails = new MyUserPrincipal(userToBeEnabled);
+        this.superFrogUserRepository.save(userToBeEnabled);
+        SuperFrogStudent superFrogStudentToBeEnabled = this.superFrogStudentRepository.findSuperFrogStudentByEmail(username);
+        superFrogStudentToBeEnabled.setActive(true);
+        this.superFrogStudentRepository.save(superFrogStudentToBeEnabled);
+        return userToBeEnabled;
     }
 }

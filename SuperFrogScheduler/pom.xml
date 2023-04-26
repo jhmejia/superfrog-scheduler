@@ -11,8 +11,8 @@
     <groupId>edu.tcu.cs</groupId>
     <artifactId>SuperFrogScheduler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hogwarts-artifacts-online</name>
-    <description>hogwarts-artifacts-online</description>
+    <name>SuperFrogScheduler</name>
+    <description>SuperFrogScheduler</description>
     <properties>
         <java.version>19</java.version>
     </properties>
