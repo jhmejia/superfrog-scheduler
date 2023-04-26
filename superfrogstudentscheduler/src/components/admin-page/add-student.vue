@@ -32,6 +32,7 @@ export default {
     },
     methods: {
         addStudent() {
+            const token=localStorage.getItem('token');
             const headers={
               'Authorization': 'Bearer ${token}',
               'Content-Type': 'application/json'
