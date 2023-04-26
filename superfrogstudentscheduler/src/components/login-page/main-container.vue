@@ -14,37 +14,87 @@
         <form>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" />
+                <input type="text" id="username" name="username" v-model="username" />
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" />
+                <input type="password" id="password" name="password" v-model="password" />
             </div>
         </form>
 
         <div class="login-buttons">
-            <button type="button" class="btn btn-primary">
+            <button type="button" @click="loginAsSuperFrog()" class="btn btn-primary">
                 Login as SuperFrog
             </button>
-            <button type="button" class="btn btn-secondary">
+            <button type="button" @click="loginAsSpiritDirector()" class="btn btn-secondary">
                 Login as Spirit Director
             </button>
         </div>
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+
         <router-link to="/">
         <button class="button is-primary home-button">Home</button>
       </router-link>
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name: "LoginPage",
     data() {
         return {
             username: "",
             password: "",
+            errorMessage: null,
         };
     },
     methods: {
+        async loginAsSpiritDirector() {
+            try {
+                console.log(this.username);
+                console.log(this.password);
+                const basicAuth = 'Basic ' + btoa(this.username + ':' + this.password);
+                console.log(basicAuth);
+                const response = await axios.post('http://localhost:8080/api/users/login', {}, {
+                    headers: {
+                        Authorization: basicAuth
+                    }
+                });
+                console.log(response.data);
+                const token = response.data.data.token;
+                localStorage.setItem('token',token);
+                console.log(token);
+                // redirect to a new page after successful login
+                this.$router.push('/admin');
+            } catch (error) {
+                console.error(error);
+                this.errorMessage = error.response.data.message;
+            }
+        },
+
+        async loginAsSuperFrog() {
+            try {
+                console.log(this.username);
+                console.log(this.password);
+                const basicAuth = 'Basic ' + btoa(this.username + ':' + this.password);
+                console.log(basicAuth);
+                const response = await axios.post('http://localhost:8080/api/users/login', {}, {
+                    headers: {
+                        Authorization: basicAuth
+                    }
+                });
+                console.log(response.data);
+                const token = response.data.data.token;
+                localStorage.setItem('token',token);
+                console.log(token);
+                // redirect to a new page after successful login
+                this.$router.push('/superfrog');
+            } catch (error) {
+                console.error(error);
+                this.errorMessage = error.response.data.message;
+            }
+        },
         goHome() {
             this.$router.push("/");
         },

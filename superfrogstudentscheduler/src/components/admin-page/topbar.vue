@@ -25,6 +25,7 @@ export default {
     },
     methods: {
         goHome() {
+            localStorage.removeItem('token');
             this.$router.push("/");
         },
     },
