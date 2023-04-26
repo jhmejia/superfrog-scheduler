@@ -76,7 +76,6 @@ ul {
       <input type="checkbox" id="agree" v-model="isChecked">
       <label for="agree">I agree to the terms & conditions of a TCU Spirit Appearance</label>
     </div>
-    <!-- <button :disabled="!termsAccepted" @click="goForward">Forward</button> -->
   </div>
 </template>
 

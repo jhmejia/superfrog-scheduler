@@ -17,11 +17,10 @@
 </template> -->
 
 <template>
-  <div>
-    <step-progress :steps="steps" :current-step="currentStep" icon-class="fa fa-check" active-color="#32CD32" passive-color="white"></step-progress>
+  <div class="progress-bar">
+    <step-progress :steps="steps" :current-step="currentStep" active-thickness="-1" passive-thickness="0" icon-class="fa fa-check" active-color="#32CD32" passive-color="grey" line-thickness="5"></step-progress>
   </div>
   <div class="request-page">
-
     <div class="content-container">
       <!-- <h3>Select Date and Time:</h3> -->
       <component :eventInfo="eventInfo" :is="currentComponent !== '' ? currentComponent : defaultComponent"></component>
@@ -35,10 +34,7 @@
       </router-link>
       
     </div>
-
   </div>
-
-  
 </template>
 
       
@@ -158,11 +154,13 @@
 </script>
 
 <style scoped>
+
+.progress-bar{
+  height: auto;
+}
 .request-page {
   background-color: #4d2279;
   color: white;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
