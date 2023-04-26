@@ -16,7 +16,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 
 export default {
@@ -36,7 +36,7 @@ export default {
               'Authorization': 'Bearer ${token}',
               'Content-Type': 'application/json'
             }
-            axios.post("localhost:8080/api/superfrogstudents", {
+            axios.post("http://localhost:8080/api/superfrogstudents", {
                  fname: this.fname,
                  lname: this.lname,
                  phoneNumber: this.phoneNumber,
