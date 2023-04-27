@@ -273,7 +273,7 @@ justify-content: space-between;
 }
 
 .event-2 > div{
-
+  
 flex-basis: 50%;
 width: 22rem;
 display: flex;

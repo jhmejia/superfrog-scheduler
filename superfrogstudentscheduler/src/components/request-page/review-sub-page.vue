@@ -140,7 +140,7 @@ export default {
         }
         
         const hours = difference / (60 * 60 * 1000);
-
+        this.eventInfo.totalCost =  parseFloat(hours * typeCoef)
         return parseFloat(hours * typeCoef);
 }
   }

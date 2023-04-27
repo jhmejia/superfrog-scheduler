@@ -6,8 +6,8 @@
     <br>
     An email of your request has been sent to your email.
     <br>
-    Here is your request ID
-    <!-- ID -->
+    Here is your request ID: {{ eventInfo.reciptId }}
+    
   </div>
 </template>
 
@@ -15,6 +15,10 @@
   <script>
   export default {
     name: 'ReceiptPage',
-    // Component 1's options
+    props:{
+      eventInfo: {
+        type: Object
+      }
+    }
   }
   </script>
