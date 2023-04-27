@@ -27,6 +27,7 @@ public class SuperFrogAppearanceRequestDtoToSuperFrogAppearanceRequestConverter 
         superFrogAppearanceRequest.setNameOfOrg(source.nameOfOrg());
         superFrogAppearanceRequest.setDescription(source.description());
         superFrogAppearanceRequest.setOutsideOrgs(source.outsideOrgs());
+        superFrogAppearanceRequest.setSpecialInstructions(source.specialInstructions());
         superFrogAppearanceRequest.setExpenses(source.expenses());
         return superFrogAppearanceRequest;
     }
