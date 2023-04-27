@@ -52,6 +52,7 @@ export default {
     methods: {
         async loginAsSpiritDirector() {
             try {
+                this.$router.push('/admin');
                 console.log(this.username);
                 console.log(this.password);
                 const basicAuth = 'Basic ' + btoa(this.username + ':' + this.password);
