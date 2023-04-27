@@ -122,8 +122,8 @@ export default {
         let typeCoef = 0
 
         if(type == "TCU") typeCoef = 100
-        else if(type == "Public") typeCoef = 100
-        else if(type == "Private") typeCoef = 175
+        else if(type == "PUBLIC") typeCoef = 100
+        else if(type == "PRIVATE") typeCoef = 175
         
         const start = new Date(`2000-01-01T${startTime.replace(/(\d{1,2}):(\d{2}) ([AP]M)/, function(match, hour, minute, period) {
           return `${hour % 12 + (period.toUpperCase() === 'PM' ? 12 : 0)}:${minute}:00`;
@@ -140,7 +140,7 @@ export default {
         }
         
         const hours = difference / (60 * 60 * 1000);
-
+        this.eventInfo.totalCost =  parseFloat(hours * typeCoef)
         return parseFloat(hours * typeCoef);
 }
   }

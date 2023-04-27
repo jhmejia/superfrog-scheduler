@@ -116,7 +116,7 @@ export default {
         startTime: this.eventInfo.startTime,
         endTime: this.eventInfo.endTime,
         eventType: this.eventInfo.eventType,
-        dropdownValues: ['TCU', 'Public/Non-Profit', 'Private/residential']
+        dropdownValues: ['TCU', 'PUBLIC', 'PRIVATE']
     }
     
 
@@ -273,7 +273,7 @@ justify-content: space-between;
 }
 
 .event-2 > div{
-
+  
 flex-basis: 50%;
 width: 22rem;
 display: flex;
