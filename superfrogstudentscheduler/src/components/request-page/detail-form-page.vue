@@ -19,8 +19,8 @@
       <label for="dropdown">Event Type</label>
         <select id="dropdown" v-model="eventInfo.eventType" @change="updateParent">
           <option value="TCU">TCU</option>
-          <option value="Public">Public/Non-profit</option>
-          <option value="Private">Private/Residential</option>
+          <option value="PUBLIC">Public/Non-profit</option>
+          <option value="PRIVATE">Private/Residential</option>
         </select>
         </div>
       </div>

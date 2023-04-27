@@ -88,7 +88,7 @@
               endTime: "",
               eventType: "",
               totalCost: 0.00,
-              status: "Pending",
+              status: "PENDING",
               reciptId: "",
             },
             steps: [

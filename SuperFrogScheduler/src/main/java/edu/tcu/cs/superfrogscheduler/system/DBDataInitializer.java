@@ -62,7 +62,7 @@ public class DBDataInitializer implements CommandLineRunner {
                 student1);
         SuperFrogAppearanceRequest request2 = new SuperFrogAppearanceRequest(
                 6,
-                EventType.NONPROFIT,
+                EventType.PUBLIC,
                 "Event address 2",
                 2.0,
                 LocalDate.of(2023, 4, 9),
@@ -122,7 +122,7 @@ public class DBDataInitializer implements CommandLineRunner {
                 student2);
         SuperFrogAppearanceRequest request5 = new SuperFrogAppearanceRequest(
                 17,
-                EventType.NONPROFIT,
+                EventType.PUBLIC,
                 "Event address 5",
                 25.0,
                 LocalDate.of(2023, 4, 19),
