@@ -116,7 +116,7 @@ export default {
         startTime: this.eventInfo.startTime,
         endTime: this.eventInfo.endTime,
         eventType: this.eventInfo.eventType,
-        dropdownValues: ['TCU', 'Public/Non-Profit', 'Private/residential']
+        dropdownValues: ['TCU', 'PUBLIC', 'PRIVATE']
     }
     
 
