@@ -41,9 +41,10 @@
   </script>
   
   <style scoped>
-  .main-box {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
+  .text {
+      color: black;
+  }
+  .h1 {
+      color: black;
   }
   </style>

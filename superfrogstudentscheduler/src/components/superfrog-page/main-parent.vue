@@ -36,16 +36,19 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  width: 100vw;
-}
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    color: black;
+  }
 
-.right {
-  display: flex;
-  flex-direction: column;
-  width: 80vw;
-}
-</style>
+  
+  .right {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+  }
+  </style>
