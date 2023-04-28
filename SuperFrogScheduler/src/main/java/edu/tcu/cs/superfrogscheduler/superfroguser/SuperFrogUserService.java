@@ -67,7 +67,7 @@ public class SuperFrogUserService implements UserDetailsService {
     }
 
     public SuperFrogUser disableUser(String username) throws UsernameNotFoundException {
-        SuperFrogUser userToBeDisabled = this.superFrogUserRepository.findByUsername(username).orElseThrow();
+        SuperFrogUser userToBeDisabled = this.superFrogUserRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("username " + username + " is not found."));
         userToBeDisabled.setActive(false);
         this.superFrogUserRepository.save(userToBeDisabled);
         UserDetails userToBeDisabledDetails = new MyUserPrincipal(userToBeDisabled);
