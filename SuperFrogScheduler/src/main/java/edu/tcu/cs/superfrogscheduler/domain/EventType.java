@@ -8,7 +8,7 @@ package edu.tcu.cs.superfrogscheduler.domain;
  */
 public enum EventType {
 
-    TCU(100), NONPROFIT(100), PRIVATE(175);
+    TCU(100), PUBLIC(100), PRIVATE(175);
 
     private int hourlyRate;
 

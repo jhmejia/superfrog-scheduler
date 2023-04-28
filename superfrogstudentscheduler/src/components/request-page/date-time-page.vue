@@ -79,16 +79,16 @@ import { format } from 'date-fns';
           this.updateParent();
         },
         formatS(date) {
-          this.eventInfo.startTime = format(date, 'hh:mm a');
-          return format(date, 'hh:mm a');
+          this.eventInfo.startTime = format(date, 'hh:mm:ss');
+          return format(date, 'hh:mm:ss');
         },
         formatE(date) {
-          this.eventInfo.endTime = format(date, 'hh:mm a');
-          return format(date, 'hh:mm a');
+          this.eventInfo.endTime = format(date, 'hh:mm:ss');
+          return format(date, 'hh:mm:ss ');
           },
         formatDate(date) {
-          this.eventInfo.scheduleDate = format(date, 'MM/dd/yyyy');
-          return format(date, 'MM/dd/yyyy');
+          this.eventInfo.scheduleDate = format(date, 'yyyy-MM-dd');
+          return format(date, 'yyyy-MM-dd');
         },
         }
   }

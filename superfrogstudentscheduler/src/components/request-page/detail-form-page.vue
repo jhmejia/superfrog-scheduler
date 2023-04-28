@@ -19,8 +19,8 @@
       <label for="dropdown">Event Type</label>
         <select id="dropdown" v-model="eventInfo.eventType" @change="updateParent">
           <option value="TCU">TCU</option>
-          <option value="Public">Public/Non-profit</option>
-          <option value="Private">Private/Residential</option>
+          <option value="PUBLIC">Public/Non-profit</option>
+          <option value="PRIVATE">Private/Residential</option>
         </select>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default {
         startTime: this.eventInfo.startTime,
         endTime: this.eventInfo.endTime,
         eventType: this.eventInfo.eventType,
-        dropdownValues: ['TCU', 'Public/Non-Profit', 'Private/residential']
+        dropdownValues: ['TCU', 'PUBLIC', 'PRIVATE']
     }
     
 
@@ -273,7 +273,7 @@ justify-content: space-between;
 }
 
 .event-2 > div{
-
+  
 flex-basis: 50%;
 width: 22rem;
 display: flex;

@@ -46,6 +46,7 @@
    import PolicyPage from './policy-page.vue'
    import ReviewSubPage from './review-sub-page.vue'
    import ReceiptPage from './receipt.vue'
+   import axios from 'axios'
       
   export default {
     name: 'RequestPage',
@@ -87,6 +88,8 @@
               endTime: "",
               eventType: "",
               totalCost: 0.00,
+              status: "PENDING",
+              reciptId: "",
             },
             steps: [
               'Select Date and Time',
@@ -143,9 +146,39 @@
               this.currentComponent = this.components[this.selectedComponentIndex].component;
               
             }
-            //Send data to backend/generate id and recipt
-          }
+            const token=localStorage.getItem('token');
+            const headers = {
+              'Content-Type': 'application/json'
+           }
+            axios.post("http://localhost:8080/api/superfrogappearancerequests", {
+                  contactFirstName: this.eventInfo.contactFirstName,
+                  contactLastName: this.eventInfo.contactLastName,
+                  email: this.eventInfo.email,
+                  phoneNumber: this.eventInfo.phoneNumber,
+                  address: this.eventInfo.addressOfAppearance,
+                  nameOfOrg: this.eventInfo.nameOfOrganization,
+                  title: this.eventInfo.eventTitle,
+                  description: this.eventInfo.eventDescription,
+                  specialInstructions: this.eventInfo.specialInstructions,
+                  outsideOrgs: this.eventInfo.outsideOrganizations,
+                  expenses: this.eventInfo.expensesBenefits,
+                  eventDate: this.eventInfo.scheduleDate,
+                  startTime: this.eventInfo.startTime,
+                  endTime: this.eventInfo.endTime,
+                  eventType: this.eventInfo.eventType,
+                  totalCost: this.eventInfo.totalCost,
+             }, {headers})
+             .then(response =>{
+                  const data = (response.data);
+                  console.log(data.data.requestId);
+                  this.successMessage = 'Student added successfully!';
+                  this.eventInfo.reciptId = data.data.requestId;
+                }).catch(error=>{
+                  console.log(error);
+          })
         },
+          }
+        ,
         
 
  }
