@@ -48,7 +48,7 @@ export default {
              }, {headers})
                 .then(response=>{
                   console.log(response.data);
-                  this.successMessage = 'Student added successfully!';
+                  this.successMessage = 'Student added successfully! Default password is superfrogstudent';
                 }).catch(error=>{
                   console.log(error);
           })

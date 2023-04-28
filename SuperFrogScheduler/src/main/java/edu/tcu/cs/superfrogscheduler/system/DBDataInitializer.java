@@ -198,13 +198,30 @@ public class DBDataInitializer implements CommandLineRunner {
 
         SuperFrogUser u2 = new SuperFrogUser();
         u2.setId(2);
-        u2.setUsername("nhan.nguyen@tcu.edu");
-        u2.setPassword("12345");
+        u2.setUsername("jane.smith@tcu.edu");
+        u2.setPassword("superfrogstudent");
         u2.setActive(true);
         u2.setRoles("superfrogstudent");
 
+        SuperFrogUser u3 = new SuperFrogUser();
+        u3.setId(3);
+        u3.setUsername("john.doe@tcu.edu");
+        u3.setPassword("superfrogstudent");
+        u3.setActive(true);
+        u3.setRoles("superfrogstudent");
+
+        SuperFrogUser u4 = new SuperFrogUser();
+        u4.setId(4);
+        u4.setUsername("john.doe@tcu.edu");
+        u4.setPassword("superfrogstudent");
+        u4.setActive(true);
+        u4.setRoles("superfrogstudent");
+
+
         this.superFrogUserService.save(u1);
         this.superFrogUserService.save(u2);
+        this.superFrogUserService.save(u3);
+        this.superFrogUserService.save(u4);
 
     }
 
