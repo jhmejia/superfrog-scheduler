@@ -17,8 +17,6 @@
         </div>
         <div class="text" v-if="section === 'view-requests'">
             <!-- Display all requests here -->
-            Yo, I need to add the backend to view all requests, can't do it
-            alone so I'm askin' for assistance.
 
             <!-- Include vue container for viewing requests (view-requests.vue)-->
             <view-requests></view-requests>
