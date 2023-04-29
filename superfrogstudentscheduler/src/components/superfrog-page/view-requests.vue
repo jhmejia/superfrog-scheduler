@@ -22,7 +22,7 @@
           <td>{{ request.status }}</td>
           <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
           <td>
-            <button @click="approveRequest(request)">Sign-Up</button>
+            <button @click="approveRequest(request.requestId)">Sign-Up</button>
             <!-- <button @click="rejectRequest(request)">Reject</button> -->
           </td>
         </tr>
@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     getRequests() {
+
       axios
         .get("http://localhost:8080/api/superfrogappearancerequests")
         .then((response) => {
@@ -67,8 +68,11 @@ export default {
             console.log(error);
           });
       },
-    approveRequest(request) {
+    approveRequest(requestId) {
       // TODO: Implement approve request functionality
+      const superFrogId = localStorage.getItem('superfrogID');
+      console.log("Superfrog id is ")
+      console.log(superFrogId);
       axios
       .put(`http://localhost:8080/api/superfrogstudents/${superFrogId}/assign/superfrogappearancerequests/${requestId}`, {
           status: 'APPROVED',
