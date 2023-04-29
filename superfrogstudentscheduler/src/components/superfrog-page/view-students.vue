@@ -57,7 +57,9 @@
       toggleStudentStatus(student) {
         const url = `http://localhost:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
         const token = localStorage.getItem('token');
+        
         console.log(token);
+        
         const headers = {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

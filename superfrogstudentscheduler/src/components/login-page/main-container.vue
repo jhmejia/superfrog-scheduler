@@ -86,8 +86,11 @@ export default {
                 });
                 console.log(response.data);
                 const token = response.data.data.token;
+                const superfrogID = response.data.data.userInfo.id;
                 localStorage.setItem('token',token);
                 console.log(token);
+                localStorage.setItem('superfrogID', superfrogID);
+                console.log(superfrogID);
                 // redirect to a new page after successful login
                 this.$router.push('/superfrog');
             } catch (error) {

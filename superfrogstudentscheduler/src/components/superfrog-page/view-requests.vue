@@ -56,25 +56,22 @@ export default {
           console.log(error);
         });
     },
+    getStudents() {
+        axios
+          .get("http://localhost:8080/api/superfrogstudents")
+          .then((response) => {
+            this.students = response.data.data;
+            console.log (response.data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
     approveRequest(request) {
       // TODO: Implement approve request functionality
       axios
-        .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/APPROVED`, {
-
-        })
-        .then((response) => {
-          this.requests = response.data.data;
-          console.log(response.data.data);
-          this.getRequests();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    rejectRequest(request) {
-      // TODO: Implement reject request functionality
-      axios
-        .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/REJECTED`, {
+      .put(`http://localhost:8080/api/superfrogstudents/${superFrogId}/assign/superfrogappearancerequests/${requestId}`, {
+          status: 'APPROVED',
         })
         .then((response) => {
           this.requests = response.data.data;

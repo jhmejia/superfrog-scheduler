@@ -59,24 +59,13 @@ export default {
     },
     approveRequest(request) {
       // TODO: Implement approve request functionality
-      axios
-        .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/APPROVED`, {
+      const superFrogID = localStorage.getItem('superfrogID');
+      console.log("Im logging in");
 
-        })
-        .then((response) => {
-          this.requests = response.data.data;
-          console.log(response.data.data);
-          this.getRequests();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    rejectRequest(request) {
-      // TODO: Implement reject request functionality
+
       axios
-        .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/REJECTED`, {
-        })
+        .put(`http://localhost:8080/api/superfrogstudents/${superFrogID}/assign/superfrogappearancerequests/${requestId}`
+, {        })
         .then((response) => {
           this.requests = response.data.data;
           console.log(response.data.data);
