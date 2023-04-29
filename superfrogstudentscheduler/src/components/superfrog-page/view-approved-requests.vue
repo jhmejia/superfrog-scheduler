@@ -22,8 +22,8 @@
             <td>{{ request.status }}</td>
             <td>{{ request.student.firstName }} {{ request.student.lastName }}</td>
             <td>
-              <button @click="approveRequest(request)">Approve</button>
-              <button @click="rejectRequest(request)">Reject</button>
+              <button @click="approveRequest(request)">Sign Up</button>
+              <!-- <button @click="rejectRequest(request)">Reject</button> -->
             </td>
           </tr>
         </tbody>
@@ -34,7 +34,7 @@
   <script>
   import axios from "axios";
   
-  export default {
+  export default{
     name: "ViewRequests",
     data() {
       return {
@@ -61,20 +61,6 @@
         axios
           .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/APPROVED`, {
   
-          })
-          .then((response) => {
-            this.requests = response.data.data;
-            console.log(response.data.data);
-            this.getRequests();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      },
-      rejectRequest(request) {
-        // TODO: Implement reject request functionality
-        axios
-          .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/REJECTED`, {
           })
           .then((response) => {
             this.requests = response.data.data;
