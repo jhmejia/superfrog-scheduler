@@ -9,7 +9,6 @@
           <th>Last Name</th>
           <th>Email Address</th>
           <th>Account Status</th>
-          <!-- <th>Action</th> -->
         </tr>
       </thead>
       <tbody>
