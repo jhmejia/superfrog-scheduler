@@ -20,11 +20,10 @@
           <td>{{ request.eventDate }}</td>
           <td>{{ request.title }}</td>
           <td>{{ request.status }}</td>
-          <!-- <td>{{ request.student.firstName }} {{ request.student.lastName }}</td> -->
-          <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
+          <td>{{ request.student.firstName }} {{ request.student.lastName }}</td>
           <td>
-            <button @click="approveRequest(request)">Approve</button>
-            <button @click="rejectRequest(request)">Reject</button>
+            <button @click="approveRequest(request)">Sign-Up</button>
+            <!-- <button @click="rejectRequest(request)">Reject</button> -->
           </td>
         </tr>
       </tbody>
@@ -88,9 +87,9 @@ export default {
     },
   },
   computed: {
-    computedRequests() {
-      return this.requests;
-    },
+  computedRequests() {
+    return this.requests.filter(request => request.status === 'APPROVED');
   },
+},
 };
 </script>
