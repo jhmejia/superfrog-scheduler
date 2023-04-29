@@ -13,7 +13,8 @@
         </div>
         <div class="text" v-if="section === 'add-request'">
             <!-- Add request form here -->
-            Add dat backend to add a request. Yo
+            <p id="add-request"> Add Request </p>
+            <add-request></add-request>
         </div>
         <div class="text" v-if="section === 'view-requests'">
             <!-- Display all requests here -->
@@ -39,6 +40,7 @@ import axios from "axios";
 import AddStudent from "./add-student.vue";
 import ViewRequests from "./view-requests.vue";
 import ViewStudents from "./view-students.vue";
+import AddRequest from "./add-request.vue";
 
 export default {
     props: {
@@ -50,7 +52,8 @@ export default {
     components: {
         AddStudent,
         ViewRequests,
-        ViewStudents
+        ViewStudents,
+        AddRequest,
     },
     data() {
         return {
@@ -67,11 +70,30 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .text {
     color: black;
 }
 .h1 {
     color: black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #588c7e;
+    font-family: monospace;
+    font-size: 25px;
+    text-align: left;
+}
+
+th {
+    background-color: #588c7e;
+    color: white;
+    border: 1px solid black;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 </style>
