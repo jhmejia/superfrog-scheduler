@@ -18,11 +18,11 @@
         ></i>
       </div>
       <div class="section-content" v-show="isExpanded('students')">
-        <div class="sub-section" @click="selectSection('add-student')">
+        <!-- <div class="sub-section" @click="selectSection('add-student')">
           Add a new student
-        </div>
+        </div> -->
         <div class="sub-section" @click="selectSection('view-students')">
-          View all students
+          View SuperFrog All Students
         </div>
       </div>
 
@@ -39,11 +39,11 @@
         ></i>
       </div>
       <div class="section-content" v-show="isExpanded('requests')">
-        <div class="sub-section" @click="selectSection('add-request')">
+        <!-- <div class="sub-section" @click="selectSection('add-request')">
           Add a new request
-        </div>
+        </div> -->
         <div class="sub-section" @click="selectSection('view-requests')">
-          View all requests
+          View Approved Requests
         </div>
       </div>
 
