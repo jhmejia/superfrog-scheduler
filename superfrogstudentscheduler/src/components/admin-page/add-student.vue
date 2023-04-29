@@ -51,6 +51,7 @@ export default {
                   this.successMessage = 'Student added successfully! Default password is superfrogstudent';
                 }).catch(error=>{
                   console.log(error);
+                  this.successMessage = 'Student not added successfully- please try again';
           })
 
         },
