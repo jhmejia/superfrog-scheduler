@@ -20,7 +20,7 @@
           <td>{{ request.eventDate }}</td>
           <td>{{ request.title }}</td>
           <td>{{ request.status }}</td>
-          <td>{{ request.student.firstName }} {{ request.student.lastName }}</td>
+          <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
           <td>
             <button @click="approveRequest(request)">Sign-Up</button>
             <!-- <button @click="rejectRequest(request)">Reject</button> -->
