@@ -23,6 +23,7 @@ const routes = [
     { path: '/login', component: LoginPage },
     { path: '/:catchAll(.*)',
     component: App}
+    
 ]
 
 const router = createRouter({

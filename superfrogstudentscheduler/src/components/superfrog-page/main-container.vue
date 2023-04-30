@@ -11,6 +11,10 @@
             <p id="all-student"> All Students </p>
             <view-students></view-students>
         </div>
+        <div class="text" v-if="section ==='edit-profile'">
+            <p id="edit-profile"> Edit Student Profile </p>
+            <edit-profile></edit-profile>
+        </div>
         <div class="text" v-if="section === 'add-request'">
             <!-- Add request form here -->
             <p id="add-request"> Add Request </p>
@@ -39,7 +43,7 @@
 import axios from "axios";
 import ViewRequests from "./view-requests.vue";
 import ViewStudents from "./view-students.vue";
-
+import editProfile from "./edit-profile.vue";
 
 export default {
     props: {
@@ -51,6 +55,7 @@ export default {
     components: {
         ViewRequests,
         ViewStudents,
+        editProfile
     },
     data() {
         return {
