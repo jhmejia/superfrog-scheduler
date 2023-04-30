@@ -142,7 +142,7 @@ export default {
             };
             axios
                 .post(
-                    "http://localhost:8080/api/superfrogappearancerequests",
+                    "http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests",
                     {
                         eventType: this.eventType,
                         address: this.address,

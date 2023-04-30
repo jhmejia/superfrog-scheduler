@@ -39,7 +39,7 @@ export default {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
            }
-            axios.post("http://localhost:8080/api/superfrogstudents", {
+            axios.post("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents", {
                  firstName: this.fname,
                  lastName: this.lname,
                  phoneNumber: this.phoneNumber,
