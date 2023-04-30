@@ -1,6 +1,9 @@
 <template>
   <div>
     <p id="view-students"> Students </p>
+    <label>
+      <input type="checkbox" v-model="showActiveOnly"> Show active students only
+    </label>
     <table>
       <thead>
         <tr>
@@ -29,56 +32,58 @@
     </table>
   </div>
 </template>
-  
-  <script>
-  import axios from "axios";
-  
-  export default {
-    name: "ViewStudents",
-    data() {
-      return {
-        students: [],
-      };
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "ViewStudents",
+  data() {
+    return {
+      students: [],
+      showActiveOnly: false,
+    };
+  },
+  mounted() {
+    this.getStudents();
+  },
+  methods: {
+    getStudents() {
+      axios
+        .get("http://localhost:8080/api/superfrogstudents")
+        .then((response) => {
+          this.students = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    mounted() {
-      this.getStudents();
+    toggleStudentStatus(student) {
+      const url = `http://localhost:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
+      const token = localStorage.getItem('token');
+      const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+      axios
+        .put(url, {}, { headers })
+        .then((response) => {
+          console.log(response.data)
+          this.getStudents();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    methods: {
-      getStudents() {
-        axios
-          .get("http://localhost:8080/api/superfrogstudents")
-          .then((response) => {
-            this.students = response.data.data;
-            console.log (response.data.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      },
-      toggleStudentStatus(student) {
-        const url = `http://localhost:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
-        const token = localStorage.getItem('token');
-        console.log(token);
-        const headers = {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-        axios
-          .put(url, {}, { headers })
-          .then((response) => {
-            console.log(response.data)
-            this.getStudents();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        },
-    },
-    computed: {
-      computedStudents() {
+  },
+  computed: {
+    computedStudents() {
+      if (this.showActiveOnly) {
+        return this.students.filter(student => student.active);
+      } else {
         return this.students;
-      },
+      }
     },
-  };
-  </script>
-  
+  },
+};
+</script>
