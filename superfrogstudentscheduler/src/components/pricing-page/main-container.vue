@@ -166,7 +166,9 @@ body {
  }
  table {
   border-collapse: collapse;
+  margin: auto;
 }
+
 
 table th, table td {
   border: 1px solid black;

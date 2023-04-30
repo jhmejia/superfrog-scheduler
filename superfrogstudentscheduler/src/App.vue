@@ -102,7 +102,7 @@ body {
 
 .login-text {
     position: absolute;
-    left: 35.5%;
+    left: 32.5%;
     bottom: 80px;
 }
 
