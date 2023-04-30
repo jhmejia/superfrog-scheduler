@@ -1,150 +1,163 @@
+<!-- <template>
+    <div>
+        <form @submit.prevent="saveChanges">
+            <div>
+                <label for="firstName">First Name</label>
+                <input type="text" v-model="superFrog.firstName" id="firstName" required />
+            </div>
+            <div>
+                <label for="lastName">Last Name</label>
+                <input type="text" v-model="superFrog.lastName" id="lastName" required />
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" v-model="superFrog.email" id="email" required />
+            </div>
+            <div>
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" v-model="superFrog.phoneNumber" id="phoneNumber" />
+            </div>
+            <div>
+                <label for="status">Active Status:</label>
+                <select id="status" v-model="superFrog.active">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</template> -->
 <template>
     <div>
-        <h1>Edit Superfrog Profile</h1>
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <label for="firstName">First Name:</label>
-                    </td>
-                    <td>
-                        <input type="text" id="firstName" v-model="superfrog.firstName" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="lastName">Last Name:</label>
-                    </td>
-                    <td>
-                        <input type="text" id="lastName" v-model="superfrog.lastName" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="email">Email:</label>
-                    </td>
-                    <td>
-                        <input type="email" id="email" v-model="superfrog.email" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="phoneNumber">Phone Number:</label>
-                    </td>
-                    <td>
-                        <input type="tel" id="phoneNumber" v-model="superfrog.phoneNumber" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="status">Status:</label>
-                    </td>
-                    <td>
-                        <select id="status" v-model="superfrog.status" required>
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit" @click="updateSuperfrog()">Save Changes</button>
+      <form @submit.prevent="saveChanges">
+        <div>
+          <label for="firstName">First Name</label>
+          <input type="text" v-model="superFrog.firstName" id="firstName" required />
+        </div>
+        <div>
+          <label for="lastName">Last Name</label>
+          <input type="text" v-model="superFrog.lastName" id="lastName" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" v-model="superFrog.email" id="email" required />
+        </div>
+        <div>
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" v-model="superFrog.phoneNumber" id="phoneNumber" />
+        </div>
+        <div>
+          <label for="status">Active Status:</label>
+          <select id="status" v-model="superFrog.active">
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+          </select>
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
     </div>
-</template>
+  </template>
   
 <script>
 import axios from "axios";
 
 export default {
-    name: "EditSuperfrogProfile",
+    name: "EditProfile",
     data() {
         return {
-            superfrog: {
-                firstName: "",
-                lastName: "",
-                email: "",
-                phoneNumber: "",
-                status: ""
-            }
+            superFrog: {},
         };
     },
     mounted() {
-        this.getSuperfrog();
+        this.getSuperFrog();
     },
     methods: {
-        getSuperfrog() {
-            const id = this.$route.params.id; // get Superfrog ID from route parameters
+        getSuperFrog() {
+            const token = localStorage.getItem("token");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            };
+            const email = localStorage.getItem("superfrogEmail");
+
             axios
-                .get(`http://localhost:8080/api/superfrogstudents/${id}`)
+                .get(`http://localhost:8080/api/superfrogstudents?email=${email}`, {
+                    headers,
+                })
                 .then((response) => {
-                    this.superfrog = response.data.data;
-                    console.log(response.data.data);
+                    this.superFrog = response.data.data[0];
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
-        updateSuperfrog() {
-        const token = localStorage.getItem("token");
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        };
+        saveChanges() {
+            const token = localStorage.getItem("token");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            };
+            const id = this.superFrog.id;
 
-        const superfrogId = this.superfrog.id; // assuming you have the ID of the Superfrog
-
-        axios
-            .put(
-                `http://localhost:8080/api/superfrogstudents/${superfrogId}`,
-                this.superfrog,
-                { headers }
-            )
-            .then((response) => {
-                console.log(response.data);
-                // handle success
-            })
-            .catch((error) => {
-                console.log(error);
-                // handle error
-            });
+            axios
+                .put(`http://localhost:8080/api/superfrogstudents/${id}`, this.superFrog, {
+                    headers,
+                })
+                .then((response) => {
+                    console.log(response.data.data);
+                    // Redirect to profile page or show success message
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
 };
 </script>
-  
 <style scoped>
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
-td {
-    padding: 10px;
-    border: 1px solid #ddd;
+div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
-td:first-child {
-    width: 30%;
+label {
+  margin-bottom: 5px;
 }
 
-input,
+input[type="text"],
+input[type="email"],
 select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #4d2279;
+  color: #fff;
+  border: none;
+  width: 100%;
+  margin-top: 10px;
+  box-sizing: border-box;
 }
-</style>  
+
+@media only screen and (min-width: 600px) {
+  form {
+    max-width: 500px;
+  }
+}
+</style>
