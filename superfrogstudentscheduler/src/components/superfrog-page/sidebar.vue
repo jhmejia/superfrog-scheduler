@@ -24,6 +24,9 @@
         <div class="sub-section" @click="selectSection('view-students')">
           View SuperFrog All Students
         </div>
+        <div class="sub-section" @click="selectSection('edit-profile')">
+          Edit SuperFrog Profile
+        </div>
       </div>
 
       <div class="section-header" @click="toggleSection('requests')">
