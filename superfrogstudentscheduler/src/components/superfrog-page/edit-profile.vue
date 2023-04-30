@@ -47,13 +47,13 @@
           <label for="phoneNumber">Phone Number</label>
           <input type="text" v-model="superFrog.phoneNumber" id="phoneNumber" />
         </div>
-        <div>
+        <!-- <div>
           <label for="status">Active Status:</label>
           <select id="status" v-model="superFrog.active">
             <option value="true">Active</option>
             <option value="false">Inactive</option>
           </select>
-        </div>
+        </div> -->
         <button type="submit">Save Changes</button>
       </form>
     </div>
