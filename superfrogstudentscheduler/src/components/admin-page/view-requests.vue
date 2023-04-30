@@ -140,15 +140,25 @@ export default {
           console.log(error);
         });
     },
-    assignSuperFrog(requestId,superfrogId) {
+    assignSuperFrog(requestId, superfrogId) {
+      const request = this.requests.find(request => request.requestId === requestId);
+      if (request.status !== 'APPROVED') {
+        console.log('Cannot assign SuperFrog to request with status', request.status);
+        return;
+      }
+
       const token = localStorage.getItem("token");
       const headers = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       };
+
       axios
-        .put(`http://localhost:8080/api/superfrogstudents/${superfrogId}/assign/superfrogappearancerequests/${requestId}`, {
-        }, { headers})
+        .put(
+          `http://localhost:8080/api/superfrogstudents/${superfrogId}/assign/superfrogappearancerequests/${requestId}`,
+          {},
+          { headers }
+        )
         .then((response) => {
           console.log(response.data.data);
           this.getRequests();
