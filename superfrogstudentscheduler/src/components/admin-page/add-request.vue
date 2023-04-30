@@ -1,6 +1,4 @@
 <template>
-
-    
     <form @submit.prevent="addRequest">
         <!-- eventtype, address, milage, eventDate, startTime, endTime -->
         <label for="eventType">Event Type:</label><br />
@@ -99,11 +97,25 @@
         <input type="text" id="expenses" name="expenses" v-model="expenses" />
         <br />
 
+        <label for="superfrogs-select">Select an Active SuperFrog:</label>
+
+        <select
+            v-if="superfrogs.length"
+            id="superfrogs-select"
+            name="superfrog"
+            v-model="superfrogId"
+        >
+            <option value="None">Select a SuperFrog</option>
+            <option v-for="superfrog in superfrogs" :value="superfrog.id">
+                {{ superfrog.name }}
+            </option>
+        </select>
 
         <input type="submit" value="Submit" />
     </form>
 
-    <p v-if="successMessage">{{ successMessage }}</p>   
+    <p v-if="successMessage">{{ successMessage }}</p>
+    <p v-if="superfrogSuccessMessage">{{ superfrogSuccessMessage }}</p>
 </template>
 
 <script>
@@ -131,7 +143,34 @@ export default {
             outsideOrgs: "None",
             expenses: "None",
             successMessage: "",
+
+            superfrogs: [],
+            superfrogId: null,
+            requestId: null,
         };
+    },
+    mounted() {
+        console.log("AddRequest.vue mounted");
+        axios
+            .get("http://localhost:8080/api/superfrogstudents/active", )
+            .then((response) => {
+                console.log(response.data);
+
+                //Get first name and last name of each superfrog
+                const superfrogs = response.data.data.map((superfrog) => {
+                    return {
+                        id: superfrog.id,
+                        name: superfrog.firstName + " " + superfrog.lastName,
+                    };
+                });
+
+                this.superfrogs = superfrogs;
+
+                console.log(this.superfrogs);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     },
     methods: {
         addRequest() {
@@ -140,6 +179,7 @@ export default {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             };
+
             axios
                 .post(
                     "http://localhost:8080/api/superfrogappearancerequests",
@@ -167,12 +207,43 @@ export default {
                 .then((response) => {
                     console.log(response.data);
                     this.successMessage = "Request added successfully!";
+                    this.requestId = response.data.data.requestId;
+                    console.log("Request id is ");
+                    console.log(this.requestId);
                 })
                 .catch((error) => {
                     console.log(error);
                     this.successMessage =
                         "Request not added successfully- please try again";
                 });
+
+                //Assign superfrog to request (if selected)
+
+
+                if (this.superfrogId) {
+                    axios
+                        .put(
+                            `http://localhost:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
+                            
+                            {
+                                superfrogId: this.superfrogId,
+                                requestId: this.requestId,
+                                
+
+                            },
+                            { headers }
+                        )
+                        .then((response) => {
+                            console.log(response.data);
+                            this.superfrogSuccessMessage =
+                                "SuperFrog assigned successfully!";
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            this.superfrogSuccessMessage =
+                                "SuperFrog not assigned successfully- please try again";
+                        });
+                }
         },
     },
 };
@@ -180,36 +251,36 @@ export default {
 
 <style>
 form {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  padding: 2px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    padding: 2px;
 }
 
 label {
-  font-size: 1.2em;
+    font-size: 1.2em;
 }
 
 input[type="text"] {
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1.2em;
-  border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
 }
 
 input[type="submit"] {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1.2em;
-  cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
-  background-color: #3e8e41;
+    background-color: #3e8e41;
 }
 </style>
