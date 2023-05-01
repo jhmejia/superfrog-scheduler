@@ -55,11 +55,6 @@
 import axios from "axios";
 import EditRequest from "./edit-request.vue";
 
-//Call get requests every 5 seconds
-setInterval(() => {
-  this.getRequests();
-}, 100);
-
 export default {
   components: {
     EditRequest,
@@ -71,10 +66,13 @@ export default {
       superfrogs: [],
       superfrogId: null,
       currentRequestId: null,
+      selectedFilter: null,
     };
   },
   mounted() {
-    this.getRequests();
+    setInterval(() => {
+      this.getRequests();
+    }, 100);
     axios
       .get("http://localhost:8080/api/superfrogstudents/active",)
       .then((response) => {
