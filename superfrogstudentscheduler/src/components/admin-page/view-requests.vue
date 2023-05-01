@@ -1,4 +1,15 @@
 <template>
+
+  <!-- Editing a request. Hidden by default, unless they click.-->
+
+  <div v-if="currentRequestId">
+    <h2> Editing Request {{ currentRequestId }} </h2>
+    
+    <edit-request></edit-request>
+    <button @click="currentRequestId = null">Close</button>
+  </div>
+
+  <!-- Show all requests-->
   <div>
     <label for="filter">Status:</label>
     <select id="filter" v-model="selectedFilter" @change="getRequests">
@@ -7,7 +18,7 @@
       <option value="PENDING">Pending</option>
       <option value="REJECTED">Rejected</option>
     </select>
-<p id="requests">Requests</p>
+
 <table>
   <thead>
     <tr>
@@ -31,6 +42,7 @@
       <td>
         <button @click="approveRequest(request)">Approve</button>
         <button @click="rejectRequest(request)">Reject</button>
+        <button @click="editRequest(request.requestId)">Edit Request</button>
       </td>
     </tr>
   </tbody>
@@ -40,12 +52,17 @@
 
 <script>
 import axios from "axios";
+import EditRequest from "./edit-request.vue";
 
 export default {
+  components: {
+    EditRequest,
+  },
   name: "ViewRequests",
   data() {
     return {
       requests: [],
+      currentRequestId: null,
     };
   },
   mounted() {
@@ -101,6 +118,18 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    editRequest(requestId) {
+      //Store request id in local storage
+      localStorage.setItem("requestId", requestId);
+      //Have the parent component (AdminPage) invoke the edit request modal
+      
+      console.log(requestId)
+      // Emit an event with the request ID as a payload
+      this.currentRequestId = requestId;
+
+
+
     },
   },
   computed: {

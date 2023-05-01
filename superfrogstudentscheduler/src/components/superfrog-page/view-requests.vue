@@ -11,6 +11,7 @@
                     <th>Request Status</th>
                     <th>Assigned SuperFrog</th>
                     <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +38,13 @@
                             Sign-Up
                         </button>
                         <!-- <button @click="rejectRequest(request)">Reject</button> -->
+
+                        <button @click="editRequest(request.requestId)">
+                            Edit Request
+                        </button>
+
                     </td>
+
                 </tr>
             </tbody>
         </table>
@@ -126,7 +133,9 @@ export default {
                     console.log(error);
                 });
         },
+        
     },
+
     computed: {
         computedRequests() {
             return this.requests.filter(
