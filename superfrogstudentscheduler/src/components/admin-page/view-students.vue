@@ -50,7 +50,7 @@ export default {
   methods: {
     getStudents() {
       axios
-        .get("http://localhost:8080/api/superfrogstudents")
+        .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents")
         .then((response) => {
           this.students = response.data.data;
         })
@@ -59,7 +59,7 @@ export default {
         });
     },
     toggleStudentStatus(student) {
-      const url = `http://localhost:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
+      const url = `http://api.superfrogscheduler.xyz:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
       const token = localStorage.getItem('token');
       const headers = {
         'Authorization': `Bearer ${token}`,

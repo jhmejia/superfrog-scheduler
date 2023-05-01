@@ -64,7 +64,7 @@ export default {
     methods: {
         getRequests() {
             axios
-                .get("http://localhost:8080/api/superfrogappearancerequests")
+                .get("http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests")
                 .then((response) => {
                     this.requests = response.data.data;
                     console.log(response.data.data);
@@ -75,7 +75,7 @@ export default {
         },
         getStudents() {
             axios
-                .get("http://localhost:8080/api/superfrogstudents")
+                .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents")
                 .then((response) => {
                     this.students = response.data.data;
                     console.log(response.data.data);
@@ -96,7 +96,7 @@ export default {
 
             //Get all superfrog students
             axios
-                .get("http://localhost:8080/api/superfrogstudents")
+                .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents")
                 .then((response) => {
                     for (let i = 0; i < response.data.data.length; i++) {
                         if (response.data.data[i].email === superfrogEmail) {
@@ -112,7 +112,7 @@ export default {
 
                     axios
                         .put(
-                            `http://localhost:8080/api/superfrogstudents/${superFrogId}/assign/superfrogappearancerequests/${requestId}`,
+                            `http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/${superFrogId}/assign/superfrogappearancerequests/${requestId}`,
                             {
                                 status: "APPROVED",
                             },  { headers }
@@ -142,7 +142,7 @@ export default {
 
         //Get all superfrog students
         axios
-            .get("http://localhost:8080/api/superfrogstudents")
+            .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents")
             .then((response) => {
                 for (let i = 0; i < response.data.data.length; i++) {
                     if (response.data.data[i].email === superfrogEmail) {
@@ -158,7 +158,7 @@ export default {
 
                 axios
                     .put(
-                        `http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
+                        `http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
                         null,  { headers }
                     )
                     .then((response) => {

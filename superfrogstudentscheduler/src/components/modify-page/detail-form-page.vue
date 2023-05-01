@@ -148,7 +148,7 @@ export default {
       const headers = {
                 'Content-Type': 'application/json'
              }
-              axios.put(`http://206.189.255.67:8080/api/superfrogappearancerequests/${this.requestId}`, {
+              axios.put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`, {
                     contactFirstName: this.requests.contactFirstName,
                     contactLastName: this.requests.contactLastName,
                     email: this.requests.email,
@@ -178,7 +178,7 @@ export default {
   
 },
 mounted(){
-   axios.get(`http://206.189.255.67:8080/api/superfrogappearancerequests/${this.requestId}`)
+   axios.get(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`)
            .then((response)  => {
             
               this.requests = response.data.data;
