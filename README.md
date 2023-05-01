@@ -8,7 +8,7 @@ This is the readme
 - [@JHMejia](https://github.com/jhmejia)
 - [@joeyaflores](https://github.com/joeyaflores)
 - [@cuirassier659](https://github.com/cuirassier659)
-- [@mann1652](https://github.com/mann1652)
+- [@mann1562](https://github.com/mann1562)
 - [@tydonnelly11](https://github.com/tydonnelly11)
 
 
