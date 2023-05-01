@@ -16,6 +16,7 @@
       <option value="">All</option>
       <option value="APPROVED">Approved</option>
       <option value="PENDING">Pending</option>
+      <option value="COMPLETED">Completed</option>
       <option value="REJECTED">Rejected</option>
     </select>
 
@@ -62,11 +63,33 @@ export default {
   data() {
     return {
       requests: [],
+      superfrogs: [],
+      superfrogId: null,
       currentRequestId: null,
     };
   },
   mounted() {
     this.getRequests();
+    axios
+      .get("http://localhost:8080/api/superfrogstudents/active",)
+      .then((response) => {
+        console.log(response.data);
+
+        //Get first name and last name of each superfrog
+        const superfrogs = response.data.data.map((superfrog) => {
+          return {
+            id: superfrog.id,
+            name: superfrog.firstName + " " + superfrog.lastName,
+          };
+        });
+
+        this.superfrogs = superfrogs;
+
+        console.log(this.superfrogs);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
   methods: {
     getRequests() {
@@ -75,19 +98,19 @@ export default {
         url += `/status/${this.selectedFilter}`;
       }
       axios
-      .get(url)
-      .then((response) => {
-        if (this.selectedFilter) {
-          this.requests = response.data.data.filter(
-            (request) => request.status === this.selectedFilter
-          );
-        } else {
-          this.requests = response.data.data;
-        }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+        .get(url)
+        .then((response) => {
+          if (this.selectedFilter) {
+            this.requests = response.data.data.filter(
+              (request) => request.status === this.selectedFilter
+            );
+          } else {
+            this.requests = response.data.data;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
     },
     approveRequest(request) {
@@ -119,6 +142,32 @@ export default {
           console.log(error);
         });
     },
+    assignSuperFrog(requestId, superfrogId) {
+      const request = this.requests.find(request => request.requestId === requestId);
+      if (request.status !== 'APPROVED') {
+        console.log('Cannot assign SuperFrog to request with status', request.status);
+        return;
+      }
+      const token = localStorage.getItem("token");
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      };
+
+      axios
+        .put(
+          `http://localhost:8080/api/superfrogstudents/${superfrogId}/assign/superfrogappearancerequests/${requestId}`,
+          {},
+          { headers }
+        )
+        .then((response) => {
+          console.log(response.data.data);
+          this.getRequests();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     editRequest(requestId) {
       //Store request id in local storage
       localStorage.setItem("requestId", requestId);
@@ -139,3 +188,29 @@ export default {
   },
 };
 </script>
+<style scoped>
+.container {
+  width: 80vw;
+  height: 70vh;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>

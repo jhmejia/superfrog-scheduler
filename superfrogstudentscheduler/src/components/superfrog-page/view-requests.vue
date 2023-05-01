@@ -37,12 +37,9 @@
                         <button @click="approveRequest(request.requestId)">
                             Sign-Up
                         </button>
-                        <!-- <button @click="rejectRequest(request)">Reject</button> -->
-
-                        <button @click="editRequest(request.requestId)">
-                            Edit Request
+                        <button v-if="request.status === 'APPROVED'" @click="completeRequest(request.requestId)">
+                            Completed
                         </button>
-
                     </td>
 
                 </tr>
@@ -133,7 +130,50 @@ export default {
                     console.log(error);
                 });
         },
-        
+        completeRequest(requestId) {
+        const token = localStorage.getItem("token");
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        };
+        // TODO: Implement complete request functionality
+        const superfrogEmail = localStorage.getItem("superfrogEmail");
+        let superFrogId = "";
+
+        //Get all superfrog students
+        axios
+            .get("http://localhost:8080/api/superfrogstudents")
+            .then((response) => {
+                for (let i = 0; i < response.data.data.length; i++) {
+                    if (response.data.data[i].email === superfrogEmail) {
+                        superFrogId = response.data.data[i].id;
+                        console.log("Superfrog id is ");
+                        console.log(this.superFrogId);
+                        console.log("Request id is ");
+                        console.log(requestId);
+
+                        break;
+                    }
+                }
+
+                axios
+                    .put(
+                        `http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
+                        null,  { headers }
+                    )
+                    .then((response) => {
+                        this.requests = response.data.data;
+                        console.log(response.data.data);
+                        this.getRequests();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     },
 
     computed: {
@@ -145,3 +185,24 @@ export default {
     },
 };
 </script>
+<style scoped>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+</style>

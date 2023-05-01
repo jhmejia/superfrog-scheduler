@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <p id="view-students"> Students </p>
     <label>
       <input type="checkbox" v-model="showActiveOnly"> Show active students only
@@ -87,3 +87,28 @@ export default {
   },
 };
 </script>
+<style scoped>
+.container {
+  height: 71vh;
+  width: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+</style>

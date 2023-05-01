@@ -108,24 +108,24 @@ export default {
 
 <style scoped>
 .login-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  margin-bottom: 20px;
 }
 
 .form-group {
@@ -165,7 +165,7 @@ button {
     cursor: pointer;
     border-radius: 40px;
     display: inline-block;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 
 .btn-primary {
@@ -189,7 +189,6 @@ button {
 .login-buttons {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px; /* add margin to bottom to create space between the two button groups */
 }
 
 .home {

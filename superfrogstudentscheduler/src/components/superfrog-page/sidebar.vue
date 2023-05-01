@@ -24,6 +24,9 @@
         <div class="sub-section" @click="selectSection('view-students')">
           View SuperFrog All Students
         </div>
+        <div class="sub-section" @click="selectSection('edit-profile')">
+          Edit SuperFrog Profile
+        </div>
       </div>
 
       <div class="section-header" @click="toggleSection('requests')">
@@ -97,7 +100,7 @@ export default {
 
 <style scoped>
   .sidebar {
-    width: 450px;
+    width: 300px;
     background-color: #4d2279;
     padding: 20px;
   }
@@ -108,7 +111,7 @@ export default {
   }
   
   .section-header {
-    font-size: 32px;
+    font-size: 19px;
     margin-top: 50px;
     font-weight: bold;
     cursor: pointer;
@@ -125,7 +128,7 @@ export default {
     cursor: pointer;
   }
   .superfrog-img{
-    width: 150px;
-    margin-left: 125px;
+    width: 120px;
+    margin-left: 65px;
   }
   </style>
