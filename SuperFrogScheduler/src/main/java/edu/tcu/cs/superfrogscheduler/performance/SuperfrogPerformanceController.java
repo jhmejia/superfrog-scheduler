@@ -3,6 +3,8 @@ package edu.tcu.cs.superfrogscheduler.performance;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.RequestStatus;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudentService;
+import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
+import edu.tcu.cs.superfrogscheduler.system.Result;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +24,11 @@ public class SuperfrogPerformanceController {
     }
 
     @GetMapping("/superfrogstudents/{studentId}/")
-    public ResponseEntity<Integer> getSuperfrogPerformance(@PathVariable RequestStatus status, @PathVariable Integer studentId) {
+    public Result getSuperfrogPerformance(@PathVariable RequestStatus status, @PathVariable Integer studentId) {
         SuperFrogStudent student = superFrogStudentService.findById(studentId);
         int completedRequests = superfrogPerformanceService.getCompletedRequests(status, student);
-        return ResponseEntity.ok(completedRequests);
+        return new Result(true, HttpStatusCode.SUCCESS, "Count Success", completedRequests);
+
     }
 }
 
