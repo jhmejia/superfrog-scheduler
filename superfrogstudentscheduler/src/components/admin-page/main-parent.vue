@@ -39,8 +39,8 @@
   .container {
     display: flex;
     flex-direction: row;
-    height: auto;
-    width: auto;
+    height: 100vh;
+    width: 100vw;
     background-color: white;
     color: black;
   }

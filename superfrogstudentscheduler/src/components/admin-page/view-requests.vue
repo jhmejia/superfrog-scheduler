@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <label for="filter">Status:</label>
     <select id="filter" v-model="selectedFilter" @change="getRequests">
       <option value="">All</option>
@@ -8,49 +8,44 @@
       <option value="COMPLETED">Completed</option>
       <option value="REJECTED">Rejected</option>
     </select>
-<p id="requests">Requests</p>
-<table>
-  <thead>
-    <tr>
-      <th>Request ID</th>
-      <th>Customer Name</th>
-      <th>Event Date</th>
-      <th>Event Title</th>
-      <th>Request Status</th>
-      <th>Assigned SuperFrog</th>
-      <th>Action</th>
-      <th>Reassignment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="request in computedRequests" :key="request.id">
-      <td>{{ request.requestId }}</td>
-      <td>{{ request.contactFirstName }} {{ request.contactLastName }}</td>
-      <td>{{ request.eventDate }}</td>
-      <td>{{ request.title }}</td>
-      <td>{{ request.status }}</td>
-      <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
-      <td>
-        <button @click="approveRequest(request)">Approve</button>
-        <button @click="rejectRequest(request)">Reject</button>
-      </td>
-      <td>
-        <select
-              v-if="superfrogs.length"
-              id="superfrogs-select"
-              name="superfrog"
-              v-model="request.superfrogId"
-              @change="assignSuperFrog(request.requestId, request.superfrogId)"
-            >
+    <p id="requests">Requests</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Customer Name</th>
+          <th>Event Date</th>
+          <th>Event Title</th>
+          <th>Request Status</th>
+          <th>Assigned SuperFrog</th>
+          <th>Action</th>
+          <th>Reassignment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="request in computedRequests" :key="request.id">
+          <td>{{ request.requestId }}</td>
+          <td>{{ request.contactFirstName }} {{ request.contactLastName }}</td>
+          <td>{{ request.eventDate }}</td>
+          <td>{{ request.title }}</td>
+          <td>{{ request.status }}</td>
+          <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
+          <td>
+            <button @click="approveRequest(request)">Approve</button>
+            <button @click="rejectRequest(request)">Reject</button>
+          </td>
+          <td>
+            <select v-if="superfrogs.length" id="superfrogs-select" name="superfrog" v-model="request.superfrogId"
+              @change="assignSuperFrog(request.requestId, request.superfrogId)">
               <option value="">Select a SuperFrog</option>
               <option v-for="superfrog in superfrogs" :value="superfrog.id">
                 {{ superfrog.name }}
               </option>
             </select>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -69,25 +64,25 @@ export default {
   mounted() {
     this.getRequests();
     axios
-            .get("http://localhost:8080/api/superfrogstudents/active", )
-            .then((response) => {
-                console.log(response.data);
+      .get("http://localhost:8080/api/superfrogstudents/active",)
+      .then((response) => {
+        console.log(response.data);
 
-                //Get first name and last name of each superfrog
-                const superfrogs = response.data.data.map((superfrog) => {
-                    return {
-                        id: superfrog.id,
-                        name: superfrog.firstName + " " + superfrog.lastName,
-                    };
-                });
+        //Get first name and last name of each superfrog
+        const superfrogs = response.data.data.map((superfrog) => {
+          return {
+            id: superfrog.id,
+            name: superfrog.firstName + " " + superfrog.lastName,
+          };
+        });
 
-                this.superfrogs = superfrogs;
+        this.superfrogs = superfrogs;
 
-                console.log(this.superfrogs);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        console.log(this.superfrogs);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
   methods: {
     getRequests() {
@@ -96,19 +91,19 @@ export default {
         url += `/status/${this.selectedFilter}`;
       }
       axios
-      .get(url)
-      .then((response) => {
-        if (this.selectedFilter) {
-          this.requests = response.data.data.filter(
-            (request) => request.status === this.selectedFilter
-          );
-        } else {
-          this.requests = response.data.data;
-        }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+        .get(url)
+        .then((response) => {
+          if (this.selectedFilter) {
+            this.requests = response.data.data.filter(
+              (request) => request.status === this.selectedFilter
+            );
+          } else {
+            this.requests = response.data.data;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
     },
     approveRequest(request) {
@@ -176,12 +171,17 @@ export default {
 };
 </script>
 <style scoped>
+.container {
+  width: 80vw;
+  height: 70vh;
+}
 table {
   border-collapse: collapse;
   width: 100%;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 8px;
 }
@@ -189,10 +189,10 @@ th, td {
 th {
   background-color: #4CAF50;
   color: white;
+  text-align: center;
 }
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
 </style>
