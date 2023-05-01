@@ -60,10 +60,8 @@
       <span><input type="text" class="normal-text" v-model="eventInfo.nameOfOrganization" @input="updateParent"></span>
     </div>
     <div>
-      <span style="display: inline;">Address of Appearance </span>
-      <span><input placeholder="street, suite/room/floor, city, state, postal code" type="text" class="normal-text" v-model="eventInfo.addressOfAppearance" @input="updateParent"></span>
-      <button class="addyButton"  @click="getAddressDifference">Check Address</button>
-      <span v-show="this.eventInfo.milage > 100">You have entered an address out of range</span>
+      <span style="display: inline;">Address of Appearance</span>
+      <span><input placeholder="(street, suite/room/floor, city, state, postal code" type="text" class="normal-text" v-model="eventInfo.addressOfAppearance" @input="updateParent"></span>
     </div>
   </div>
     
@@ -92,10 +90,8 @@
     
 
 </template>
-<script>
-import { Loader } from '@googlemaps/js-api-loader';
-import axios from 'axios'
 
+<script>
 export default {
   name: 'DetailFormPage',
   props: {
@@ -120,12 +116,7 @@ export default {
         startTime: this.eventInfo.startTime,
         endTime: this.eventInfo.endTime,
         eventType: this.eventInfo.eventType,
-        dropdownValues: ['TCU', 'PUBLIC', 'PRIVATE'],
-        loader: new Loader({
-          apiKey: 'AIzaSyB30iSOz9MXYEQdoFtybpeHb93_GvLEWg8',
-          version: "weekly",
-          libraries: ["routes"]
-        }),
+        dropdownValues: ['TCU', 'PUBLIC', 'PRIVATE']
     }
     
 
@@ -136,25 +127,8 @@ export default {
       eventInfo: this.eventInfo,
         
       });
-  },
-  getAddressDifference() {
-      
-    this.loader.loadCallback(() => {
-      new google.maps.DirectionsService().route({
-            origin: "2800 S University Dr, Fort Worth, TX 76109",
-            destination : `${this.eventInfo.addressOfAppearance}`,
-            travelMode: "DRIVING",
-            avoidTolls: true,
-            unitSystem: google.maps.UnitSystem.IMPERIAL,
-            region: "us"
-           }).then((response) => {this.eventInfo.milage = parseFloat(response.routes[0].legs[0].distance.text)})
-           
-    });
-    
-    }
   }
-
-,
+},
 computed: {
     
   }
@@ -225,11 +199,7 @@ margin-bottom: 2vh;
 flex-basis: 100%;
 justify-content: center;
 }
-.addyButton{
-  background-color: #4d2279;
-  color: white;
-  border: solid white 1px;
-}
+
 
 .contact-info {
 font-size: 1.2em;
