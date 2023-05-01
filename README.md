@@ -24,6 +24,24 @@ This is the readme
 To be made...
 
 
+## Usage
+Go to https://superfrogscheduler.xyz/
+Be sure to go to settings and enable unsafe content for this website
+
+Alternatively, you can host it yourself. 
+
+Backend:
+- Install jdk 19 or greater
+- cd into SuperFrogScheduler folder
+- ./mvnw spring-boot:run
+- It should be running on localhost:8080. 
+
+Frontend:
+- Install node js
+- cd into superfrogstudentscheduler
+- npm install
+- npm run build
+- npm start
 
 
 
