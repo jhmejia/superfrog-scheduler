@@ -288,6 +288,9 @@ export default {
                                 "SuperFrog not assigned successfully- please try again";
                         });
                 }
+
+                // call get requests method in view requests component
+                this.$emit("getRequests");
         },
     },
 };
