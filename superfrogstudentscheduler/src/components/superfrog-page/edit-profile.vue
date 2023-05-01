@@ -55,7 +55,7 @@ export default {
             const email = localStorage.getItem("superfrogEmail");
 
             axios
-                .get(`http://localhost:8080/api/superfrogstudents?email=${email}`, {
+                .get(`http://api.superfrogscheduler.xyz:8080/api/superfrogstudents?email=${email}`, {
                     headers,
                 })
                 .then((response) => {
@@ -74,7 +74,7 @@ export default {
             const id = this.superFrog.id;
 
             axios
-                .put(`http://localhost:8080/api/superfrogstudents/${id}`, this.superFrog, {
+                .put(`http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/${id}`, this.superFrog, {
                     headers,
                 })
                 .then((response) => {
