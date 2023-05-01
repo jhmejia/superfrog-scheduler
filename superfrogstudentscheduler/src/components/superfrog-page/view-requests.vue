@@ -11,7 +11,7 @@
                     <th>Request Status</th>
                     <th>Assigned SuperFrog</th>
                     <th>Action</th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +27,10 @@
                     <td>
                         {{
                             request.student
-                                ? request.student.firstName +
-                                  " " +
-                                  request.student.lastName
-                                : "None"
+                            ? request.student.firstName +
+                            " " +
+                            request.student.lastName
+                            : "None"
                         }}
                     </td>
                     <td>
@@ -40,6 +40,10 @@
                         <button v-if="request.status === 'APPROVED'" @click="completeRequest(request.requestId)">
                             Completed
                         </button>
+                        <button v-if="request.status === 'APPROVED'" @click="cancelRequest(request.requestId)">
+                            Cancel
+                        </button>
+
                     </td>
 
                 </tr>
@@ -115,7 +119,7 @@ export default {
                             `http://localhost:8080/api/superfrogstudents/${superFrogId}/assign/superfrogappearancerequests/${requestId}`,
                             {
                                 status: "APPROVED",
-                            },  { headers }
+                            }, { headers }
                         )
                         .then((response) => {
                             this.requests = response.data.data;
@@ -131,49 +135,92 @@ export default {
                 });
         },
         completeRequest(requestId) {
-        const token = localStorage.getItem("token");
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        };
-        // TODO: Implement complete request functionality
-        const superfrogEmail = localStorage.getItem("superfrogEmail");
-        let superFrogId = "";
+            const token = localStorage.getItem("token");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            };
+            // TODO: Implement complete request functionality
+            const superfrogEmail = localStorage.getItem("superfrogEmail");
+            let superFrogId = "";
 
-        //Get all superfrog students
-        axios
-            .get("http://localhost:8080/api/superfrogstudents")
-            .then((response) => {
-                for (let i = 0; i < response.data.data.length; i++) {
-                    if (response.data.data[i].email === superfrogEmail) {
-                        superFrogId = response.data.data[i].id;
-                        console.log("Superfrog id is ");
-                        console.log(this.superFrogId);
-                        console.log("Request id is ");
-                        console.log(requestId);
+            //Get all superfrog students
+            axios
+                .get("http://localhost:8080/api/superfrogstudents")
+                .then((response) => {
+                    for (let i = 0; i < response.data.data.length; i++) {
+                        if (response.data.data[i].email === superfrogEmail) {
+                            superFrogId = response.data.data[i].id;
+                            console.log("Superfrog id is ");
+                            console.log(this.superFrogId);
+                            console.log("Request id is ");
+                            console.log(requestId);
 
-                        break;
+                            break;
+                        }
                     }
-                }
 
-                axios
-                    .put(
-                        `http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
-                        null,  { headers }
-                    )
-                    .then((response) => {
-                        this.requests = response.data.data;
-                        console.log(response.data.data);
-                        this.getRequests();
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
+                    axios
+                        .put(
+                            `http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
+                            null, { headers }
+                        )
+                        .then((response) => {
+                            this.requests = response.data.data;
+                            console.log(response.data.data);
+                            this.getRequests();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        cancelRequest(requestId) {
+            const token = localStorage.getItem("token");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            };
+            // TODO: Implement cancel request functionality
+            const superfrogEmail = localStorage.getItem("superfrogEmail");
+            let superFrogId = "";
+
+            //Get all superfrog students
+            axios
+                .get("http://localhost:8080/api/superfrogstudents")
+                .then((response) => {
+                    for (let i = 0; i < response.data.data.length; i++) {
+                        if (response.data.data[i].email === superfrogEmail) {
+                            superFrogId = response.data.data[i].id;
+                            console.log("Superfrog id is ");
+                            console.log(this.superFrogId);
+                            console.log("Request id is ");
+                            console.log(requestId);
+
+                            break;
+                        }
+                    }
+                    axios
+                        .put(`http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/CANCELLED`,
+                            null, { headers }
+                        )
+                        .then((response) => {
+                            this.requests = response.data.data;
+                            console.log(response.data.data);
+                            this.getRequests();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
     },
 
     computed: {
@@ -187,22 +234,22 @@ export default {
 </script>
 <style scoped>
 table {
-  border-collapse: collapse;
-  width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-th, td {
-  text-align: left;
-  padding: 8px;
+th,
+td {
+    text-align: left;
+    padding: 8px;
 }
 
 th {
-  background-color: #4CAF50;
-  color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
-
 </style>
