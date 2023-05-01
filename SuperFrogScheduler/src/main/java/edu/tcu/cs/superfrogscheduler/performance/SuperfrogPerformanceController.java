@@ -23,10 +23,10 @@ public class SuperfrogPerformanceController {
         this.superFrogStudentService = superFrogStudentService;
     }
 
-    @GetMapping("/superfrogstudents/{studentId}/")
-    public Result getSuperfrogPerformance(@PathVariable RequestStatus status, @PathVariable Integer studentId) {
+    @GetMapping("/superfrogstudents/{studentId}")
+    public Result getSuperfrogPerformance(@PathVariable Integer studentId) {
         SuperFrogStudent student = superFrogStudentService.findById(studentId);
-        int completedRequests = superfrogPerformanceService.getCompletedRequests(status, student);
+        int completedRequests = superfrogPerformanceService.getCompletedRequests(RequestStatus.COMPLETED, student);
         return new Result(true, HttpStatusCode.SUCCESS, "Count Success", completedRequests);
 
     }

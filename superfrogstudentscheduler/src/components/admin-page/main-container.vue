@@ -24,7 +24,7 @@
             
             
             <view-requests v-if="currentRequestEdit === null"></view-requests>
-            <edit-request v-else></edit-request>
+            <!-- <edit-request v-else></edit-request>-->
             <edit-request v-else @editRequest="editRequest"></edit-request>
 
 
@@ -38,6 +38,7 @@
         </div>
         <div class="text" v-if="section === 'view-reports'">
             <!-- Display reports here -->
+            <view-reports></view-reports>
         </div>
     </div>
 </template>
@@ -49,7 +50,8 @@ import ViewRequests from "./view-requests.vue";
 import ViewStudents from "./view-students.vue";
 import AddRequest from "./add-request.vue";
 import EditRequest from "./edit-request.vue";
-
+import GenerateReport from "./view-reports.vue";
+import ViewReports from "@/components/admin-page/view-reports.vue";
 export default {
     props: {
         section: {
@@ -58,11 +60,13 @@ export default {
         },
     },
     components: {
+        ViewReports,
         AddStudent,
         ViewRequests,
         ViewStudents,
         AddRequest,
         EditRequest,
+        GenerateReport,
     },
     data() {
         return {
