@@ -10,6 +10,7 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.15.1",
     "@vuepic/vue-datepicker": "^4.5.1",
     "axios": "^0.21.4",
     "font-awesome": "^4.7.0",

@@ -111,6 +111,7 @@ export default {
         endTime: this.eventInfo.endTime,
         eventType: this.eventInfo.eventType,
         totalCost: this.eventInfo.totalCost,
+        milage: this.eventInfo.milage,
         
   }
 
@@ -140,8 +141,9 @@ export default {
         }
         
         const hours = difference / (60 * 60 * 1000);
-        this.eventInfo.totalCost =  parseFloat(hours * typeCoef)
-        return parseFloat(hours * typeCoef);
+        const mileFee = this.eventInfo.milage * .75
+        this.eventInfo.totalCost =  parseFloat(hours * typeCoef + (this.eventInfo.milage * .75))
+        return parseFloat(hours * typeCoef + (this.eventInfo.milage * .75));
 }
   }
 
