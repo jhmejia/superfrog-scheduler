@@ -3,29 +3,35 @@
     Select date
   <VueDatePicker
     :enable-time-picker="false"
-    v-model="scheduleDate"
-    :format="formatDate"
+    v-model="eventInfo.eventDate"
+    :model-value="eventInfo.eventDate"
+    model-type="yyyy-MM-dd"
     @closed="updateDate"
+    :format="formatDate"
     
   />
 </div>
 <div class="time">
   <span>Select starting time</span>
   <VueDatePicker
-    v-model="startTime"
+    :model-value="eventInfo.startTime"
     time-picker
-    :format="formatS"
+    model-type="HH:mm:ss"
     @closed="updateStart"
+    :format="formatS"
     :is-24="false"
     
     />
     <span>Select ending time</span>
     <VueDatePicker
-    v-model="endTime"
+    
+    :model-value="eventInfo.endTime"
     time-picker
-    :format='formatE'
+    model-type="HH:mm:ss"
+    :format="formatE"
     @closed="updateEnd"
     :is-24="false"
+    
     />
   </div>
 </template>
@@ -35,7 +41,7 @@
  
   import VueDatePicker from '@vuepic/vue-datepicker';
   import '@vuepic/vue-datepicker/dist/main.css'
-import { format } from 'date-fns';
+  import { format } from 'date-fns';
   import { ref } from 'vue';
 
   export default {
@@ -80,11 +86,11 @@ import { format } from 'date-fns';
         },
         formatS(date) {
           this.eventInfo.startTime = format(date, 'hh:mm:ss');
-          return format(date, 'hh:mm:ss');
+          return format(date, 'hh:mm:ss a');
         },
         formatE(date) {
           this.eventInfo.endTime = format(date, 'hh:mm:ss');
-          return format(date, 'hh:mm:ss ');
+          return format(date, 'hh:mm:ss a ');
           },
         formatDate(date) {
           this.eventInfo.scheduleDate = format(date, 'yyyy-MM-dd');

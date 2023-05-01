@@ -90,6 +90,7 @@
               totalCost: 0.00,
               status: "PENDING",
               reciptId: "",
+              milage: 0.00
             },
             steps: [
               'Select Date and Time',
@@ -167,6 +168,7 @@
                   endTime: this.eventInfo.endTime,
                   eventType: this.eventInfo.eventType,
                   totalCost: this.eventInfo.totalCost,
+                  Milage: this.eventInfo.milage
              }, {headers})
              .then(response =>{
                   const data = (response.data);

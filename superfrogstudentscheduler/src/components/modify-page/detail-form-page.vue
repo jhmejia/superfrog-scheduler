@@ -5,10 +5,12 @@
         <tr>
           <td>Date</td>
           <td><VueDatePicker
+            
             :enable-time-picker="false"
             v-model="requests.eventDate"
             :model-value="requests.eventDate"
             model-type="yyyy-MM-dd"
+            
 
 
           /></td>
@@ -16,6 +18,8 @@
         <tr>
           <td>Start Time</td>
           <td><VueDatePicker
+            :max-time="{ hours: 11, minutes: 0, a: 'PM' }"
+            :min-time="{ hours: 7, minutes: 0 }"
               :model-value="requests.startTime"
               model-type="HH:mm:ss"
               time-picker
@@ -28,6 +32,8 @@
         <tr>
           <td>End Time</td>
           <td><VueDatePicker
+            :max-time="{ hours: 11, minutes: 0, a: 'PM' }"
+            :min-time="{ hours: 7, minutes: 0,  }"
                 v-model="requests.endTime"
                 model-type="HH:mm:ss"
                 time-picker
@@ -112,6 +118,8 @@
     <!--For the other css components when you add the input boxes just follow the two as above-->
 <div class="button-container">
   <button class="button is-primary submit-button" @click="submit">Submit</button>
+  <button class="button is-primary submit-button" @click="cancel">Cancel</button>
+
 </div>
 </template>
 
@@ -119,7 +127,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import axios from 'axios';
-import { format } from 'date-fns';
+import { isProxy, reactive, toRaw } from "vue";
 
 export default {
   name: 'DetailFormPage',
@@ -129,7 +137,8 @@ export default {
   data(){
     return{
       requests: Object,
-      responseStatus: undefined
+      responseStatus: undefined,
+      ogReq: Object
         
     }
     
@@ -140,11 +149,25 @@ export default {
 
   },
   methods: {
-    formatE(date) {
-          return format(date, 'hh:mm:ss ');
-          },
-    
-    submit() {
+    findDifferentVars(obj1, obj2) {
+      let differentVars = [];
+
+      const rawObj1 = isProxy(obj1) ? toRaw(obj1) : obj1;
+      const rawObj2 = isProxy(obj2) ? toRaw(obj2) : obj2;
+
+      const obj1Keys = Object.keys(rawObj1);
+      const obj2Keys = Object.keys(rawObj2);
+
+      obj1Keys.forEach((key) => {
+        if (rawObj1[key] !== rawObj2[key]) {
+          differentVars.push(key);
+        }
+      });
+
+return differentVars;
+    },
+    cancel() {
+
       const headers = {
                 'Content-Type': 'application/json'
              }
@@ -165,6 +188,51 @@ export default {
                     endTime: this.requests.endTime,
                     eventType: this.requests.eventType,
                     totalCost: this.requests.totalCost,
+                    status: "CANCELED"
+               }, {headers})
+               .then(response =>{
+                    const data = (response.data);
+                    console.log(data.data.requestId);
+                    this.requests.requestId = data.data.requestId;
+
+                    this.responseStatus = response.status;
+                  }).catch(error=>{
+                    console.log(error);
+            })
+
+    },
+    
+    submit() {
+      let differentVars = this.findDifferentVars(this.$data.requests, this.$data.ogReq)
+      pendingVars = ['startTime', 'endTime', 'eventDate', 'eventType', 'title', 'address', 'description', 'outsideOrgs', 'expenses', 'nameOfOrg', ]
+      if(containsCommonElement) {
+        this.requests.status = "PENDING"
+      }
+
+
+      console.log(differentVars);
+
+      const headers = {
+                'Content-Type': 'application/json'
+             }
+              axios.put(`http://206.189.255.67:8080/api/superfrogappearancerequests/${this.requestId}`, {
+                    contactFirstName: this.requests.contactFirstName,
+                    contactLastName: this.requests.contactLastName,
+                    email: this.requests.email,
+                    phoneNumber: this.requests.phoneNumber,
+                    address: this.requests.address,
+                    nameOfOrg: this.requests.nameOfOrg,
+                    title: this.requests.title,
+                    description: this.requests.description,
+                    specialInstructions: this.requests.specialInstructions,
+                    outsideOrgs: this.requests.outsideOrgs,
+                    expenses: this.requests.expenses,
+                    eventDate: this.requests.eventDate,
+                    startTime: this.requests.startTime,
+                    endTime: this.requests.endTime,
+                    eventType: this.requests.eventType,
+                    totalCost: this.requests.totalCost,
+                    status: this.requests.status
                }, {headers})
                .then(response =>{
                     const data = (response.data);
@@ -177,11 +245,13 @@ export default {
           },
   
 },
-mounted(){
+beforeMount(){
    axios.get(`http://206.189.255.67:8080/api/superfrogappearancerequests/${this.requestId}`)
            .then((response)  => {
             
               this.requests = response.data.data;
+              this.ogReq = {...response.data.data};
+              console.log(this.ogReq)
               console.log(this.requests)
             
             }).catch((error) => {
