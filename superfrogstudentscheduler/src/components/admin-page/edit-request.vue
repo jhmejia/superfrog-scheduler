@@ -1,113 +1,45 @@
 <template>
-    
-
-   
     <form @submit.prevent="editRequest">
         <!-- eventtype, address, milage, eventDate, startTime, endTime -->
         <label for="eventType">Event Type:</label><br />
-        <input
-            type="text"
-            id="eventType"
-            name="eventType"
-            v-model="eventType"
-        /><br />
+        <input type="text" id="eventType" name="eventType" v-model="eventType" /><br />
         <label for="address">Address:</label><br />
-        <input
-            type="text"
-            id="address"
-            name="address"
-            v-model="address"
-        /><br />
+        <input type="text" id="address" name="address" v-model="address" /><br />
         <label for="milage">Mileage:</label><br />
         <input type="text" id="milage" name="milage" v-model="milage" /><br />
         <label for="eventDate">Event Date:</label><br />
-        <input
-            type="text"
-            id="eventDate"
-            name="eventDate"
-            v-model="eventDate"
-        /><br />
+        <input type="text" id="eventDate" name="eventDate" v-model="eventDate" /><br />
         <label for="startTime">Start Time:</label><br />
-        <input
-            type="text"
-            id="startTime"
-            name="startTime"
-            v-model="startTime"
-        /><br />
+        <input type="text" id="startTime" name="startTime" v-model="startTime" /><br />
         <label for="endTime">End Time:</label><br />
-        <input
-            type="text"
-            id="endTime"
-            name="endTime"
-            v-model="endTime"
-        /><br />
+        <input type="text" id="endTime" name="endTime" v-model="endTime" /><br />
         <label for="status">Status:</label><br />
         <input type="text" id="status" name="status" v-model="status" /><br />
         <label for="contactFirstName">Contact First Name:</label><br />
-        <input
-            type="text"
-            id="contactFirstName"
-            name="contactFirstName"
-            v-model="contactFirstName"
-        /><br />
+        <input type="text" id="contactFirstName" name="contactFirstName" v-model="contactFirstName" /><br />
         <label for="contactLastName">Contact Last Name:</label><br />
-        <input
-            type="text"
-            id="contactLastName"
-            name="contactLastName"
-            v-model="contactLastName"
-        /><br />
+        <input type="text" id="contactLastName" name="contactLastName" v-model="contactLastName" /><br />
         <label for="phoneNumber">Phone Number:</label><br />
-        <input
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            v-model="phoneNumber"
-        /><br />
+        <input type="text" id="phoneNumber" name="phoneNumber" v-model="phoneNumber" /><br />
         <label for="email">Email:</label><br />
         <input type="text" id="email" name="email" v-model="email" /><br />
         <label for="title">Title:</label><br />
         <input type="text" id="title" name="title" v-model="title" /><br />
         <label for="nameOfOrg">Name of Organization:</label><br />
-        <input
-            type="text"
-            id="nameOfOrg"
-            name="nameOfOrg"
-            v-model="nameOfOrg"
-        /><br />
+        <input type="text" id="nameOfOrg" name="nameOfOrg" v-model="nameOfOrg" /><br />
         <label for="description">Description:</label><br />
-        <input
-            type="text"
-            id="description"
-            name="description"
-            v-model="description"
-        /><br />
+        <input type="text" id="description" name="description" v-model="description" /><br />
         <label for="specialInstructions">Special Instructions:</label><br />
-        <input
-            type="text"
-            id="specialInstructions"
-            name="specialInstructions"
-            v-model="specialInstructions"
-        /><br />
+        <input type="text" id="specialInstructions" name="specialInstructions" v-model="specialInstructions" /><br />
         <label for="outsideOrgs">Outside Organizations:</label><br />
-        <input
-            type="text"
-            id="outsideOrgs"
-            name="outsideOrgs"
-            v-model="outsideOrgs"
-        /><br />
+        <input type="text" id="outsideOrgs" name="outsideOrgs" v-model="outsideOrgs" /><br />
         <label for="expenses">Expenses:</label><br />
         <input type="text" id="expenses" name="expenses" v-model="expenses" />
         <br />
 
         <label for="superfrogs-select">Select an Active SuperFrog:</label>
 
-        <select
-            v-if="superfrogs.length"
-            id="superfrogs-select"
-            name="superfrog"
-            v-model="superfrogId"
-        >
+        <select v-if="superfrogs.length" id="superfrogs-select" name="superfrog" v-model="superfrogId">
             <option value="None">Select a SuperFrog</option>
             <option v-for="superfrog in superfrogs" :value="superfrog.id">
                 {{ superfrog.name }}
@@ -196,7 +128,7 @@ export default {
             });
 
         axios
-            .get("http://localhost:8080/api/superfrogstudents/active", )
+            .get("http://localhost:8080/api/superfrogstudents/active",)
             .then((response) => {
                 console.log(response.data);
 
@@ -261,36 +193,36 @@ export default {
                         "Request not edited successfully- please try again";
                 });
 
-                //Assign superfrog to request (if selected)
+            //Assign superfrog to request (if selected)
 
 
-                if (this.superfrogId) {
-                    axios
-                        .put(
-                            `http://localhost:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
-                            
-                            {
-                                superfrogId: this.superfrogId,
-                                requestId: this.requestId,
-                                
+            if (this.superfrogId) {
+                axios
+                    .put(
+                        `http://localhost:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
 
-                            },
-                            { headers }
-                        )
-                        .then((response) => {
-                            console.log(response.data);
-                            this.superfrogSuccessMessage =
-                                "SuperFrog assigned successfully!";
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            this.superfrogSuccessMessage =
-                                "SuperFrog not assigned successfully- please try again";
-                        });
-                }
+                        {
+                            superfrogId: this.superfrogId,
+                            requestId: this.requestId,
 
-                // call get requests method in view requests component
-                this.$emit("getRequests");
+
+                        },
+                        { headers }
+                    )
+                    .then((response) => {
+                        console.log(response.data);
+                        this.superfrogSuccessMessage =
+                            "SuperFrog assigned successfully!";
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.superfrogSuccessMessage =
+                            "SuperFrog not assigned successfully- please try again";
+                    });
+            }
+
+            // call get requests method in view requests component
+            this.$emit("getRequests");
         },
     },
 };
@@ -327,7 +259,21 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+input[type="cancel"] {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
 input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+input[type="cancel"]:hover {
     background-color: #3e8e41;
 }
 </style>
