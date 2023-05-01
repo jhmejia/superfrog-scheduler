@@ -98,7 +98,7 @@
   
   <style scoped>
   .sidebar {
-    width: 450px;
+    width: 350px;
     background-color: #4d2279;
     padding: 20px;
   }
@@ -109,7 +109,7 @@
   }
   
   .section-header {
-    font-size: 32px;
+    font-size: 25px;
     margin-top: 50px;
     font-weight: bold;
     cursor: pointer;
@@ -127,6 +127,6 @@
   }
   .superfrog-img{
     width: 150px;
-    margin-left: 125px;
+    margin-left: 90px;
   }
   </style>

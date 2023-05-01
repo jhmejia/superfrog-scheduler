@@ -107,12 +107,10 @@ export default {
 body {
    font-family: Arial, sans-serif;
    margin: 0;
-   /*background-color: #fff;*/
  }
 
  .pricing {
    background-color: #fff;
-   /* text color black*/
    color: #000;
  }
 
@@ -173,6 +171,9 @@ body {
 table th, table td {
   border: 1px solid black;
   padding: 8px;
+}
+th {
+  background-color: #588c7e;
 }
 
 </style>

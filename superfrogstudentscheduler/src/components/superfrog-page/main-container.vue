@@ -72,7 +72,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .text {
     color: black;
 }
@@ -87,15 +87,23 @@ table {
     font-family: monospace;
     font-size: 25px;
     text-align: left;
+    margin-top: 20px;
 }
 
 th {
     background-color: #588c7e;
     color: white;
     border: 1px solid black;
+    padding: 8px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 8px;
 }
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 </style>
+
