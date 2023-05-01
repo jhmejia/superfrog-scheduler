@@ -1,36 +1,43 @@
 <template>
     <div class="main-box">
         <h1>{{ section }}</h1>
+        
         <div class="text" v-if="section === 'add-student'">
-
             <!-- Include vue container for form to add a student (add-student.vue)-->
             <add-student></add-student>
-
         </div>
         <div class="text" v-if="section === 'view-students'">
-            <p id="all-student"> All Students </p>
+            <p id="all-student">All Students</p>
             <view-students></view-students>
         </div>
         <div class="text" v-if="section === 'add-request'">
             <!-- Add request form here -->
-            <p id="add-request"> Add Request </p>
+            <p id="add-request">Add Request</p>
             <add-request></add-request>
         </div>
         <div class="text" v-if="section === 'view-requests'">
-            <!-- Display all requests here -->
 
+            
+            <!-- if currentRequestId is null, show view-requests -->
+            <!-- if currentRequestId is not null, show edit-request -->
+
+            
+            
+            <view-requests v-if="currentRequestEdit === null"></view-requests>
+            <edit-request v-else></edit-request>
+            <edit-request v-else @editRequest="editRequest"></edit-request>
+
+
+
+
+            
             <!-- Include vue container for viewing requests (view-requests.vue)-->
-            <view-requests></view-requests>
         </div>
         <div class="text" v-if="section === 'view-calendar'">
             <!-- Display calendar here -->
-            Yo, I need to add the backend to view the calendar, can't do it
-            alone so I'm askin' for assistance.
         </div>
         <div class="text" v-if="section === 'view-reports'">
             <!-- Display reports here -->
-            Yo, I need to add the backend to view the reports, can't do it alone
-            so I'm askin' for assistance.
         </div>
     </div>
 </template>
@@ -41,6 +48,7 @@ import AddStudent from "./add-student.vue";
 import ViewRequests from "./view-requests.vue";
 import ViewStudents from "./view-students.vue";
 import AddRequest from "./add-request.vue";
+import EditRequest from "./edit-request.vue";
 
 export default {
     props: {
@@ -54,6 +62,7 @@ export default {
         ViewRequests,
         ViewStudents,
         AddRequest,
+        EditRequest,
     },
     data() {
         return {
@@ -61,10 +70,21 @@ export default {
         };
     },
     mounted() {
-        
+        this.currentRequestEdit = null;
         
     },
     methods: {
+        editRequest(requestEdit) {
+            console.log("Editing request: " + requestEdit)
+            this.currentRequestEdit = requestEdit;
+
+            
+        },
+        goBack() {
+            console.log("Going back")
+            this.currentRequestEdit = null;
+            console.log("Current request id: " + this.currentRequestEdit);
+        },
         
     },
 };

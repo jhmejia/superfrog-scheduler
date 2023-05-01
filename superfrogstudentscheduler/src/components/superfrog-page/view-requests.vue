@@ -11,6 +11,7 @@
                     <th>Request Status</th>
                     <th>Assigned SuperFrog</th>
                     <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@
                             Completed
                         </button>
                     </td>
+
                 </tr>
             </tbody>
         </table>
@@ -173,6 +175,7 @@ export default {
             });
     },
     },
+
     computed: {
         computedRequests() {
             return this.requests.filter(

@@ -1,5 +1,16 @@
 <template>
-  <div class="container">
+
+  <!-- Editing a request. Hidden by default, unless they click.-->
+
+  <div v-if="currentRequestId">
+    <h2> Editing Request {{ currentRequestId }} </h2>
+    
+    <edit-request></edit-request>
+    <button @click="currentRequestId = null">Close</button>
+  </div>
+
+  <!-- Show all requests-->
+  <div>
     <label for="filter">Status:</label>
     <select id="filter" v-model="selectedFilter" @change="getRequests">
       <option value="">All</option>
@@ -8,57 +19,53 @@
       <option value="COMPLETED">Completed</option>
       <option value="REJECTED">Rejected</option>
     </select>
-    <p id="requests">Requests</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Request ID</th>
-          <th>Customer Name</th>
-          <th>Event Date</th>
-          <th>Event Title</th>
-          <th>Request Status</th>
-          <th>Assigned SuperFrog</th>
-          <th>Action</th>
-          <th>Reassignment</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="request in computedRequests" :key="request.id">
-          <td>{{ request.requestId }}</td>
-          <td>{{ request.contactFirstName }} {{ request.contactLastName }}</td>
-          <td>{{ request.eventDate }}</td>
-          <td>{{ request.title }}</td>
-          <td>{{ request.status }}</td>
-          <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
-          <td>
-            <button @click="approveRequest(request)">Approve</button>
-            <button @click="rejectRequest(request)">Reject</button>
-          </td>
-          <td>
-            <select v-if="superfrogs.length" id="superfrogs-select" name="superfrog" v-model="request.superfrogId"
-              @change="assignSuperFrog(request.requestId, request.superfrogId)">
-              <option value="">Select a SuperFrog</option>
-              <option v-for="superfrog in superfrogs" :value="superfrog.id">
-                {{ superfrog.name }}
-              </option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request ID</th>
+      <th>Customer Name</th>
+      <th>Event Date</th>
+      <th>Event Title</th>
+      <th>Request Status</th>
+      <th>Assigned SuperFrog</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="request in computedRequests" :key="request.id">
+      <td>{{ request.requestId }}</td>
+      <td>{{ request.contactFirstName }} {{ request.contactLastName }}</td>
+      <td>{{ request.eventDate }}</td>
+      <td>{{ request.title }}</td>
+      <td>{{ request.status }}</td>
+      <td>{{ request.student ? request.student.firstName + ' ' + request.student.lastName : 'None' }}</td>
+      <td>
+        <button @click="approveRequest(request)">Approve</button>
+        <button @click="rejectRequest(request)">Reject</button>
+        <button @click="editRequest(request.requestId)">Edit Request</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import EditRequest from "./edit-request.vue";
 
 export default {
+  components: {
+    EditRequest,
+  },
   name: "ViewRequests",
   data() {
     return {
       requests: [],
       superfrogs: [],
       superfrogId: null,
+      currentRequestId: null,
     };
   },
   mounted() {
@@ -141,7 +148,6 @@ export default {
         console.log('Cannot assign SuperFrog to request with status', request.status);
         return;
       }
-
       const token = localStorage.getItem("token");
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -161,7 +167,19 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    }
+    },
+    editRequest(requestId) {
+      //Store request id in local storage
+      localStorage.setItem("requestId", requestId);
+      //Have the parent component (AdminPage) invoke the edit request modal
+      
+      console.log(requestId)
+      // Emit an event with the request ID as a payload
+      this.currentRequestId = requestId;
+
+
+
+    },
   },
   computed: {
     computedRequests() {
