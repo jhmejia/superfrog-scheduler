@@ -6,7 +6,7 @@
     <h2> Editing Request {{ currentRequestId }} </h2>
     
     <edit-request></edit-request>
-    <button @click="currentRequestId = null">Close</button>
+    <button @click="currentRequestId = null; getRequests()">Close</button>
   </div>
 
   <!-- Show all requests-->
@@ -54,6 +54,11 @@
 <script>
 import axios from "axios";
 import EditRequest from "./edit-request.vue";
+
+//Call get requests every 5 seconds
+setInterval(() => {
+  this.getRequests();
+}, 100);
 
 export default {
   components: {
