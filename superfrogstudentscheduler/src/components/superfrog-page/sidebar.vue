@@ -111,7 +111,7 @@ export default {
   }
   
   .section-header {
-    font-size: 19.9px;
+    font-size: 19px;
     margin-top: 50px;
     font-weight: bold;
     cursor: pointer;
