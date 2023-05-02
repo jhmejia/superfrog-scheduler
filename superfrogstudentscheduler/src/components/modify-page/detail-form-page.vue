@@ -114,7 +114,7 @@
   </div>
   </div>
 </div>
-<div v-if="responseStatus == 200">Update Success</div>
+<div v-if="responseStatus == 200">{{ returnMsg }}</div>
     <!--For the other css components when you add the input boxes just follow the two as above-->
 <div class="button-container">
   <button class="button is-primary submit-button" @click="submit">Submit</button>
@@ -194,7 +194,7 @@ return differentVars;
                     const data = (response.data);
                     console.log(data.data.requestId);
                     this.requests.requestId = data.data.requestId;
-
+                    this.returnMsg ="Request has been canceled"
                     this.responseStatus = response.status;
                   }).catch(error=>{
                     console.log(error);
@@ -203,8 +203,14 @@ return differentVars;
     },
     
     submit() {
+      let containsCommonElement = false
       let differentVars = this.findDifferentVars(this.$data.requests, this.$data.ogReq)
-      pendingVars = ['startTime', 'endTime', 'eventDate', 'eventType', 'title', 'address', 'description', 'outsideOrgs', 'expenses', 'nameOfOrg', ]
+      const pendingVars = ['startTime', 'endTime', 'eventDate', 'eventType', 'title', 'address', 'description', 'outsideOrgs', 'expenses', 'nameOfOrg', ]
+      pendingVars.forEach((key) => {
+        if (differentVars.includes(key)) {
+          containsCommonElement = true
+        }
+      });
       if(containsCommonElement) {
         this.requests.status = "PENDING"
       }
@@ -239,6 +245,7 @@ return differentVars;
                     console.log(data.data.requestId);
                     this.requests.requestId = data.data.requestId;
                     this.responseStatus = response.status;
+                    this.returnMsg = "Request Updated"
                   }).catch(error=>{
                     console.log(error);
             })
