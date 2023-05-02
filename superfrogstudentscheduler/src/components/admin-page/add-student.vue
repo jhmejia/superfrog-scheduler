@@ -33,29 +33,48 @@ export default {
         };
     },
     methods: {
-        addStudent() {
-            const token=localStorage.getItem('token');
-            const headers = {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-           }
-            axios.post("http://localhost:8080/api/superfrogstudents", {
-                 firstName: this.fname,
-                 lastName: this.lname,
-                 phoneNumber: this.phoneNumber,
-                 email: this.email,
-                 address: this.address,
-             }, {headers})
+      addStudent() {
+        const token=localStorage.getItem('token');
+        const headers = {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+
+        let isDuplicate = false;
+
+        // Check if the email already exists
+        axios
+          .get(`http://localhost:8080/api/superfrogstudents/email/${this.email}`, {headers})
+          .then((response) => {
+            isDuplicate = true;
+            this.successMessage = 'Add Student Failed! Email already in use';
+          })
+          .catch(error => {
+            console.log(error);
+          })
+          .finally(() => {
+            // If the email doesn't exist, create a new student
+            if (!isDuplicate) {
+              axios.post("http://localhost:8080/api/superfrogstudents", {
+                firstName: this.fname,
+                lastName: this.lname,
+                phoneNumber: this.phoneNumber,
+                email: this.email,
+                address: this.address,
+                }, {headers})
                 .then(response=>{
                   console.log(response.data);
                   this.successMessage = 'Student added successfully! Default password is superfrogstudent';
-                }).catch(error=>{
+                })
+                .catch(error=>{
                   console.log(error);
                   this.successMessage = 'Student not added successfully- please try again';
+                })
+            }
           })
+      },
 
-        },
-    },
+  },
 }
 
 </script>

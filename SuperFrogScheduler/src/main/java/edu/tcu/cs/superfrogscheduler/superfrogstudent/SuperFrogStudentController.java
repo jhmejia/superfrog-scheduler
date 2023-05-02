@@ -9,6 +9,7 @@ import edu.tcu.cs.superfrogscheduler.superfroguser.SuperFrogUserService;
 import edu.tcu.cs.superfrogscheduler.system.Result;
 import edu.tcu.cs.superfrogscheduler.system.HttpStatusCode;
 import jakarta.validation.Valid;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,6 +60,13 @@ public class SuperFrogStudentController {
                 .collect(Collectors.toList());
 
         return new Result(true, HttpStatusCode.SUCCESS, "Find All Active Success", superFrogStudentDtos);
+    }
+
+    @GetMapping("/api/superfrogstudents/email/{email}")
+    public Result findByEmail(@PathVariable String email) {
+        SuperFrogStudent foundSuperFrogStudent = this.superFrogStudentService.findByEmail(email);
+        SuperFrogStudentDto superfrogDto = this.superfrogToSuperfrogDtoConverter.convert(foundSuperFrogStudent);
+        return new Result(true, HttpStatusCode.SUCCESS, "Find by Email Success", superfrogDto);
     }
 
     @PostMapping("/api/superfrogstudents")

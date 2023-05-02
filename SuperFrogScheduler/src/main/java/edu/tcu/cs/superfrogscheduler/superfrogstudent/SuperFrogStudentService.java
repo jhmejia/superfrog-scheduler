@@ -34,6 +34,10 @@ public class SuperFrogStudentService {
         return this.superFrogStudentRepository.findSuperFrogStudentByActive(true);
     }
 
+    public SuperFrogStudent findByEmail(String email) {
+        return this.superFrogStudentRepository.findSuperFrogStudentByEmail(email);
+    }
+
     public List<SuperFrogStudent> findAll() {
         return this.superFrogStudentRepository.findAll();
     }
