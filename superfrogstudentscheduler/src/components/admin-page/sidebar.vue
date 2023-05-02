@@ -56,7 +56,6 @@
         <div class="section">
           <div class="section-header" @click="selectSection('view-reports')">
             <i class="icon fa fa-file"></i>
-
             Reports
           </div>
         </div>

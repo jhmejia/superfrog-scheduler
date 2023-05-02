@@ -2,6 +2,7 @@ package edu.tcu.cs.superfrogscheduler.superfrogrequest;
 
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequest;
 import edu.tcu.cs.superfrogscheduler.superfrogrequest.SuperFrogAppearanceRequestRepository;
+import edu.tcu.cs.superfrogscheduler.superfrogstudent.SuperFrogStudent;
 import edu.tcu.cs.superfrogscheduler.system.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class SuperFrogAppearanceRequestService {
         return this.superFrogAppearanceRequestRepository.findByStatus(status);
     }
 
+    public List<SuperFrogAppearanceRequest> findByStatusAndStudent(RequestStatus status, SuperFrogStudent student) {
+        return this.superFrogAppearanceRequestRepository.findByStatusAndStudent(status, student);
+    }
     public SuperFrogAppearanceRequest save(SuperFrogAppearanceRequest newSuperFrogAppearanceRequest) {
         return this.superFrogAppearanceRequestRepository.save(newSuperFrogAppearanceRequest);
     }
