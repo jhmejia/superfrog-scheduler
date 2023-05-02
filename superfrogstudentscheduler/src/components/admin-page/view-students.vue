@@ -32,7 +32,6 @@
     </table>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 
@@ -59,14 +58,21 @@ export default {
         });
     },
     toggleStudentStatus(student) {
+      let reason = '';
+      if (student.active) {
+        reason = prompt('Please enter a reason for disabling the student:');
+        if (!reason) {
+          return;
+        }
+      }
       const url = `http://localhost:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
       const token = localStorage.getItem('token');
       const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
-      }
+      };
       axios
-        .put(url, {}, { headers })
+        .put(url, { reason }, { headers })
         .then((response) => {
           console.log(response.data)
           this.getStudents();
