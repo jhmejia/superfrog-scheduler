@@ -5,9 +5,9 @@
         <label for="lname">Last name:</label><br>
         <input type="text" id="lname" name="lname" v-model="lname"><br>
         <label for="phoneNumber">Phone Number:</label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber" v-model="phoneNumber"><br>
+        <input type="text" id="phoneNumber" name="phoneNumber" v-model="phoneNumber" pattern="^[0-9]{10}$"><br>
         <label for="email">email:</label><br>
-        <input type="text" id="email" name="email" v-model="email"><br>
+        <input type="email" id="email" name="email" v-model="email"><br>
         <label for="address">Physical Address:</label><br>
         <input type="text" id="address" name="address" v-model="address"><br>
         <input type="submit" value="Submit">
