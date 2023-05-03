@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="student in computedStudents" :key="student.id">
+        <tr v-for="(student, index) in displayedStudents" :key="student.id">
           <td>{{ student.id }}</td>
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
@@ -30,8 +30,14 @@
         </tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <button :disabled="currentPage === 1" @click="prevPage">Prev</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button :disabled="currentPage === totalPages" @click="nextPage">Next</button>
+    </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 
@@ -41,6 +47,8 @@ export default {
     return {
       students: [],
       showActiveOnly: false,
+      currentPage: 1,
+      rowsPerPage: 5,
     };
   },
   mounted() {
@@ -81,18 +89,43 @@ export default {
           console.log(error);
         });
     },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
   },
   computed: {
-    computedStudents() {
+    totalPages() {
+      let students = [];
       if (this.showActiveOnly) {
-        return this.students.filter(student => student.active);
+        students = this.students.filter(student => student.active);
       } else {
-        return this.students;
+        students = this.students;
       }
+      return Math.ceil(students.length / this.rowsPerPage);
+    },
+    displayedStudents() {
+      let students = [];
+      if (this.showActiveOnly) {
+        students = this.students.filter(student => student.active);
+      } else {
+        students = this.students;
+      }
+      const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+      const endIndex = startIndex + this.rowsPerPage;
+      return students.slice(startIndex, endIndex);
     },
   },
 };
 </script>
+
 <style scoped>
 .container {
   height: 71vh;
