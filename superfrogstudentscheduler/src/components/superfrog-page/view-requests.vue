@@ -67,15 +67,25 @@ export default {
     },
     methods: {
         getRequests() {
+            let url = "http://206.189.255.67:8080/api/superfrogappearancerequests";
+            if (this.selectedFilter) {
+                url += `/status/${this.selectedFilter}`;
+            }
             axios
-                .get("http://localhost:8080/api/superfrogappearancerequests")
+                .get(url)
                 .then((response) => {
-                    this.requests = response.data.data;
-                    console.log(response.data.data);
+                    if (this.selectedFilter) {
+                        this.requests = response.data.data.filter(
+                            (request) => request.status === this.selectedFilter
+                        );
+                    } else {
+                        this.requests = response.data.data;
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+
         },
         getStudents() {
             axios
