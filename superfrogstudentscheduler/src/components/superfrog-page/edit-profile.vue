@@ -3,15 +3,15 @@
       <form @submit.prevent="saveChanges">
         <div>
           <label for="firstName">First Name</label>
-          <input type="text" v-model="superFrog.firstName" id="firstName" required />
+          <input type="text" v-model="superFrog.firstName" id="firstName"  />
         </div>
         <div>
           <label for="lastName">Last Name</label>
-          <input type="text" v-model="superFrog.lastName" id="lastName" required />
+          <input type="text" v-model="superFrog.lastName" id="lastName"  />
         </div>
         <div>
-          <label for="email">Email</label>
-          <input type="email" v-model="superFrog.email" id="email" required />
+          <label for="address">Address</label>
+          <input type="address" v-model="superFrog.address" id="address" />
         </div>
         <div>
           <label for="phoneNumber">Phone Number</label>
@@ -108,7 +108,7 @@ label {
 }
 
 input[type="text"],
-input[type="email"],
+input[type="address"],
 select {
   padding: 10px;
   font-size: 16px;
