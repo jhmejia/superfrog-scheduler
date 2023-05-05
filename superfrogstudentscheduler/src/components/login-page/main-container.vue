@@ -56,7 +56,7 @@ export default {
                 console.log(this.password);
                 const basicAuth = 'Basic ' + btoa(this.username + ':' + this.password);
                 console.log(basicAuth);
-                const response = await axios.post('http://localhost:8080/api/users/login', {}, {
+                const response = await axios.post('http://206.189.255.67:8080/api/users/login', {}, {
                     headers: {
                         Authorization: basicAuth
                     }
@@ -79,7 +79,7 @@ export default {
                 console.log(this.password);
                 const basicAuth = 'Basic ' + btoa(this.username + ':' + this.password);
                 console.log(basicAuth);
-                const response = await axios.post('http://localhost:8080/api/users/login', {}, {
+                const response = await axios.post('http://206.189.255.67:8080/api/users/login', {}, {
                     headers: {
                         Authorization: basicAuth
                     }
