@@ -45,7 +45,7 @@
     methods: {
       getStudents() {
         axios
-          .get("http://localhost:8080/api/superfrogstudents")
+          .get("http://206.189.255.67:8080/api/superfrogstudents")
           .then((response) => {
             this.students = response.data.data;
             console.log (response.data.data);
