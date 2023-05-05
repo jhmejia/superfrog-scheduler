@@ -2,7 +2,7 @@
   <!-- Editing a request. Hidden by default, unless they click.-->
 
   <div v-if="currentRequestId">
-    <h2> Editing Request {{ currentRequestId }} </h2>
+    <h2> Viewing Request {{ currentRequestId }} </h2>
 
     <edit-request></edit-request>
     <button @click="currentRequestId = null; getRequests()">Close</button>
@@ -33,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="  request   in   computedRequests  " :key=" request.id ">
+        <tr v-for="  request   in   displayedRequests  " :key="request.requestId">
           <td>{{ request.requestId }}</td>
           <td>{{ request.contactFirstName }} {{ request.contactLastName }}</td>
           <td>{{ request.eventDate }}</td>
@@ -43,12 +43,17 @@
           <td>
             <button @click=" approveRequest(request) ">Approve</button>
             <button @click=" rejectRequest(request) ">Reject</button>
-            <button @click=" editRequest(request.requestId) ">Edit Request</button>
+            <button @click=" editRequest(request.requestId) ">Edit/View Request</button>
             <button @click=" cancelRequest(request.requestId) ">Cancel</button>
           </td>
         </tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <button :disabled="currentPage === 1" @click="prevPage">Prev</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button :disabled="currentPage === totalPages" @click="nextPage">Next</button>
+    </div>
   </div>
 </template>
 
@@ -70,6 +75,9 @@ export default {
       superfrogs: [],
       superfrogId: null,
       currentRequestId: null,
+      selectedFilter: "",
+      currentPage: 1,
+      rowsPerPage: 5,
     };
   },
   mounted() {
@@ -227,10 +235,41 @@ export default {
           console.log(error);
         });
     },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
   },
   computed: {
     computedRequests() {
       return this.requests;
+    },
+    totalPages() {
+      let requests = [];
+      if (this.selectedFilter) {
+        requests = this.requests.filter(request => request.status === this.selectedFilter);
+      } else {
+        requests = this.requests;
+      }
+      return Math.ceil(requests.length / this.rowsPerPage);
+    },
+    displayedRequests() {
+      let requests = [];
+      if (this.selectedFilter) {
+        requests = this.requests.filter(request => request.status === this.selectedFilter);
+      } else {
+        requests = this.requests;
+      }
+      console.log(requests)
+      const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+      const endIndex = startIndex + this.rowsPerPage;
+      return requests.slice(startIndex, endIndex);
     },
   },
 };
