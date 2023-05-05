@@ -51,16 +51,16 @@
       </div>
 
       <div class="section">
-        <div class="section-header" @click="selectSection('view-calendar')">
+        <!-- <div class="section-header" @click="selectSection('view-calendar')">
           <i class="icon fa fa-calendar"></i>
           Calendar
-        </div>
+        </div> -->
       </div>
       <div class="section">
-        <div class="section-header" @click="selectSection('view-reports')">
+        <!-- <div class="section-header" @click="selectSection('view-reports')">
           <i class="icon fa fa-file"></i>
           Reports
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
