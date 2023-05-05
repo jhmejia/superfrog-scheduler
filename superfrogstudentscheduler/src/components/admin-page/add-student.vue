@@ -54,6 +54,7 @@ export default {
           })
           .finally(() => {
             // If the email doesn't exist, create a new student
+            console.log(token);
             if (!isDuplicate) {
               axios.post("http://localhost:8080/api/superfrogstudents", {
                 firstName: this.fname,
