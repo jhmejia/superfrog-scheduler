@@ -49,6 +49,11 @@
                 </tr>
             </tbody>
         </table>
+        <div class="pagination">
+            <button :disabled="currentPage === 1" @click="prevPage">Prev</button>
+            <span>{{ currentPage }} / {{ totalPages }}</span>
+            <button :disabled="currentPage === totalPages" @click="nextPage">Next</button>
+        </div>
     </div>
 </template>
 
@@ -60,10 +65,36 @@ export default {
     data() {
         return {
             requests: [],
+            superfrogs: [],
+            superfrogId: null,
+            currentRequestId: null,
+            currentPage: 1,
+            rowsPerPage: 5,
         };
     },
     mounted() {
+
         this.getRequests();
+        axios
+            .get("http://206.189.255.67:8080/api/superfrogstudents/active",)
+            .then((response) => {
+                console.log(response.data);
+
+                //Get first name and last name of each superfrog
+                const superfrogs = response.data.data.map((superfrog) => {
+                    return {
+                        id: superfrog.id,
+                        name: superfrog.firstName + " " + superfrog.lastName,
+                    };
+                });
+
+                this.superfrogs = superfrogs;
+
+                console.log(this.superfrogs);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     },
     methods: {
         getRequests() {
@@ -89,7 +120,7 @@ export default {
         },
         getStudents() {
             axios
-                .get("http://localhost:8080/api/superfrogstudents")
+                .get("http://206.189.255.67:8080/api/superfrogstudents")
                 .then((response) => {
                     this.students = response.data.data;
                     console.log(response.data.data);
@@ -110,7 +141,7 @@ export default {
 
             //Get all superfrog students
             axios
-                .get("http://localhost:8080/api/superfrogstudents")
+                .get("http://206.189.255.67:8080/api/superfrogstudents")
                 .then((response) => {
                     for (let i = 0; i < response.data.data.length; i++) {
                         if (response.data.data[i].email === superfrogEmail) {
@@ -126,10 +157,9 @@ export default {
 
                     axios
                         .put(
-                            `http://localhost:8080/api/superfrogstudents/${superFrogId}/assign/superfrogappearancerequests/${requestId}`,
-                            {
-                                status: "APPROVED",
-                            }, { headers }
+                            `http://206.189.255.67:8080/api/superfrogstudents/${superfrogId}/assign/superfrogappearancerequests/${requestId}`,
+                            {},
+                            { headers }
                         )
                         .then((response) => {
                             this.requests = response.data.data;
@@ -156,7 +186,7 @@ export default {
 
             //Get all superfrog students
             axios
-                .get("http://localhost:8080/api/superfrogstudents")
+                .get("http://206.189.255.67:8080/api/superfrogstudents")
                 .then((response) => {
                     for (let i = 0; i < response.data.data.length; i++) {
                         if (response.data.data[i].email === superfrogEmail) {
@@ -172,8 +202,7 @@ export default {
 
                     axios
                         .put(
-                            `http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
-                            null, { headers }
+                            `http://206.189.255.67:8080/api/superfrogappearancerequests/${requestId}/status/COMPLETED`,
                         )
                         .then((response) => {
                             this.requests = response.data.data;
@@ -200,7 +229,7 @@ export default {
 
             //Get all superfrog students
             axios
-                .get("http://localhost:8080/api/superfrogstudents")
+                .get("http://206.189.255.67:8080/api/superfrogstudents")
                 .then((response) => {
                     for (let i = 0; i < response.data.data.length; i++) {
                         if (response.data.data[i].email === superfrogEmail) {
@@ -214,7 +243,7 @@ export default {
                         }
                     }
                     axios
-                        .put(`http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/CANCELLED`,
+                        .put(`http://206.189.255.67:8080/api/superfrogappearancerequests/${requestId}/status/CANCELLED`,
                             null, { headers }
                         )
                         .then((response) => {
@@ -230,6 +259,16 @@ export default {
                     console.log(error);
                 });
         },
+        prevPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+            }
+        },
 
     },
 
@@ -238,6 +277,27 @@ export default {
             return this.requests.filter(
                 (request) => request.status === "APPROVED"
             );
+        },
+        totalPages() {
+            let requests = [];
+            if (this.selectedFilter) {
+                requests = this.requests.filter(request => request.status === this.selectedFilter);
+            } else {
+                requests = this.requests;
+            }
+            return Math.ceil(requests.length / this.rowsPerPage);
+        },
+        displayedRequests() {
+            let requests = [];
+            if (this.selectedFilter) {
+                requests = this.requests.filter(request => request.status === this.selectedFilter);
+            } else {
+                requests = this.requests;
+            }
+            console.log(requests)
+            const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+            const endIndex = startIndex + this.rowsPerPage;
+            return requests.slice(startIndex, endIndex);
         },
     },
 };

@@ -194,47 +194,47 @@ export default {
 
     },
     cancelRequest(requestId) {
-      const token = localStorage.getItem("token");
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      };
-      // TODO: Implement cancel request functionality
-      const superfrogEmail = localStorage.getItem("superfrogEmail");
-      let superFrogId = "";
+            const token = localStorage.getItem("token");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            };
+            // TODO: Implement cancel request functionality
+            const superfrogEmail = localStorage.getItem("superfrogEmail");
+            let superFrogId = "";
 
-      //Get all superfrog students
-      axios
-        .get("http://localhost:8080/api/superfrogstudents")
-        .then((response) => {
-          for (let i = 0; i < response.data.data.length; i++) {
-            if (response.data.data[i].email === superfrogEmail) {
-              superFrogId = response.data.data[i].id;
-              console.log("Superfrog id is ");
-              console.log(this.superFrogId);
-              console.log("Request id is ");
-              console.log(requestId);
+            //Get all superfrog students
+            axios
+                .get("http://206.189.255.67:8080/api/superfrogstudents")
+                .then((response) => {
+                    for (let i = 0; i < response.data.data.length; i++) {
+                        if (response.data.data[i].email === superfrogEmail) {
+                            superFrogId = response.data.data[i].id;
+                            console.log("Superfrog id is ");
+                            console.log(this.superFrogId);
+                            console.log("Request id is ");
+                            console.log(requestId);
 
-              break;
-            }
-          }
-          axios
-            .put(`http://localhost:8080/api/superfrogappearancerequests/${requestId}/status/CANCELLED`,
-              null, { headers }
-            )
-            .then((response) => {
-              this.requests = response.data.data;
-              console.log(response.data.data);
-              this.getRequests();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+                            break;
+                        }
+                    }
+                    axios
+                        .put(`http://206.189.255.67:8080/api/superfrogappearancerequests/${requestId}/status/CANCELLED`,
+                            null, { headers }
+                        )
+                        .then((response) => {
+                            this.requests = response.data.data;
+                            console.log(response.data.data);
+                            this.getRequests();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
