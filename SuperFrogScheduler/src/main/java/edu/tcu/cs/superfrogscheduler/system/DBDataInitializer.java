@@ -35,10 +35,12 @@ public class DBDataInitializer implements CommandLineRunner {
         SuperFrogStudent student1 = new SuperFrogStudent("Jane", "Smith", 1001, "jane.smith@tcu.edu", "1234567890", "address1", true);
         SuperFrogStudent student2 = new SuperFrogStudent("John", "Doe", 1004, "john.doe@tcu.edu", "1234567890", "address2", true);
         SuperFrogStudent student3 = new SuperFrogStudent("Tim", "Johnson", 1012, "tim.johnson@tcu.edu", "1234567890", "address3", true);
+        SuperFrogStudent student5 = new SuperFrogStudent("Kurisu", "Makise", 1002, "kurisu.makise@tcu.edu", "1234567890", "address4", true);
 
         this.studentRepository.save(student1);
         this.studentRepository.save(student2);
         this.studentRepository.save(student3);
+        this.studentRepository.save(student5);
 
         SuperFrogAppearanceRequest request1 = new SuperFrogAppearanceRequest(
                 5,
@@ -103,40 +105,40 @@ public class DBDataInitializer implements CommandLineRunner {
         SuperFrogAppearanceRequest request4 = new SuperFrogAppearanceRequest(
                 16,
                 EventType.PRIVATE,
-                "Event address 4",
+                "Tucker Technology Center",
                 18.0,
                 LocalDate.of(2023, 4, 17),
                 LocalTime.of(11, 0),
                 LocalTime.of(12, 0),
                 RequestStatus.COMPLETED,
-                "FirstName",
-                "LastName",
-                "1234567890",
-                "Email",
-                "Title",
-                "Org",
-                "Desc",
-                "Special",
-                "OutsideOrg",
-                "Expenses",
+                "Bingyang",
+                "Wei",
+                "8172577166",
+                "bwei@tcu.edu",
+                "TCU Women in Computing",
+                "WICS (MAGICS) Club",
+                "We are going to have a meeting",
+                "We need a frog to come to our meeting and take a picture with us.",
+                "No",
+                "No",
                 student2);
         SuperFrogAppearanceRequest request5 = new SuperFrogAppearanceRequest(
                 17,
                 EventType.PUBLIC,
-                "Event address 5",
+                "SuperFrog Statue",
                 25.0,
                 LocalDate.of(2023, 4, 19),
                 LocalTime.of(14, 30),
                 LocalTime.of(15, 30),
                 RequestStatus.APPROVED,
-                "FirstName",
-                "LastName",
+                "Spike",
+                "Spiegel",
                 "1234567890",
-                "Email",
-                "Title",
-                "Org",
+                "spiegel@bebop.org",
+                "Bounty Hunter Meet and Greet",
+                "Bebop",
                 "Desc",
-                "Special",
+                "Ed and Ein will be there!",
                 "OutsideOrg",
                 "Expenses",
                 student2);
@@ -149,14 +151,14 @@ public class DBDataInitializer implements CommandLineRunner {
                 LocalTime.of(9, 30),
                 LocalTime.of(14, 30),
                 RequestStatus.COMPLETED,
-                "FirstName",
-                "LastName",
-                "1234567890",
-                "Email",
-                "Title",
-                "Org",
-                "Desc",
-                "Special",
+                "Nagito",
+                "Komaeda",
+                "7777777777",
+                "nkomaeda@tcu.edu",
+                "Ultimate Lucky Student Class 77-B",
+                "Hope's Peak Academy",
+                "Birthday Party",
+                "Despair",
                 "OutsideOrg",
                 "Expenses",
                 student2);
@@ -169,15 +171,35 @@ public class DBDataInitializer implements CommandLineRunner {
                 LocalTime.of(17, 0),
                 LocalTime.of(19, 0),
                 RequestStatus.COMPLETED,
-                "FirstName",
-                "LastName",
+                "Yu",
+                "Narukami",
                 "1234567890",
-                "Email",
-                "Title",
-                "Org",
-                "Desc",
-                "Special",
+                "yunarukami@yasogamihigh.edu",
+                "Investigation Team Meeting",
+                "Yasogami High School",
+                "Investigation Team Meeting",
+                "Bring Teddie",
                 "OutsideOrg",
+                "Expenses",
+                student3);
+        SuperFrogAppearanceRequest request8 = new SuperFrogAppearanceRequest(
+                23,
+                EventType.PUBLIC,
+                "Event address 8",
+                0.0,
+                LocalDate.of(2023, 4, 27),
+                LocalTime.of(10, 0),
+                LocalTime.of(11, 0),
+                RequestStatus.PENDING,
+                "Makoto",
+                "Naegi",
+                "11037",
+                "mnaegi@hopespeak.org",
+                "Ultimate Lucky Student Celebration",
+                "Hope's Peak Academy",
+                "Ultimate Lucky Student Celebration",
+                "Bring Hope",
+                "Hope's Peak Academy",
                 "Expenses",
                 student3);
 
@@ -188,6 +210,7 @@ public class DBDataInitializer implements CommandLineRunner {
         this.requestRepository.save(request5);
         this.requestRepository.save(request6);
         this.requestRepository.save(request7);
+        this.requestRepository.save(request8);
 
         SuperFrogUser u1 = new SuperFrogUser();
         u1.setId(1);
@@ -217,11 +240,18 @@ public class DBDataInitializer implements CommandLineRunner {
         u4.setActive(true);
         u4.setRoles("superfrogstudent");
 
+        SuperFrogUser u5 = new SuperFrogUser();
+        u5.setId(5);
+        u5.setUsername("kurisu.makise@tcu.edu");
+        u5.setPassword("superfrogstudent");
+        u5.setActive(true);
+        u5.setRoles("superfrogstudent");
 
         this.superFrogUserService.save(u1);
         this.superFrogUserService.save(u2);
         this.superFrogUserService.save(u3);
         this.superFrogUserService.save(u4);
+        this.superFrogUserService.save(u5);
 
     }
 
