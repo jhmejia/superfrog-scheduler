@@ -1,6 +1,6 @@
 # Super Frog Scheduler project
 
-This is the codebase for the SuperFrog scheduler 
+This is the codebase for the [SuperFrog scheduler](https://superfrogscheduler.xyz)
 
 ## Authors
 
