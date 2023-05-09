@@ -82,7 +82,7 @@
               const headers = {
                 'Content-Type': 'application/json'
              }
-              axios.put(`http://localhost:8080/api/superfrogappearancerequests/${this.requestId}`, {
+              axios.put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`, {
                     contactFirstName: this.requests.contactFirstName,
                     contactLastName: this.requests.contactLastName,
                     email: this.requests.email,
@@ -112,7 +112,7 @@
           getrequests(requestId)
           {
             console.log(requestId)
-            axios.get(`http://localhost:8080/api/superfrogappearancerequests/${requestId}`)
+            axios.get(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${requestId}`)
            .then((response)  => {
               this.requests = response.data.data;
               console.log(this.requests)

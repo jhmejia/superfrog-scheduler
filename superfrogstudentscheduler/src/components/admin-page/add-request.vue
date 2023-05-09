@@ -158,7 +158,7 @@ export default {
     mounted() {
         console.log("AddRequest.vue mounted");
         axios
-            .get("http://localhost:8080/api/superfrogstudents/active")
+            .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/active")
             .then((response) => {
                 console.log(response.data);
 
@@ -188,7 +188,7 @@ export default {
 
             axios
                 .post(
-                    "http://localhost:8080/api/superfrogappearancerequests",
+                    "http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests",
                     {
                         eventType: this.eventType,
                         address: this.address,
@@ -228,7 +228,7 @@ export default {
             if (this.superfrogId) {
                 axios
                     .put(
-                        `http://localhost:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
+                        `http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
 
                         {
                             superfrogId: this.superfrogId,

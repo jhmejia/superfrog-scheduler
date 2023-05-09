@@ -44,7 +44,7 @@ export default {
 
         // Check if the email already exists
         axios
-          .get(`http://localhost:8080/api/superfrogstudents/email/${this.email}`, {headers})
+          .get(`http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/email/${this.email}`, {headers})
           .then((response) => {
             isDuplicate = true;
             this.successMessage = 'Add Student Failed! Email already in use';
@@ -56,7 +56,7 @@ export default {
             // If the email doesn't exist, create a new student
             console.log(token);
             if (!isDuplicate) {
-              axios.post("http://localhost:8080/api/superfrogstudents", {
+              axios.post("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents", {
                 firstName: this.fname,
                 lastName: this.lname,
                 phoneNumber: this.phoneNumber,

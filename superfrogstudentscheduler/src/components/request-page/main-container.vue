@@ -151,7 +151,7 @@
             const headers = {
               'Content-Type': 'application/json'
            }
-            axios.post("http://localhost:8080/api/superfrogappearancerequests", {
+            axios.post("http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests", {
                   contactFirstName: this.eventInfo.contactFirstName,
                   contactLastName: this.eventInfo.contactLastName,
                   email: this.eventInfo.email,
