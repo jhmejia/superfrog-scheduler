@@ -1,7 +1,7 @@
+# Super Frog Scheduler project
 
-# Super Frog Webtech project
+This is the codebase for the SuperFrog scheduler 
 
-This is the readme 
 ## Authors
 
 - [@J4Ninja](https://www.github.com/J4Ninja)
