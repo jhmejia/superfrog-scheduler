@@ -28,21 +28,22 @@ To be made...
 Go to https://superfrogscheduler.xyz/
 Be sure to go to settings and enable unsafe content for this website
 
-Alternatively, you can host it yourself. 
+Alternatively, you can host it yourself:
 
 Backend:
 - Install jdk 19 or greater
-- cd into SuperFrogScheduler folder
-- ./mvnw spring-boot:run
+- `git clone` the repo
+- `cd` into SuperFrogScheduler folder
+- `./mvnw spring-boot:run` (`nohup ./mvnw spring-boot:run &` to have it not attached to a terminal)
 - It should be running on localhost:8080. 
 
 Frontend:
 - Install node js
-- cd into superfrogstudentscheduler
+- `cd` into superfrogstudentscheduler
 - Change all references of api.superfrogscheduler.xyz to localhost
-- npm install
-- npm run build
-- npm start
+- `npm install`
+- `npm run build`
+- `npm start`
 
 
 
