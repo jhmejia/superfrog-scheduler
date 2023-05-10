@@ -39,7 +39,13 @@
             v-model="endTime"
         /><br />
         <label for="status">Status:</label><br />
-        <input type="text" id="status" name="status" v-model="status" /><br />
+        
+        <select id="status" name="status" v-model="status">
+            <option value="cancelled">Cancelled</option>
+            <option value="approved">Approved</option>
+            <option value="completed">Completed</option>
+            <option value="rejected">Rejected</option></select
+        ><br />
         <label for="contactFirstName">Contact First Name:</label><br />
         <input
             type="text"
@@ -152,7 +158,7 @@ export default {
     mounted() {
         console.log("AddRequest.vue mounted");
         axios
-            .get("http://localhost:8080/api/superfrogstudents/active", )
+            .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/active")
             .then((response) => {
                 console.log(response.data);
 
@@ -182,7 +188,7 @@ export default {
 
             axios
                 .post(
-                    "http://localhost:8080/api/superfrogappearancerequests",
+                    "http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests",
                     {
                         eventType: this.eventType,
                         address: this.address,
@@ -217,33 +223,30 @@ export default {
                         "Request not added successfully- please try again";
                 });
 
-                //Assign superfrog to request (if selected)
+            //Assign superfrog to request (if selected)
 
+            if (this.superfrogId) {
+                axios
+                    .put(
+                        `http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
 
-                if (this.superfrogId) {
-                    axios
-                        .put(
-                            `http://localhost:8080/api/superfrogstudents/${this.superfrogId}/assign/superfrogappearancerequests/${this.requestId}`,
-                            
-                            {
-                                superfrogId: this.superfrogId,
-                                requestId: this.requestId,
-                                
-
-                            },
-                            { headers }
-                        )
-                        .then((response) => {
-                            console.log(response.data);
-                            this.superfrogSuccessMessage =
-                                "SuperFrog assigned successfully!";
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            this.superfrogSuccessMessage =
-                                "SuperFrog not assigned successfully- please try again";
-                        });
-                }
+                        {
+                            superfrogId: this.superfrogId,
+                            requestId: this.requestId,
+                        },
+                        { headers }
+                    )
+                    .then((response) => {
+                        console.log(response.data);
+                        this.superfrogSuccessMessage =
+                            "SuperFrog assigned successfully!";
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.superfrogSuccessMessage =
+                            "SuperFrog not assigned successfully- please try again";
+                    });
+            }
         },
     },
 };

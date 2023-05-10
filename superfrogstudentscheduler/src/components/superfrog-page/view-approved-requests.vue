@@ -47,7 +47,7 @@
     methods: {
       getRequests() {
         axios
-          .get("http://localhost:8080/api/superfrogappearancerequests")
+          .get("http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests")
           .then((response) => {
             this.requests = response.data.data;
             console.log(response.data.data);
@@ -59,7 +59,7 @@
       approveRequest(request) {
         // TODO: Implement approve request functionality
         axios
-          .put(`http://localhost:8080/api/superfrogappearancerequests/${request.requestId}/status/APPROVED`, {
+          .put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${request.requestId}/status/APPROVED`, {
   
           })
           .then((response) => {

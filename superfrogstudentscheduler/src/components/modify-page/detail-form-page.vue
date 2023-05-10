@@ -108,7 +108,7 @@
   </div>
   </div>
 </div>
-<div v-if="responseStatus == 200">Update Success</div>
+<div v-if="responseStatus == 200">{{ returnMsg }}</div>
     <!--For the other css components when you add the input boxes just follow the two as above-->
 <div class="button-container">
   <button class="button is-primary submit-button" @click="submit">Submit</button>
@@ -140,15 +140,75 @@ export default {
 
   },
   methods: {
-    formatE(date) {
-          return format(date, 'hh:mm:ss ');
-          },
-    
-    submit() {
+    findDifferentVars(obj1, obj2) {
+      let differentVars = [];
+
+      const rawObj1 = isProxy(obj1) ? toRaw(obj1) : obj1;
+      const rawObj2 = isProxy(obj2) ? toRaw(obj2) : obj2;
+
+      const obj1Keys = Object.keys(rawObj1);
+      const obj2Keys = Object.keys(rawObj2);
+
+      obj1Keys.forEach((key) => {
+        if (rawObj1[key] !== rawObj2[key]) {
+          differentVars.push(key);
+        }
+      });
+
+return differentVars;
+    },
+    cancel() {
+
       const headers = {
                 'Content-Type': 'application/json'
              }
-              axios.put(`http://206.189.255.67:8080/api/superfrogappearancerequests/${this.requestId}`, {
+              axios.put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`, {
+                    contactFirstName: this.requests.contactFirstName,
+                    contactLastName: this.requests.contactLastName,
+                    email: this.requests.email,
+                    phoneNumber: this.requests.phoneNumber,
+                    address: this.requests.address,
+                    nameOfOrg: this.requests.nameOfOrg,
+                    title: this.requests.title,
+                    description: this.requests.description,
+                    specialInstructions: this.requests.specialInstructions,
+                    outsideOrgs: this.requests.outsideOrgs,
+                    expenses: this.requests.expenses,
+                    eventDate: this.requests.eventDate,
+                    startTime: this.requests.startTime,
+                    endTime: this.requests.endTime,
+                    eventType: this.requests.eventType,
+                    totalCost: this.requests.totalCost,
+                    status: "CANCELED"
+               }, {headers})
+               .then(response =>{
+                    const data = (response.data);
+                    console.log(data.data.requestId);
+                    this.requests.requestId = data.data.requestId;
+                    this.returnMsg ="Request has been canceled"
+                    this.responseStatus = response.status;
+                  }).catch(error=>{
+                    console.log(error);
+            })
+
+    },
+    
+    submit() {
+      let containsCommonElement = false
+      let differentVars = this.findDifferentVars(this.$data.requests, this.$data.ogReq)
+      const pendingVars = ['startTime', 'endTime', 'eventDate', 'eventType', 'title', 'address', 'description', 'outsideOrgs', 'expenses', 'nameOfOrg', ]
+      pendingVars.forEach((key) => {
+        if (differentVars.includes(key)) {
+          containsCommonElement = true
+        }
+      });
+
+      console.log(differentVars);
+
+      const headers = {
+                'Content-Type': 'application/json'
+             }
+              axios.put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`, {
                     contactFirstName: this.requests.contactFirstName,
                     contactLastName: this.requests.contactLastName,
                     email: this.requests.email,
@@ -171,14 +231,18 @@ export default {
                     console.log(data.data.requestId);
                     this.requests.requestId = data.data.requestId;
                     this.responseStatus = response.status;
+                    this.returnMsg = "Request Updated"
+
                   }).catch(error=>{
                     console.log(error);
             })
           },
   
 },
-mounted(){
-   axios.get(`http://206.189.255.67:8080/api/superfrogappearancerequests/${this.requestId}`)
+
+beforeMount(){
+   axios.get(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`)
+
            .then((response)  => {
             
               this.requests = response.data.data;

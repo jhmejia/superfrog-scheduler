@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="student in computedStudents" :key="student.id">
+        <tr v-for="(student, index) in displayedStudents" :key="student.id">
           <td>{{ student.id }}</td>
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
@@ -30,6 +30,11 @@
         </tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <button :disabled="currentPage === 1" @click="prevPage">Prev</button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button :disabled="currentPage === totalPages" @click="nextPage">Next</button>
+    </div>
   </div>
 </template>
 
@@ -42,6 +47,8 @@ export default {
     return {
       students: [],
       showActiveOnly: false,
+      currentPage: 1,
+      rowsPerPage: 5,
     };
   },
   mounted() {
@@ -50,7 +57,7 @@ export default {
   methods: {
     getStudents() {
       axios
-        .get("http://localhost:8080/api/superfrogstudents")
+        .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents")
         .then((response) => {
           this.students = response.data.data;
         })
@@ -59,14 +66,21 @@ export default {
         });
     },
     toggleStudentStatus(student) {
-      const url = `http://localhost:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
+      let reason = '';
+      if (student.active) {
+        reason = prompt('Please enter a reason for disabling the student:');
+        if (!reason) {
+          return;
+        }
+      }
+      const url = `http://api.superfrogscheduler.xyz:8080/api/users/${student.email}/${student.active ? 'disable' : 'enable'}`;
       const token = localStorage.getItem('token');
       const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
-      }
+      };
       axios
-        .put(url, {}, { headers })
+        .put(url, { reason }, { headers })
         .then((response) => {
           console.log(response.data)
           this.getStudents();
@@ -75,18 +89,43 @@ export default {
           console.log(error);
         });
     },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
   },
   computed: {
-    computedStudents() {
+    totalPages() {
+      let students = [];
       if (this.showActiveOnly) {
-        return this.students.filter(student => student.active);
+        students = this.students.filter(student => student.active);
       } else {
-        return this.students;
+        students = this.students;
       }
+      return Math.ceil(students.length / this.rowsPerPage);
+    },
+    displayedStudents() {
+      let students = [];
+      if (this.showActiveOnly) {
+        students = this.students.filter(student => student.active);
+      } else {
+        students = this.students;
+      }
+      const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+      const endIndex = startIndex + this.rowsPerPage;
+      return students.slice(startIndex, endIndex);
     },
   },
 };
 </script>
+
 <style scoped>
 .container {
   height: 71vh;
