@@ -61,9 +61,6 @@
 import axios from "axios";
 import EditRequest from "./edit-request.vue";
 
-//Call get requests every 5 seconds
-
-
 export default {
   components: {
     EditRequest,
@@ -81,10 +78,12 @@ export default {
     };
   },
   mounted() {
-    
-    this.getRequests();
+    setInterval(() => {
+      this.getRequests();
+    }, 100);
     axios
       .get("http://api.superfrogscheduler.xyz:8080/api/superfrogstudents/active",)
+
       .then((response) => {
         console.log(response.data);
 
@@ -129,6 +128,7 @@ export default {
     approveRequest(request) {
       // TODO: Implement approve request functionality
       axios
+
         .put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${request.requestId}/status/APPROVED`, {
 
         })
@@ -145,6 +145,7 @@ export default {
       // TODO: Implement reject request functionality
       axios
         .put(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${request.requestId}/status/REJECTED`, {
+
         })
         .then((response) => {
           this.requests = response.data.data;

@@ -149,7 +149,7 @@ export default {
             outsideOrgs: "None",
             expenses: "None",
             successMessage: "",
-
+            superfrogSuccessMessage: "",
             superfrogs: [],
             superfrogId: null,
             requestId: null,

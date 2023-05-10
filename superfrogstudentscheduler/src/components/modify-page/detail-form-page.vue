@@ -5,12 +5,10 @@
         <tr>
           <td>Date</td>
           <td><VueDatePicker
-            
             :enable-time-picker="false"
             v-model="requests.eventDate"
             :model-value="requests.eventDate"
             model-type="yyyy-MM-dd"
-            
 
 
           /></td>
@@ -18,8 +16,6 @@
         <tr>
           <td>Start Time</td>
           <td><VueDatePicker
-            :max-time="{ hours: 11, minutes: 0, a: 'PM' }"
-            :min-time="{ hours: 7, minutes: 0 }"
               :model-value="requests.startTime"
               model-type="HH:mm:ss"
               time-picker
@@ -32,8 +28,6 @@
         <tr>
           <td>End Time</td>
           <td><VueDatePicker
-            :max-time="{ hours: 11, minutes: 0, a: 'PM' }"
-            :min-time="{ hours: 7, minutes: 0,  }"
                 v-model="requests.endTime"
                 model-type="HH:mm:ss"
                 time-picker
@@ -118,8 +112,6 @@
     <!--For the other css components when you add the input boxes just follow the two as above-->
 <div class="button-container">
   <button class="button is-primary submit-button" @click="submit">Submit</button>
-  <button class="button is-primary submit-button" @click="cancel">Cancel</button>
-
 </div>
 </template>
 
@@ -127,7 +119,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import axios from 'axios';
-import { isProxy, reactive, toRaw } from "vue";
+import { format } from 'date-fns';
 
 export default {
   name: 'DetailFormPage',
@@ -137,8 +129,7 @@ export default {
   data(){
     return{
       requests: Object,
-      responseStatus: undefined,
-      ogReq: Object
+      responseStatus: undefined
         
     }
     
@@ -234,7 +225,6 @@ return differentVars;
                     endTime: this.requests.endTime,
                     eventType: this.requests.eventType,
                     totalCost: this.requests.totalCost,
-                    status: this.requests.status
                }, {headers})
                .then(response =>{
                     const data = (response.data);
@@ -249,13 +239,13 @@ return differentVars;
           },
   
 },
+
 beforeMount(){
    axios.get(`http://api.superfrogscheduler.xyz:8080/api/superfrogappearancerequests/${this.requestId}`)
+
            .then((response)  => {
             
               this.requests = response.data.data;
-              this.ogReq = {...response.data.data};
-              console.log(this.ogReq)
               console.log(this.requests)
             
             }).catch((error) => {
