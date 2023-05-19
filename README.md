@@ -16,17 +16,12 @@ This is the codebase for the [SuperFrog scheduler](https://superfrogscheduler.xy
 
 ### [API Documentation](https://jhmejia.com/superdocs)
 
-### [Google Drive](https://drive.google.com/drive/folders/1CFxMNblwOV-mthVcRRb2gTsFxNRO7nlz?usp=sharing)
-
 
 ## Demo
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/uW-3g06aQNE" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![Demo Page](https://img.youtube.com/vi/uW-3g06aQNE/0.jpg)](https://www.youtube.com/watch?v=uW-3g06aQNE "Demo Page")
 
+https://www.youtube.com/watch?v=uW-3g06aQNE
 
 ## Usage
 Go to https://superfrogscheduler.xyz/
