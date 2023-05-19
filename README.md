@@ -21,7 +21,11 @@ This is the codebase for the [SuperFrog scheduler](https://superfrogscheduler.xy
 
 ## Demo
 
-To be made...
+  <iframe width="560" height="315"
+src="https://www.youtube.com/embed/uW-3g06aQNE" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
 
 
 ## Usage
