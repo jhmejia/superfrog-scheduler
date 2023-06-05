@@ -39,7 +39,7 @@ Backend:
 Frontend:
 - Install node js
 - `cd` into superfrogstudentscheduler
-- Change all references of api.superfrogscheduler.xyz to localhost
+- Change all references of api.superfrogscheduler.xyz to localhost, if you are hosting the backend. 
 - `npm install`
 - `npm run build`
 - `npm start`
